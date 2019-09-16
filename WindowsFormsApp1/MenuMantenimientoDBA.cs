@@ -26,7 +26,9 @@ namespace WindowsFormsApp1
 
         private void btnCRUDBancos_Click(object sender, EventArgs e)
         {
-            Console.WriteLine("Hola");
+            this.Hide();
+            ABC_BANCO abc_banco = new ABC_BANCO();
+            abc_banco.Show();
         }
     }
 }
