@@ -28,13 +28,46 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
+            this.btnMantenimientoDBA = new System.Windows.Forms.Button();
+            this.btnNuevasCuentas = new System.Windows.Forms.Button();
+            this.SuspendLayout();
+            // 
+            // btnMantenimientoDBA
+            // 
+            this.btnMantenimientoDBA.Location = new System.Drawing.Point(122, 56);
+            this.btnMantenimientoDBA.Name = "btnMantenimientoDBA";
+            this.btnMantenimientoDBA.Size = new System.Drawing.Size(90, 53);
+            this.btnMantenimientoDBA.TabIndex = 0;
+            this.btnMantenimientoDBA.Text = "Mantenimiento DBA";
+            this.btnMantenimientoDBA.UseVisualStyleBackColor = true;
+            this.btnMantenimientoDBA.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // btnNuevasCuentas
+            // 
+            this.btnNuevasCuentas.Location = new System.Drawing.Point(298, 56);
+            this.btnNuevasCuentas.Name = "btnNuevasCuentas";
+            this.btnNuevasCuentas.Size = new System.Drawing.Size(75, 53);
+            this.btnNuevasCuentas.TabIndex = 1;
+            this.btnNuevasCuentas.Text = "Nuevas Cuentas";
+            this.btnNuevasCuentas.UseVisualStyleBackColor = true;
+            // 
+            // Form1
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(519, 160);
+            this.Controls.Add(this.btnNuevasCuentas);
+            this.Controls.Add(this.btnMantenimientoDBA);
+            this.Name = "Form1";
             this.Text = "Form1";
+            this.ResumeLayout(false);
+
         }
 
         #endregion
+
+        private System.Windows.Forms.Button btnMantenimientoDBA;
+        private System.Windows.Forms.Button btnNuevasCuentas;
     }
 }
 
