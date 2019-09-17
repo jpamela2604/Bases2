@@ -37,5 +37,12 @@ namespace WindowsFormsApp1
             ABC_Agencia abc_agencia = new ABC_Agencia();
             abc_agencia.Show();
         }
+
+        private void btnCRUDUsuarios_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            ABC_Cliente abc_cliente = new ABC_Cliente();
+            abc_cliente.Show();
+        }
     }
 }

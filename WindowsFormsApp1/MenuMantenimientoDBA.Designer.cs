@@ -52,6 +52,7 @@
             this.btnCRUDUsuarios.TabIndex = 1;
             this.btnCRUDUsuarios.Text = "ABC de Usuarios";
             this.btnCRUDUsuarios.UseVisualStyleBackColor = true;
+            this.btnCRUDUsuarios.Click += new System.EventHandler(this.btnCRUDUsuarios_Click);
             // 
             // btnCRUDAgencias
             // 
