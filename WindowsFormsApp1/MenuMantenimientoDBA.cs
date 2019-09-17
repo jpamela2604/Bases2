@@ -30,5 +30,12 @@ namespace WindowsFormsApp1
             ABC_BANCO abc_banco = new ABC_BANCO();
             abc_banco.Show();
         }
+
+        private void btnCRUDAgencias_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            ABC_Agencia abc_agencia = new ABC_Agencia();
+            abc_agencia.Show();
+        }
     }
 }
