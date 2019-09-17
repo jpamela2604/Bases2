@@ -38,7 +38,7 @@
             // 
             // btnDatosCliente
             // 
-            this.btnDatosCliente.Location = new System.Drawing.Point(64, 27);
+            this.btnDatosCliente.Location = new System.Drawing.Point(61, 23);
             this.btnDatosCliente.Name = "btnDatosCliente";
             this.btnDatosCliente.Size = new System.Drawing.Size(294, 23);
             this.btnDatosCliente.TabIndex = 0;
@@ -47,7 +47,7 @@
             // 
             // btnAperturarCuenta
             // 
-            this.btnAperturarCuenta.Location = new System.Drawing.Point(64, 70);
+            this.btnAperturarCuenta.Location = new System.Drawing.Point(61, 52);
             this.btnAperturarCuenta.Name = "btnAperturarCuenta";
             this.btnAperturarCuenta.Size = new System.Drawing.Size(294, 23);
             this.btnAperturarCuenta.TabIndex = 1;
@@ -56,7 +56,7 @@
             // 
             // btnBloquearCuenta
             // 
-            this.btnBloquearCuenta.Location = new System.Drawing.Point(64, 114);
+            this.btnBloquearCuenta.Location = new System.Drawing.Point(61, 81);
             this.btnBloquearCuenta.Name = "btnBloquearCuenta";
             this.btnBloquearCuenta.Size = new System.Drawing.Size(294, 23);
             this.btnBloquearCuenta.TabIndex = 2;
@@ -65,7 +65,7 @@
             // 
             // btnSolicitarChequera
             // 
-            this.btnSolicitarChequera.Location = new System.Drawing.Point(64, 161);
+            this.btnSolicitarChequera.Location = new System.Drawing.Point(61, 110);
             this.btnSolicitarChequera.Name = "btnSolicitarChequera";
             this.btnSolicitarChequera.Size = new System.Drawing.Size(294, 23);
             this.btnSolicitarChequera.TabIndex = 3;
@@ -74,7 +74,7 @@
             // 
             // btnChequeExtraviado
             // 
-            this.btnChequeExtraviado.Location = new System.Drawing.Point(64, 205);
+            this.btnChequeExtraviado.Location = new System.Drawing.Point(61, 139);
             this.btnChequeExtraviado.Name = "btnChequeExtraviado";
             this.btnChequeExtraviado.Size = new System.Drawing.Size(294, 23);
             this.btnChequeExtraviado.TabIndex = 4;
@@ -83,7 +83,7 @@
             // 
             // btnRegresar
             // 
-            this.btnRegresar.Location = new System.Drawing.Point(64, 246);
+            this.btnRegresar.Location = new System.Drawing.Point(61, 183);
             this.btnRegresar.Name = "btnRegresar";
             this.btnRegresar.Size = new System.Drawing.Size(294, 23);
             this.btnRegresar.TabIndex = 5;
@@ -95,7 +95,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(415, 296);
+            this.ClientSize = new System.Drawing.Size(415, 223);
             this.Controls.Add(this.btnRegresar);
             this.Controls.Add(this.btnChequeExtraviado);
             this.Controls.Add(this.btnSolicitarChequera);

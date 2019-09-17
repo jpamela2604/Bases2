@@ -42,6 +42,7 @@
             this.btnCRUDBancos.TabIndex = 0;
             this.btnCRUDBancos.Text = "ABC de Bancos";
             this.btnCRUDBancos.UseVisualStyleBackColor = true;
+            this.btnCRUDBancos.Click += new System.EventHandler(this.btnCRUDBancos_Click);
             // 
             // btnCRUDUsuarios
             // 
