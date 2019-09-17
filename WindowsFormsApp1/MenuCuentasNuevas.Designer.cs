@@ -44,6 +44,7 @@
             this.btnDatosCliente.TabIndex = 0;
             this.btnDatosCliente.Text = "ABC Datos Cliente";
             this.btnDatosCliente.UseVisualStyleBackColor = true;
+            this.btnDatosCliente.Click += new System.EventHandler(this.btnDatosCliente_Click);
             // 
             // btnAperturarCuenta
             // 
@@ -53,6 +54,7 @@
             this.btnAperturarCuenta.TabIndex = 1;
             this.btnAperturarCuenta.Text = "Apertura de una Cuenta";
             this.btnAperturarCuenta.UseVisualStyleBackColor = true;
+            this.btnAperturarCuenta.Click += new System.EventHandler(this.btnAperturarCuenta_Click);
             // 
             // btnBloquearCuenta
             // 
@@ -62,6 +64,7 @@
             this.btnBloquearCuenta.TabIndex = 2;
             this.btnBloquearCuenta.Text = "Cancelación/Bloqueo de Cuenta";
             this.btnBloquearCuenta.UseVisualStyleBackColor = true;
+            this.btnBloquearCuenta.Click += new System.EventHandler(this.btnBloquearCuenta_Click);
             // 
             // btnSolicitarChequera
             // 

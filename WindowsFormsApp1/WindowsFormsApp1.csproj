@@ -64,6 +64,18 @@
     <Compile Include="ABC_Cliente.Designer.cs">
       <DependentUpon>ABC_Cliente.cs</DependentUpon>
     </Compile>
+    <Compile Include="CanBloq_Cuenta.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CanBloq_Cuenta.Designer.cs">
+      <DependentUpon>CanBloq_Cuenta.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Cuenta_Nueva.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Cuenta_Nueva.Designer.cs">
+      <DependentUpon>Cuenta_Nueva.cs</DependentUpon>
+    </Compile>
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -92,6 +104,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ABC_Cliente.resx">
       <DependentUpon>ABC_Cliente.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CanBloq_Cuenta.resx">
+      <DependentUpon>CanBloq_Cuenta.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Cuenta_Nueva.resx">
+      <DependentUpon>Cuenta_Nueva.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>

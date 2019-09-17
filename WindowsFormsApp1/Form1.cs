@@ -23,5 +23,12 @@ namespace WindowsFormsApp1
             MenuMantenimientoDBA menu = new MenuMantenimientoDBA();
             menu.Show();
         }
+
+        private void btnNuevasCuentas_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            MenuCuentasNuevas mcn = new MenuCuentasNuevas();
+            mcn.Show();
+        }
     }
 }
