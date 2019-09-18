@@ -61,7 +61,7 @@
             this.btnCRUDAgencias.TabIndex = 2;
             this.btnCRUDAgencias.Text = "ABC de Agencias";
             this.btnCRUDAgencias.UseVisualStyleBackColor = true;
-            this.btnCRUDAgencias.Click += new System.EventHandler(this.btnCRUDAgencias_Click);
+            //this.btnCRUDAgencias.Click += new System.EventHandler(this.btnCRUDAgencias_Click);
             // 
             // btnRegresar
             // 
