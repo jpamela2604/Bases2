@@ -59,8 +59,9 @@
             this.btnCRUDAgencias.Name = "btnCRUDAgencias";
             this.btnCRUDAgencias.Size = new System.Drawing.Size(161, 23);
             this.btnCRUDAgencias.TabIndex = 2;
-            this.btnCRUDAgencias.Text = "ABC DE Agencias";
+            this.btnCRUDAgencias.Text = "ABC de Agencias";
             this.btnCRUDAgencias.UseVisualStyleBackColor = true;
+            this.btnCRUDAgencias.Click += new System.EventHandler(this.btnCRUDAgencias_Click);
             // 
             // btnRegresar
             // 

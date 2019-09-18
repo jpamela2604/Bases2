@@ -13,7 +13,7 @@
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
+    <PlatformTarget>x64</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -34,6 +34,7 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Data.OracleClient" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -45,6 +46,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ABC_Agencia.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ABC_Agencia.Designer.cs">
+      <DependentUpon>ABC_Agencia.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ABC_BANCO.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ABC_BANCO.Designer.cs">
+      <DependentUpon>ABC_BANCO.cs</DependentUpon>
+    </Compile>
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -65,6 +78,12 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="ABC_Agencia.resx">
+      <DependentUpon>ABC_Agencia.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ABC_BANCO.resx">
+      <DependentUpon>ABC_BANCO.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
