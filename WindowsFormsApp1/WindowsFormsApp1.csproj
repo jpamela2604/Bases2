@@ -58,6 +58,7 @@
     <Compile Include="ABC_BANCO.Designer.cs">
       <DependentUpon>ABC_BANCO.cs</DependentUpon>
     </Compile>
+    <Compile Include="Conexion.cs" />
     <Compile Include="Declarar_Anomalia_Cheque.cs">
       <SubType>Form</SubType>
     </Compile>
