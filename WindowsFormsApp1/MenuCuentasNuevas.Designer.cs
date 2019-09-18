@@ -44,6 +44,7 @@
             this.btnDatosCliente.TabIndex = 0;
             this.btnDatosCliente.Text = "ABC Datos Cliente";
             this.btnDatosCliente.UseVisualStyleBackColor = true;
+            this.btnDatosCliente.Click += new System.EventHandler(this.btnDatosCliente_Click);
             // 
             // btnAperturarCuenta
             // 

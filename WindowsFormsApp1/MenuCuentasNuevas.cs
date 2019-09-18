@@ -23,5 +23,10 @@ namespace WindowsFormsApp1
             Form1 principal = new Form1();
             principal.Show();
         }
+
+        private void btnDatosCliente_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
