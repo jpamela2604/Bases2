@@ -57,5 +57,12 @@ namespace WindowsFormsApp1
                 ora.Close();
             }
         }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            Login principal = new Login();
+            principal.Show();
+        }
     }
 }
