@@ -166,8 +166,9 @@ namespace WindowsFormsApp1
             {
                 ora.Open();
                 comando = new OracleCommand("INSERT INTO CLIENTE(nombre,direccion,nit,telefono,correo,TIPO_CLIENTE,foto,firma,dpi)" +
-                    "values(" + nombre + "," + direccion + "," + nit + "," + telefono + "," + correo + "," + tipo_cliente + "," + foto + "+" + firma + "," + dpi + ")");
+                    "values(" + nombre + "," + direccion + "," + nit + "," + telefono + "," + correo + "," + tipo_cliente + "," + foto + "," + firma + "," + dpi + ")");
                 comando.ExecuteNonQuery();
+
                 comando = new OracleCommand("SELECT codigo_cliente from CLIENTE where dpi = "+dpi);
                 adaptador = new OracleDataAdapter();
                 adaptador.SelectCommand = comando;
@@ -268,16 +269,50 @@ namespace WindowsFormsApp1
             }
         }
 
-        
 
-        private void add_cliente_Click(object sender, EventArgs e)
+        private void textBox_KeyPress(object sender, KeyPressEventArgs e)
         {
+            // Verify that the pressed key isn't CTRL or any non-numeric digit
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+            {
+                e.Handled = true;
+            }
             
         }
 
-        private void add_cliente_Clic(object sender, TabControlEventArgs e)
+        private void but_enviar_Click(object sender, EventArgs e)
         {
-            
+            if (box_dpi.Text == "") { System.Windows.Forms.MessageBox.Show("debe ingresar informacion en el dpi"); return; }
+            if (box_nombre.Text == "") { System.Windows.Forms.MessageBox.Show("debe ingresar informacion en el nombre"); return; }
+            if (box_direccion.Text == "") { System.Windows.Forms.MessageBox.Show("debe ingresar informacion en la direccion"); return; }
+            if (box_nit.Text == "") { System.Windows.Forms.MessageBox.Show("debe ingresar informacion el nit"); return; }
+            if (box_telefono.Text == "") { System.Windows.Forms.MessageBox.Show("debe ingresar informacion en el telefono"); return; }
+            if (box_correo.Text == "") { System.Windows.Forms.MessageBox.Show("debe ingresar informacion en el correo"); return; }
+            if (combo_tipo.Text == "") { System.Windows.Forms.MessageBox.Show("debe seleccionar un tipo de cliente"); return; }
+            if (box_foto.Text == "") { System.Windows.Forms.MessageBox.Show("debe agregar una foto"); return; }
+            if (box_firma.Text == "") { System.Windows.Forms.MessageBox.Show("debe agregar una firma"); return; }
+            if (box_nombre.Text == "") { System.Windows.Forms.MessageBox.Show("debe ingresar informacion en el nombre"); return; }
+
+            if (box_dpi.Text.Length != 13) { System.Windows.Forms.MessageBox.Show("la cantidad de digitos no corresponde a un dpi valido"); return; }
+            if (box_telefono.Text.Length != 8) { System.Windows.Forms.MessageBox.Show("la cantidad de digitos no corresponde a un telefono valido"); return; }
+
+            try
+            {
+                var eMailValidator = new System.Net.Mail.MailAddress(box_correo.Text);
+            }
+            catch (FormatException ex)
+            {
+                System.Windows.Forms.MessageBox.Show("formato invalido de correo electronico");
+                return;
+            }
+
+            byte[] foto = convert_image_to_blob(box_foto.Text);
+            byte[] firma = convert_image_to_blob(box_firma.Text);
+            string tipo_cliente = ((KeyValuePair<string, string>)combo_tipo.SelectedItem).Key;
+
+            Add_Client(box_nombre.Text, box_direccion.Text, Int32.Parse(box_nit.Text), Int32.Parse(box_telefono.Text), box_correo.Text, Int32.Parse(tipo_cliente), foto, firma, box_dpi.Text);
+
+            //System.Windows.Forms.MessageBox.Show("operacion realizada con exito");
         }
     }
     

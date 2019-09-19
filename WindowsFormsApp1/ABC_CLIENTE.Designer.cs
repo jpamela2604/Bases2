@@ -56,6 +56,8 @@
             this.get_cliente = new System.Windows.Forms.TabPage();
             this.remove_cliente = new System.Windows.Forms.TabPage();
             this.modif_cliente = new System.Windows.Forms.TabPage();
+            this.label11 = new System.Windows.Forms.Label();
+            this.box_dpi = new System.Windows.Forms.TextBox();
             this.tab_cliente.SuspendLayout();
             this.add_cliente.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pic_firma)).BeginInit();
@@ -73,10 +75,11 @@
             this.tab_cliente.SelectedIndex = 0;
             this.tab_cliente.Size = new System.Drawing.Size(913, 518);
             this.tab_cliente.TabIndex = 0;
-            this.tab_cliente.Selected += new System.Windows.Forms.TabControlEventHandler(this.add_cliente_Clic);
             // 
             // add_cliente
             // 
+            this.add_cliente.Controls.Add(this.label11);
+            this.add_cliente.Controls.Add(this.box_dpi);
             this.add_cliente.Controls.Add(this.but_enviar);
             this.add_cliente.Controls.Add(this.label10);
             this.add_cliente.Controls.Add(this.label9);
@@ -116,6 +119,7 @@
             this.but_enviar.TabIndex = 22;
             this.but_enviar.Text = "Enviar";
             this.but_enviar.UseVisualStyleBackColor = true;
+            this.but_enviar.Click += new System.EventHandler(this.but_enviar_Click);
             // 
             // label10
             // 
@@ -165,6 +169,7 @@
             // 
             // box_firma
             // 
+            this.box_firma.Enabled = false;
             this.box_firma.Location = new System.Drawing.Point(203, 398);
             this.box_firma.Name = "box_firma";
             this.box_firma.Size = new System.Drawing.Size(212, 22);
@@ -172,6 +177,7 @@
             // 
             // box_foto
             // 
+            this.box_foto.Enabled = false;
             this.box_foto.Location = new System.Drawing.Point(203, 354);
             this.box_foto.Name = "box_foto";
             this.box_foto.Size = new System.Drawing.Size(212, 22);
@@ -223,9 +229,11 @@
             // box_telefono
             // 
             this.box_telefono.Location = new System.Drawing.Point(203, 196);
+            this.box_telefono.MaxLength = 8;
             this.box_telefono.Name = "box_telefono";
             this.box_telefono.Size = new System.Drawing.Size(212, 22);
             this.box_telefono.TabIndex = 9;
+            this.box_telefono.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox_KeyPress);
             // 
             // label4
             // 
@@ -242,11 +250,12 @@
             this.box_nit.Name = "box_nit";
             this.box_nit.Size = new System.Drawing.Size(212, 22);
             this.box_nit.TabIndex = 7;
+            this.box_nit.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox_KeyPress);
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(47, 89);
+            this.label3.Location = new System.Drawing.Point(47, 104);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(67, 17);
             this.label3.TabIndex = 6;
@@ -254,8 +263,8 @@
             // 
             // box_direccion
             // 
-            this.box_direccion.Location = new System.Drawing.Point(203, 86);
-            this.box_direccion.MaxLength = 25;
+            this.box_direccion.Location = new System.Drawing.Point(203, 101);
+            this.box_direccion.MaxLength = 50;
             this.box_direccion.Name = "box_direccion";
             this.box_direccion.Size = new System.Drawing.Size(212, 22);
             this.box_direccion.TabIndex = 5;
@@ -263,7 +272,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(47, 38);
+            this.label2.Location = new System.Drawing.Point(47, 68);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(58, 17);
             this.label2.TabIndex = 4;
@@ -271,8 +280,8 @@
             // 
             // box_nombre
             // 
-            this.box_nombre.Location = new System.Drawing.Point(203, 34);
-            this.box_nombre.MaxLength = 10;
+            this.box_nombre.Location = new System.Drawing.Point(203, 64);
+            this.box_nombre.MaxLength = 50;
             this.box_nombre.Name = "box_nombre";
             this.box_nombre.Size = new System.Drawing.Size(212, 22);
             this.box_nombre.TabIndex = 3;
@@ -332,6 +341,24 @@
             this.modif_cliente.Text = "Modificar Cliente";
             this.modif_cliente.UseVisualStyleBackColor = true;
             // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(47, 36);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(30, 17);
+            this.label11.TabIndex = 24;
+            this.label11.Text = "DPI";
+            // 
+            // box_dpi
+            // 
+            this.box_dpi.Location = new System.Drawing.Point(203, 32);
+            this.box_dpi.MaxLength = 13;
+            this.box_dpi.Name = "box_dpi";
+            this.box_dpi.Size = new System.Drawing.Size(212, 22);
+            this.box_dpi.TabIndex = 23;
+            this.box_dpi.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox_KeyPress);
+            // 
             // ABC_CLIENTE
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -380,5 +407,7 @@
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.PictureBox pic_firma;
         private System.Windows.Forms.Button but_enviar;
+        private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.TextBox box_dpi;
     }
 }
