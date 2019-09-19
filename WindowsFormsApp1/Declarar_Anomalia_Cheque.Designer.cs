@@ -96,6 +96,7 @@
             this.button1.TabIndex = 5;
             this.button1.Text = "Reportar Cheque";
             this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // textBox1
             // 
@@ -128,6 +129,7 @@
             this.Controls.Add(this.label1);
             this.Name = "Declarar_Anomalia_Cheque";
             this.Text = "Declarar_Anomalia_Cheque";
+            this.Load += new System.EventHandler(this.Declarar_Anomalia_Cheque_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
