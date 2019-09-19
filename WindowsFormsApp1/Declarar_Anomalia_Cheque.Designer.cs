@@ -34,8 +34,8 @@
             this.label4 = new System.Windows.Forms.Label();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.button1 = new System.Windows.Forms.Button();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.NumeroCuenta = new System.Windows.Forms.TextBox();
+            this.NumeroCheque = new System.Windows.Forms.TextBox();
             this.button2 = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
@@ -99,21 +99,23 @@
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
-            // textBox1
+            // NumeroCuenta
             // 
-            this.textBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox1.Location = new System.Drawing.Point(248, 85);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(204, 22);
-            this.textBox1.TabIndex = 6;
+            this.NumeroCuenta.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.NumeroCuenta.Location = new System.Drawing.Point(248, 85);
+            this.NumeroCuenta.Name = "NumeroCuenta";
+            this.NumeroCuenta.Size = new System.Drawing.Size(204, 22);
+            this.NumeroCuenta.TabIndex = 6;
+            this.NumeroCuenta.TextChanged += new System.EventHandler(this.NumeroCuenta_TextChanged);
             // 
-            // textBox2
+            // NumeroCheque
             // 
-            this.textBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox2.Location = new System.Drawing.Point(248, 125);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(204, 22);
-            this.textBox2.TabIndex = 7;
+            this.NumeroCheque.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.NumeroCheque.Location = new System.Drawing.Point(248, 125);
+            this.NumeroCheque.Name = "NumeroCheque";
+            this.NumeroCheque.Size = new System.Drawing.Size(204, 22);
+            this.NumeroCheque.TabIndex = 7;
+            this.NumeroCheque.TextChanged += new System.EventHandler(this.NumeroCheque_TextChanged);
             // 
             // button2
             // 
@@ -131,8 +133,8 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(527, 282);
             this.Controls.Add(this.button2);
-            this.Controls.Add(this.textBox2);
-            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.NumeroCheque);
+            this.Controls.Add(this.NumeroCuenta);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.comboBox1);
             this.Controls.Add(this.label4);
@@ -155,8 +157,8 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.ComboBox comboBox1;
         private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.TextBox NumeroCuenta;
+        private System.Windows.Forms.TextBox NumeroCheque;
         private System.Windows.Forms.Button button2;
     }
 }

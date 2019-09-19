@@ -16,7 +16,7 @@ namespace WindowsFormsApp1
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new ABC_Empleado());
+            Application.Run(new Declarar_Anomalia_Cheque());
         }
     }
 }

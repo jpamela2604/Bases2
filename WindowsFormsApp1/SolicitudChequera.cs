@@ -17,9 +17,57 @@ namespace WindowsFormsApp1
         {
             InitializeComponent();
         }
+        bool CheckTextBox(TextBox tb)
+        {
+            if (string.IsNullOrEmpty(tb.Text))
+            {
+                MessageBox.Show("El campo " + tb.Name + " debe ser llenado");
+                return false;
+            }
+            return true;
+        }
+        bool positivo()
+        {
+            if((int)numericUpDown1.Value<=0)
+            {
+                MessageBox.Show("El campo cantidad debe ser mayor a cero");
+                return false;
+            }
+            return true;
+        }
+
+        bool ComprobarCuenta()
+        {
+            try
+            {
+
+                OracleConnection ora = new OracleConnection("DATA SOURCE = orcl; PASSWORD=pampam; USER ID=SYSTEM;");
+
+                ora.Open();
+                OracleCommand comando = new OracleCommand("validar_cuenta", ora);
+                comando.CommandType = System.Data.CommandType.StoredProcedure;
+                comando.Parameters.Add("cuent", OracleType.Number).Value = Convert.ToInt32(NumeroCuenta.Text);
+                comando.Parameters.Add("resultado", OracleType.Number);
+                comando.Parameters["resultado"].Direction = ParameterDirection.ReturnValue;
+                comando.ExecuteNonQuery();
+                comando.Connection.Close();
+                /*ASIGNAR A VARIABLE DE CONFIGURACION*/
+                var codigoRol = Convert.ToString(comando.Parameters["resultado"].Value);
+                return true;
+            }
+            catch (Exception EX)
+            {
+                MessageBox.Show("Cuenta inexistente");
+                return false;
+            }
+        }
 
         private void button1_Click(object sender, EventArgs e)
         {
+            if (!(CheckTextBox(NumeroCuenta)&& positivo()&& ComprobarCuenta()))
+            {
+                return;
+            }
             OracleConnection ora = new OracleConnection("DATA SOURCE = orcl; PASSWORD=pampam; USER ID=SYSTEM;");
 
             try
@@ -27,7 +75,7 @@ namespace WindowsFormsApp1
                ora.Open();
                 OracleCommand comando = new OracleCommand("solicitar_chequera", ora);
                 comando.CommandType = System.Data.CommandType.StoredProcedure;
-                comando.Parameters.Add("numero_cuenta", OracleType.VarChar).Value = Convert.ToInt32(textBox1.Text);
+                comando.Parameters.Add("numero_cuenta", OracleType.VarChar).Value = Convert.ToInt32(NumeroCuenta.Text);
                 comando.Parameters.Add("cantidad", OracleType.VarChar).Value = (int)numericUpDown1.Value; 
                 comando.ExecuteNonQuery();
                 ora.Close();
@@ -47,6 +95,20 @@ namespace WindowsFormsApp1
             this.Hide();
             Login principal = new Login();
             principal.Show();
+        }
+
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+            if (System.Text.RegularExpressions.Regex.IsMatch(NumeroCuenta.Text, "[^0-9]"))
+            {
+                MessageBox.Show("Ingrese solo numeros");
+                NumeroCuenta.Text = NumeroCuenta.Text.Remove(NumeroCuenta.Text.Length - 1);
+            }
+        }
+
+        private void numericUpDown1_ValueChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

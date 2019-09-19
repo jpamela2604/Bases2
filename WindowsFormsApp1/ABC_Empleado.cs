@@ -6,6 +6,7 @@ using System.Data.OracleClient;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -109,6 +110,11 @@ namespace WindowsFormsApp1
 
         private void button4_Click(object sender, EventArgs e)
         {
+            if (!ComprobarEmpleado())
+            {
+                return;
+            }
+
             OracleConnection ora = new OracleConnection("DATA SOURCE = orcl; PASSWORD=pampam; USER ID=SYSTEM;");
             try
             {
@@ -116,7 +122,7 @@ namespace WindowsFormsApp1
                 ora.Open();
                 OracleCommand comando = new OracleCommand("empleado_delete", ora);
                 comando.CommandType = System.Data.CommandType.StoredProcedure;
-                comando.Parameters.Add("id", OracleType.Number).Value =Convert.ToInt32( textBox1.Text);
+                comando.Parameters.Add("id", OracleType.Number).Value =Convert.ToInt32( codigoEmpleado.Text);
                 comando.ExecuteNonQuery();
                 MessageBox.Show("Empleado eliminado correctamente");
 
@@ -129,24 +135,79 @@ namespace WindowsFormsApp1
             ora.Close();
             cargar_datos();
         }
+        bool CheckTextBox(TextBox tb)
+        {
+            if (string.IsNullOrEmpty(tb.Text))
+            {
+                MessageBox.Show("El campo " + tb.Name + " debe ser llenado");
+                return false;
+            }
+            return true;
+        }
+
+        bool ValidarTodosCampos()
+        {
+            if(CheckTextBox(codigoEmpleado)&& CheckTextBox(nombre)&& CheckTextBox(direccion)
+                && CheckTextBox(telefono)&& CheckTextBox(correo)&& CheckTextBox(dpi)&& CheckTextBox(contrasena)
+                && validarCorreo())
+            {
+                return true;
+            }
+            return false;
+        }
+        bool ComprobarEmpleado()
+        {
+            try
+            {
+
+                OracleConnection ora = new OracleConnection("DATA SOURCE = orcl; PASSWORD=pampam; USER ID=SYSTEM;");
+
+                ora.Open();
+                OracleCommand comando = new OracleCommand("validar_empleado", ora);
+                comando.CommandType = System.Data.CommandType.StoredProcedure;
+                comando.Parameters.Add("cod", OracleType.Number).Value = Convert.ToInt32(codigoEmpleado.Text);
+                comando.Parameters.Add("resultado", OracleType.Number);
+                comando.Parameters["resultado"].Direction = ParameterDirection.ReturnValue;
+                comando.ExecuteNonQuery();
+                comando.Connection.Close();
+                /*ASIGNAR A VARIABLE DE CONFIGURACION*/
+                var codigoRol = Convert.ToString(comando.Parameters["resultado"].Value);
+                return true;
+            }
+            catch (Exception EX)
+            {
+                MessageBox.Show("Empleado inexistente");
+                return false;
+            }
+        }
 
         private void button1_Click(object sender, EventArgs e)
         {
+            if(!ValidarTodosCampos())
+            {
+                return;
+            }
+
+            if(!ComprobarEmpleado())
+            {
+                return;
+            }
+
             OracleConnection ora = new OracleConnection("DATA SOURCE = orcl; PASSWORD=pampam; USER ID=SYSTEM;");
             try
             {
                 ora.Open();
                 OracleCommand comando = new OracleCommand("empleado_actualizar", ora);
                 comando.CommandType = System.Data.CommandType.StoredProcedure;
-                comando.Parameters.Add("cod", OracleType.Number).Value = Convert.ToInt32(textBox1.Text);
-                comando.Parameters.Add("namee", OracleType.VarChar).Value = textBox2.Text;
-                comando.Parameters.Add("dir", OracleType.VarChar).Value = textBox3.Text;
-                comando.Parameters.Add("tel", OracleType.Number).Value = Convert.ToInt32(textBox4.Text);
-                comando.Parameters.Add("email", OracleType.VarChar).Value = textBox5.Text;
+                comando.Parameters.Add("cod", OracleType.Number).Value = Convert.ToInt32(codigoEmpleado.Text);
+                comando.Parameters.Add("namee", OracleType.VarChar).Value = nombre.Text;
+                comando.Parameters.Add("dir", OracleType.VarChar).Value = direccion.Text;
+                comando.Parameters.Add("tel", OracleType.Number).Value = Convert.ToInt32(telefono.Text);
+                comando.Parameters.Add("email", OracleType.VarChar).Value = correo.Text;
                 comando.Parameters.Add("ro", OracleType.Number).Value = Convert.ToInt32(comboBox1.SelectedValue.ToString());
                 comando.Parameters.Add("agen", OracleType.Number).Value = Convert.ToInt32(comboBox2.SelectedValue.ToString()) ;
-                comando.Parameters.Add("dp", OracleType.VarChar).Value = textBox6.Text;
-                comando.Parameters.Add("pass", OracleType.VarChar).Value = textBox7.Text;
+                comando.Parameters.Add("dp", OracleType.VarChar).Value = dpi.Text;
+                comando.Parameters.Add("pass", OracleType.VarChar).Value = contrasena.Text;
                 comando.ExecuteNonQuery();
                 MessageBox.Show("Empleado modificado correctamente");
             }
@@ -161,21 +222,25 @@ namespace WindowsFormsApp1
 
         private void button3_Click(object sender, EventArgs e)
         {
+            if (!ValidarTodosCampos())
+            {
+                return;
+            }
             OracleConnection ora = new OracleConnection("DATA SOURCE = orcl; PASSWORD=pampam; USER ID=SYSTEM;");
             try
             {
                 ora.Open();
                 OracleCommand comando = new OracleCommand("empleado_crear", ora);
                 comando.CommandType = System.Data.CommandType.StoredProcedure;
-                comando.Parameters.Add("cod", OracleType.Number).Value = Convert.ToInt32(textBox1.Text);
-                comando.Parameters.Add("namee", OracleType.VarChar).Value = textBox2.Text;
-                comando.Parameters.Add("dir", OracleType.VarChar).Value = textBox3.Text;
-                comando.Parameters.Add("tel", OracleType.Number).Value = Convert.ToInt32(textBox4.Text);
-                comando.Parameters.Add("email", OracleType.VarChar).Value = textBox5.Text;
+                comando.Parameters.Add("cod", OracleType.Number).Value = Convert.ToInt32(codigoEmpleado.Text);
+                comando.Parameters.Add("namee", OracleType.VarChar).Value = nombre.Text;
+                comando.Parameters.Add("dir", OracleType.VarChar).Value = direccion.Text;
+                comando.Parameters.Add("tel", OracleType.Number).Value = Convert.ToInt32(telefono.Text);
+                comando.Parameters.Add("email", OracleType.VarChar).Value = correo.Text;
                 comando.Parameters.Add("ro", OracleType.Number).Value = Convert.ToInt32(comboBox1.SelectedValue.ToString());
                 comando.Parameters.Add("agen", OracleType.Number).Value = Convert.ToInt32(comboBox2.SelectedValue.ToString());
-                comando.Parameters.Add("dp", OracleType.VarChar).Value = textBox6.Text;
-                comando.Parameters.Add("pass", OracleType.VarChar).Value = textBox7.Text;
+                comando.Parameters.Add("dp", OracleType.VarChar).Value = dpi.Text;
+                comando.Parameters.Add("pass", OracleType.VarChar).Value = contrasena.Text;
                 comando.ExecuteNonQuery();
                 MessageBox.Show("Empleado creado correctamente");
             }
@@ -186,6 +251,50 @@ namespace WindowsFormsApp1
 
             ora.Close();
             cargar_datos();
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            Login principal = new Login();
+            principal.Show();
+        }
+
+        private void codigoEmpleado_TextChanged(object sender, EventArgs e)
+        {
+            if (System.Text.RegularExpressions.Regex.IsMatch(codigoEmpleado.Text, "[^0-9]"))
+            {
+                MessageBox.Show("Ingrese solo numeros");
+                codigoEmpleado.Text = codigoEmpleado.Text.Remove(codigoEmpleado.Text.Length - 1);
+            }
+        }
+        private bool validarCorreo()
+        {
+            Regex regex = new Regex(@"^([\w-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$");
+            bool isValid = regex.IsMatch(correo.Text.Trim());
+            if (!isValid)
+            {
+                MessageBox.Show("Correo invalido");
+                return false;
+            }
+            return true;
+        }
+        private void telefono_TextChanged(object sender, EventArgs e)
+        {
+            if (System.Text.RegularExpressions.Regex.IsMatch(telefono.Text, "[^0-9]"))
+            {
+                MessageBox.Show("Ingrese solo numeros");
+                telefono.Text = telefono.Text.Remove(telefono.Text.Length - 1);
+            }
+        }
+
+        private void dpi_TextChanged(object sender, EventArgs e)
+        {
+            if (System.Text.RegularExpressions.Regex.IsMatch(dpi.Text, "[^0-9]"))
+            {
+                MessageBox.Show("Ingrese solo numeros");
+                dpi.Text = dpi.Text.Remove(dpi.Text.Length - 1);
+            }
         }
     }
 }

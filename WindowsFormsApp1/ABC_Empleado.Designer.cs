@@ -43,13 +43,13 @@
             this.button1 = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
             this.button4 = new System.Windows.Forms.Button();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.textBox3 = new System.Windows.Forms.TextBox();
-            this.textBox4 = new System.Windows.Forms.TextBox();
-            this.textBox5 = new System.Windows.Forms.TextBox();
-            this.textBox6 = new System.Windows.Forms.TextBox();
-            this.textBox7 = new System.Windows.Forms.TextBox();
+            this.codigoEmpleado = new System.Windows.Forms.TextBox();
+            this.nombre = new System.Windows.Forms.TextBox();
+            this.direccion = new System.Windows.Forms.TextBox();
+            this.telefono = new System.Windows.Forms.TextBox();
+            this.correo = new System.Windows.Forms.TextBox();
+            this.dpi = new System.Windows.Forms.TextBox();
+            this.contrasena = new System.Windows.Forms.TextBox();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.comboBox2 = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
@@ -63,6 +63,7 @@
             this.button2.TabIndex = 10;
             this.button2.Text = "Cerrar Sesión";
             this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // label1
             // 
@@ -204,54 +205,57 @@
             this.button4.UseVisualStyleBackColor = true;
             this.button4.Click += new System.EventHandler(this.button4_Click);
             // 
-            // textBox1
+            // codigoEmpleado
             // 
-            this.textBox1.Location = new System.Drawing.Point(184, 94);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(174, 20);
-            this.textBox1.TabIndex = 24;
+            this.codigoEmpleado.Location = new System.Drawing.Point(184, 94);
+            this.codigoEmpleado.Name = "codigoEmpleado";
+            this.codigoEmpleado.Size = new System.Drawing.Size(174, 20);
+            this.codigoEmpleado.TabIndex = 24;
+            this.codigoEmpleado.TextChanged += new System.EventHandler(this.codigoEmpleado_TextChanged);
             // 
-            // textBox2
+            // nombre
             // 
-            this.textBox2.Location = new System.Drawing.Point(184, 132);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(174, 20);
-            this.textBox2.TabIndex = 25;
+            this.nombre.Location = new System.Drawing.Point(184, 132);
+            this.nombre.Name = "nombre";
+            this.nombre.Size = new System.Drawing.Size(174, 20);
+            this.nombre.TabIndex = 25;
             // 
-            // textBox3
+            // direccion
             // 
-            this.textBox3.Location = new System.Drawing.Point(184, 161);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(174, 20);
-            this.textBox3.TabIndex = 26;
+            this.direccion.Location = new System.Drawing.Point(184, 161);
+            this.direccion.Name = "direccion";
+            this.direccion.Size = new System.Drawing.Size(174, 20);
+            this.direccion.TabIndex = 26;
             // 
-            // textBox4
+            // telefono
             // 
-            this.textBox4.Location = new System.Drawing.Point(184, 195);
-            this.textBox4.Name = "textBox4";
-            this.textBox4.Size = new System.Drawing.Size(174, 20);
-            this.textBox4.TabIndex = 27;
+            this.telefono.Location = new System.Drawing.Point(184, 195);
+            this.telefono.Name = "telefono";
+            this.telefono.Size = new System.Drawing.Size(174, 20);
+            this.telefono.TabIndex = 27;
+            this.telefono.TextChanged += new System.EventHandler(this.telefono_TextChanged);
             // 
-            // textBox5
+            // correo
             // 
-            this.textBox5.Location = new System.Drawing.Point(184, 229);
-            this.textBox5.Name = "textBox5";
-            this.textBox5.Size = new System.Drawing.Size(174, 20);
-            this.textBox5.TabIndex = 28;
+            this.correo.Location = new System.Drawing.Point(184, 229);
+            this.correo.Name = "correo";
+            this.correo.Size = new System.Drawing.Size(174, 20);
+            this.correo.TabIndex = 28;
             // 
-            // textBox6
+            // dpi
             // 
-            this.textBox6.Location = new System.Drawing.Point(184, 331);
-            this.textBox6.Name = "textBox6";
-            this.textBox6.Size = new System.Drawing.Size(174, 20);
-            this.textBox6.TabIndex = 29;
+            this.dpi.Location = new System.Drawing.Point(184, 331);
+            this.dpi.Name = "dpi";
+            this.dpi.Size = new System.Drawing.Size(174, 20);
+            this.dpi.TabIndex = 29;
+            this.dpi.TextChanged += new System.EventHandler(this.dpi_TextChanged);
             // 
-            // textBox7
+            // contrasena
             // 
-            this.textBox7.Location = new System.Drawing.Point(184, 357);
-            this.textBox7.Name = "textBox7";
-            this.textBox7.Size = new System.Drawing.Size(174, 20);
-            this.textBox7.TabIndex = 30;
+            this.contrasena.Location = new System.Drawing.Point(184, 357);
+            this.contrasena.Name = "contrasena";
+            this.contrasena.Size = new System.Drawing.Size(174, 20);
+            this.contrasena.TabIndex = 30;
             // 
             // comboBox1
             // 
@@ -276,13 +280,13 @@
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.Controls.Add(this.comboBox2);
             this.Controls.Add(this.comboBox1);
-            this.Controls.Add(this.textBox7);
-            this.Controls.Add(this.textBox6);
-            this.Controls.Add(this.textBox5);
-            this.Controls.Add(this.textBox4);
-            this.Controls.Add(this.textBox3);
-            this.Controls.Add(this.textBox2);
-            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.contrasena);
+            this.Controls.Add(this.dpi);
+            this.Controls.Add(this.correo);
+            this.Controls.Add(this.telefono);
+            this.Controls.Add(this.direccion);
+            this.Controls.Add(this.nombre);
+            this.Controls.Add(this.codigoEmpleado);
             this.Controls.Add(this.button4);
             this.Controls.Add(this.button3);
             this.Controls.Add(this.button1);
@@ -324,13 +328,13 @@
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.Button button4;
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.TextBox textBox2;
-        private System.Windows.Forms.TextBox textBox3;
-        private System.Windows.Forms.TextBox textBox4;
-        private System.Windows.Forms.TextBox textBox5;
-        private System.Windows.Forms.TextBox textBox6;
-        private System.Windows.Forms.TextBox textBox7;
+        private System.Windows.Forms.TextBox codigoEmpleado;
+        private System.Windows.Forms.TextBox nombre;
+        private System.Windows.Forms.TextBox direccion;
+        private System.Windows.Forms.TextBox telefono;
+        private System.Windows.Forms.TextBox correo;
+        private System.Windows.Forms.TextBox dpi;
+        private System.Windows.Forms.TextBox contrasena;
         private System.Windows.Forms.ComboBox comboBox1;
         private System.Windows.Forms.ComboBox comboBox2;
     }
