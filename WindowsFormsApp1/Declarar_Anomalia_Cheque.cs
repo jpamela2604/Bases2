@@ -13,14 +13,16 @@ namespace WindowsFormsApp1
 {
     public partial class Declarar_Anomalia_Cheque : Form
     {
+        public String conexion;
         public Declarar_Anomalia_Cheque()
         {
-            InitializeComponent();
+            conexion = "DATA SOURCE = " + Properties.Settings.Default.nombre_db + "; PASSWORD=" + Properties.Settings.Default.contrasenia_db + "; USER ID=" + Properties.Settings.Default.usuario_db + ";";
+            InitializeComponent();            
         }
 
         private void Declarar_Anomalia_Cheque_Load(object sender, EventArgs e)
         {
-            OracleConnection ora = new OracleConnection("DATA SOURCE = orcl; PASSWORD=pampam; USER ID=SYSTEM;");
+            OracleConnection ora = new OracleConnection(conexion);
             ora.Open();
             OracleCommand comando = new OracleCommand("estadocheque_select", ora);
             comando.CommandType = System.Data.CommandType.StoredProcedure;
@@ -44,13 +46,47 @@ namespace WindowsFormsApp1
             }
             return true;
         }
+        bool RelacionarCuentaCheque()
+        {
+            try
+            {
+                OracleConnection ora = new OracleConnection(conexion);
+                ora.Open();
+                OracleCommand comando = new OracleCommand("validad_cuenta_cheque", ora);
+                comando.CommandType = System.Data.CommandType.StoredProcedure;
+                comando.Parameters.Add("cuen", OracleType.Number).Value = Convert.ToInt32(NumeroCuenta.Text);
+                comando.Parameters.Add("che", OracleType.Number).Value = Convert.ToInt32(NumeroCheque.Text);
+                comando.Parameters.Add("resultado", OracleType.Number);
+                comando.Parameters["resultado"].Direction = ParameterDirection.ReturnValue;
+                comando.ExecuteNonQuery();
+                comando.Connection.Close();
+                /*ASIGNAR A VARIABLE DE CONFIGURACION*/
+                var codigoRol = Convert.ToInt32(comando.Parameters["resultado"].Value);
+
+                if(codigoRol == 1)
+                {
+                    return true;
+                }else
+                {
+                    MessageBox.Show("La cuenta no esta relacionada con el cheque");
+                    return false;
+                }
+                
+            }
+            catch (Exception EX)
+            {
+                MessageBox.Show("La cuenta no esta relacionada con el cheque");
+            }
+           
+            return false;
+        }
         private void button1_Click(object sender, EventArgs e)
         {
-            if(!(CheckTextBox(NumeroCuenta)&&CheckTextBox(NumeroCheque)&& ComprobarCuenta()&& ComprobarCheque()))
+            if (!(CheckTextBox(NumeroCuenta)&&CheckTextBox(NumeroCheque)&& ComprobarCuenta()&& ComprobarCheque()&& RelacionarCuentaCheque()))
             {
                 return;
             }
-            OracleConnection ora = new OracleConnection("DATA SOURCE = orcl; PASSWORD=pampam; USER ID=SYSTEM;");
+            OracleConnection ora = new OracleConnection(conexion);
 
             try
             {
@@ -80,9 +116,7 @@ namespace WindowsFormsApp1
         {
             try
             {
-
-                OracleConnection ora = new OracleConnection("DATA SOURCE = orcl; PASSWORD=pampam; USER ID=SYSTEM;");
-
+                OracleConnection ora = new OracleConnection(conexion);
                 ora.Open();
                 OracleCommand comando = new OracleCommand("validar_cuenta", ora);
                 comando.CommandType = System.Data.CommandType.StoredProcedure;
@@ -106,7 +140,7 @@ namespace WindowsFormsApp1
             try
             {
 
-                OracleConnection ora = new OracleConnection("DATA SOURCE = orcl; PASSWORD=pampam; USER ID=SYSTEM;");
+                OracleConnection ora = new OracleConnection(conexion);
 
                 ora.Open();
                 OracleCommand comando = new OracleCommand("validar_cheque", ora);

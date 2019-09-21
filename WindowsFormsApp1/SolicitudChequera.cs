@@ -13,9 +13,11 @@ namespace WindowsFormsApp1
 {
     public partial class SolicitudChequera : Form
     {
+        public String conexion;
         public SolicitudChequera()
         {
-            InitializeComponent();
+            conexion = "DATA SOURCE = " + Properties.Settings.Default.nombre_db + "; PASSWORD=" + Properties.Settings.Default.contrasenia_db + "; USER ID=" + Properties.Settings.Default.usuario_db + ";";
+            InitializeComponent();            
         }
         bool CheckTextBox(TextBox tb)
         {
@@ -41,7 +43,7 @@ namespace WindowsFormsApp1
             try
             {
 
-                OracleConnection ora = new OracleConnection("DATA SOURCE = orcl; PASSWORD=pampam; USER ID=SYSTEM;");
+                OracleConnection ora = new OracleConnection(conexion);
 
                 ora.Open();
                 OracleCommand comando = new OracleCommand("validar_cuenta", ora);
@@ -68,7 +70,7 @@ namespace WindowsFormsApp1
             {
                 return;
             }
-            OracleConnection ora = new OracleConnection("DATA SOURCE = orcl; PASSWORD=pampam; USER ID=SYSTEM;");
+            OracleConnection ora = new OracleConnection(conexion);
 
             try
            {

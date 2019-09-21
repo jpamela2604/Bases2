@@ -14,6 +14,7 @@ namespace WindowsFormsApp1
     public partial class Login : Form
     {
         Conexion c = new Conexion();
+        OracleConnection ora = new OracleConnection("DATA SOURCE = " + Properties.Settings.Default.nombre_db + "; PASSWORD=" + Properties.Settings.Default.contrasenia_db + "; USER ID=" + Properties.Settings.Default.usuario_db + ";");
         public Login()
         {
             InitializeComponent();
@@ -44,7 +45,7 @@ namespace WindowsFormsApp1
                 try
                 {
 
-                    OracleConnection ora = new OracleConnection("DATA SOURCE = orcl; PASSWORD=pampam; USER ID=SYSTEM;");
+                    
 
                     ora.Open();
                     OracleCommand comando = new OracleCommand("login", ora);
@@ -56,7 +57,9 @@ namespace WindowsFormsApp1
                     comando.ExecuteNonQuery();
                     comando.Connection.Close();
                     /*ASIGNAR A VARIABLE DE CONFIGURACION*/
-                    var codigoRol = Convert.ToString(comando.Parameters["resultado"].Value);
+                    var codigoRol = Convert.ToInt32(comando.Parameters["resultado"].Value);
+                    Properties.Settings.Default.rol = codigoRol;
+                    MessageBox.Show("Bienvenido");
                 }
                 catch (Exception EX)
                 {

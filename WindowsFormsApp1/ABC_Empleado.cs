@@ -14,20 +14,36 @@ namespace WindowsFormsApp1
 {
     public partial class ABC_Empleado : Form
     {
+        public String conexion;
         public ABC_Empleado()
         {
+            conexion = "DATA SOURCE = " + Properties.Settings.Default.nombre_db +"; PASSWORD="+Properties.Settings.Default.contrasenia_db +"; USER ID="+Properties.Settings.Default.usuario_db+";";
             InitializeComponent();
+            
         }
 
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-
+            if (e.RowIndex >= 0)
+            {
+                //gets a collection that contains all the rows
+                DataGridViewRow row = this.dataGridView1.Rows[e.RowIndex];
+                codigoEmpleado.Text = row.Cells[0].Value.ToString();
+                nombre.Text = row.Cells[1].Value.ToString();
+                direccion.Text = row.Cells[2].Value.ToString();
+                telefono.Text = row.Cells[3].Value.ToString();
+                correo.Text = row.Cells[4].Value.ToString();
+                comboBox1.SelectedIndex = comboBox1.FindStringExact(row.Cells[5].Value.ToString());
+                comboBox2.SelectedIndex = comboBox2.FindStringExact(row.Cells[6].Value.ToString());
+                dpi.Text = row.Cells[7].Value.ToString();
+                contrasena.Text = row.Cells[8].Value.ToString();
+            }
         }
         public void cargar_datos()
         {
             try
              {
-                OracleConnection ora = new OracleConnection("DATA SOURCE = orcl; PASSWORD=pampam; USER ID=SYSTEM;");
+                OracleConnection ora = new OracleConnection(conexion);
                 ora.Open();
                 OracleCommand comando = new OracleCommand("empleado_select", ora);
                 comando.CommandType = System.Data.CommandType.StoredProcedure;
@@ -51,7 +67,7 @@ namespace WindowsFormsApp1
         {
             try
             {
-                OracleConnection ora = new OracleConnection("DATA SOURCE = orcl; PASSWORD=pampam; USER ID=SYSTEM;");
+                OracleConnection ora = new OracleConnection(conexion);
                 ora.Open();
                 OracleCommand comando = new OracleCommand("rol_select", ora);
                 comando.CommandType = System.Data.CommandType.StoredProcedure;
@@ -76,7 +92,7 @@ namespace WindowsFormsApp1
         {
             try
             {
-                OracleConnection ora = new OracleConnection("DATA SOURCE = orcl; PASSWORD=pampam; USER ID=SYSTEM;");
+                OracleConnection ora = new OracleConnection(conexion);
                 ora.Open();
                 OracleCommand comando = new OracleCommand("agencia_select", ora);
                 comando.CommandType = System.Data.CommandType.StoredProcedure;
@@ -115,7 +131,7 @@ namespace WindowsFormsApp1
                 return;
             }
 
-            OracleConnection ora = new OracleConnection("DATA SOURCE = orcl; PASSWORD=pampam; USER ID=SYSTEM;");
+            OracleConnection ora = new OracleConnection(conexion);
             try
             {
 
@@ -145,11 +161,24 @@ namespace WindowsFormsApp1
             return true;
         }
 
+        bool ValidarTelefono()
+        {
+            if(telefono.Text.Length!=8)
+            {
+                MessageBox.Show("El campo telefono debe tener 8 digitos");
+                return false;
+            }else if (dpi.Text.Length != 13)
+            {
+                MessageBox.Show("El campo dpi debe tener 13 digitos");
+                return false;
+            }
+            return true;
+        }
         bool ValidarTodosCampos()
         {
             if(CheckTextBox(codigoEmpleado)&& CheckTextBox(nombre)&& CheckTextBox(direccion)
                 && CheckTextBox(telefono)&& CheckTextBox(correo)&& CheckTextBox(dpi)&& CheckTextBox(contrasena)
-                && validarCorreo())
+                && validarCorreo()&& ValidarTelefono())
             {
                 return true;
             }
@@ -160,7 +189,7 @@ namespace WindowsFormsApp1
             try
             {
 
-                OracleConnection ora = new OracleConnection("DATA SOURCE = orcl; PASSWORD=pampam; USER ID=SYSTEM;");
+                OracleConnection ora = new OracleConnection(conexion);
 
                 ora.Open();
                 OracleCommand comando = new OracleCommand("validar_empleado", ora);
@@ -193,7 +222,7 @@ namespace WindowsFormsApp1
                 return;
             }
 
-            OracleConnection ora = new OracleConnection("DATA SOURCE = orcl; PASSWORD=pampam; USER ID=SYSTEM;");
+            OracleConnection ora = new OracleConnection(conexion);
             try
             {
                 ora.Open();
@@ -226,7 +255,7 @@ namespace WindowsFormsApp1
             {
                 return;
             }
-            OracleConnection ora = new OracleConnection("DATA SOURCE = orcl; PASSWORD=pampam; USER ID=SYSTEM;");
+            OracleConnection ora = new OracleConnection(conexion);
             try
             {
                 ora.Open();
