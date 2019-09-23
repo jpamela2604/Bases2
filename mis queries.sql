@@ -2,7 +2,7 @@ CREATE OR REPLACE  FUNCTION  login
 ( usuario  in INT,password  IN VARCHAR2) 
 RETURN INTEGER is resultado integer;
 	BEGIN
-		  select  ROL_ID_ROL into resultado from "SYSTEM"."EMPLEADO" WHERE id_empleado=usuario and contrasena=password;
+		  select  rol into resultado from "SYSTEM"."EMPLEADO" WHERE codigo_empleado=usuario and contrasena=password;
           return resultado;
     END login;
 	
@@ -57,7 +57,8 @@ end;
 CREATE OR REPLACE PROCEDURE empleado_select(registros out sys_refcursor)
 as
 begin 
-    open registros for select * from empleado;
+    open registros for select e.codigo_empleado,e.nombre,e.direccion,e.telefono,e.correo,r.nombre as rol,
+a.direccion as agencia,e.dpi,e.contrasena from empleado e,rol r , agencia a where e.rol=r.id_rol and e.agencia=a.id_agencia;
 end;
 
 CREATE OR REPLACE PROCEDURE rol_select(registros out sys_refcursor)
@@ -131,4 +132,20 @@ RETURN INTEGER is resultado integer;
 		  select  codigo_cheque into resultado from "SYSTEM"."CHEQUE_LOCAL" WHERE codigo_cheque=cod;
           return resultado;
     END validar_cheque;
+	
+	
+CREATE OR REPLACE  FUNCTION  validad_cuenta_cheque
+( cuen  in INT, che in INT) 
+RETURN INT 
+as 
+resultado INT;
+cuentareal number;
+	BEGIN
+		  select  c.cuenta into cuentareal from chequera c,cheque_local l where  c.codigo_chequera=l.chequera  and l.codigo_cheque=che;
+		  if cuentareal=cuen THEN resultado := 1;
+		  ELSE  resultado := 0;
+          END IF;
+		  return resultado;
+    END validad_cuenta_cheque;
+	
 	
