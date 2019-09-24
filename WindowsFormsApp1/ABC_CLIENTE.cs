@@ -160,23 +160,30 @@ namespace WindowsFormsApp1
             return s1;
         }
 
-        private void Add_Client(String nombre, String direccion, int nit, int telefono, String correo, int tipo_cliente, byte[] foto, byte[] firma, String dpi) {
-            String codigo_cliente = "010";
+        private int Add_Client(String nombre, String direccion, int nit, int telefono, String correo, int tipo_cliente, byte[] foto, byte[] firma, String dpi) {
+            int codigo_cliente = -1;
             try
             {
                 ora.Open();
-                comando = new OracleCommand("INSERT INTO CLIENTE(nombre,direccion,nit,telefono,correo,TIPO_CLIENTE,foto,firma,dpi)" +
-                    "values(" + nombre + "," + direccion + "," + nit + "," + telefono + "," + correo + "," + tipo_cliente + "," + foto + "," + firma + "," + dpi + ")");
-                comando.ExecuteNonQuery();
+                comando = new OracleCommand("INSERT INTO CLIENTE (NOMBRE, DIRECCION, NIT, TELEFONO, CORREO, TIPO_CLIENTE,FOTO,FIRMA, DPI)" +
+                    "VALUES ('" + nombre + "','" + direccion + "','" + nit + "','" + telefono + "','" + correo + "','" + tipo_cliente + "',:iFOTO,:iFIRMA,'" + dpi + "')",ora);
 
-                comando = new OracleCommand("SELECT codigo_cliente from CLIENTE where dpi = "+dpi);
+                OracleParameter iFOTO = comando.Parameters.Add(":iFOTO", OracleType.Blob);
+                iFOTO.Value = foto;
+
+                OracleParameter iFIRMA = comando.Parameters.Add(":iFIRMA", OracleType.Blob);
+                iFIRMA.Value = firma;
+
+                comando.ExecuteNonQuery();
+                
+                comando = new OracleCommand("SELECT codigo_cliente from CLIENTE where dpi = "+dpi,ora);
                 adaptador = new OracleDataAdapter();
                 adaptador.SelectCommand = comando;
                 DataTable tabla_tipos = new DataTable();
                 adaptador.Fill(tabla_tipos);
                 foreach (DataRow row in tabla_tipos.Rows)
                 {
-                    codigo_cliente = row["codigo_cliente"].ToString();
+                    codigo_cliente = System.Convert.ToInt32(row["codigo_cliente"].ToString());
                     break;
                 }
                 System.Windows.Forms.MessageBox.Show("Operacion exitosa, su codigo de cliente: " + codigo_cliente);
@@ -189,6 +196,7 @@ namespace WindowsFormsApp1
             {
                 ora.Close();
             }
+            return codigo_cliente;
         }
 
         private void Remove_Client(int codigo)
@@ -244,7 +252,7 @@ namespace WindowsFormsApp1
             OpenFileDialog openFileDialog1 = new OpenFileDialog();
             openFileDialog1.Title = "Subir Foto";
             openFileDialog1.DefaultExt = "jpg";
-            openFileDialog1.ShowDialog();
+            //openFileDialog1.ShowDialog();
 
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
             {
@@ -259,7 +267,7 @@ namespace WindowsFormsApp1
             OpenFileDialog openFileDialog1 = new OpenFileDialog();
             openFileDialog1.Title = "Subir Firma";
             openFileDialog1.DefaultExt = "jpg";
-            openFileDialog1.ShowDialog();
+            //openFileDialog1.ShowDialog();
 
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
             {
@@ -282,6 +290,8 @@ namespace WindowsFormsApp1
 
         private void but_enviar_Click(object sender, EventArgs e)
         {
+            if (!IsValidNit(box_nit.Text)) { System.Windows.Forms.MessageBox.Show("el verificador no puede validar su numero de nit, ingrese un nit valido"); return; }
+
             if (box_dpi.Text == "") { System.Windows.Forms.MessageBox.Show("debe ingresar informacion en el dpi"); return; }
             if (box_nombre.Text == "") { System.Windows.Forms.MessageBox.Show("debe ingresar informacion en el nombre"); return; }
             if (box_direccion.Text == "") { System.Windows.Forms.MessageBox.Show("debe ingresar informacion en la direccion"); return; }
@@ -291,8 +301,7 @@ namespace WindowsFormsApp1
             if (combo_tipo.Text == "") { System.Windows.Forms.MessageBox.Show("debe seleccionar un tipo de cliente"); return; }
             if (box_foto.Text == "") { System.Windows.Forms.MessageBox.Show("debe agregar una foto"); return; }
             if (box_firma.Text == "") { System.Windows.Forms.MessageBox.Show("debe agregar una firma"); return; }
-            if (box_nombre.Text == "") { System.Windows.Forms.MessageBox.Show("debe ingresar informacion en el nombre"); return; }
-
+            
             if (box_dpi.Text.Length != 13) { System.Windows.Forms.MessageBox.Show("la cantidad de digitos no corresponde a un dpi valido"); return; }
             if (box_telefono.Text.Length != 8) { System.Windows.Forms.MessageBox.Show("la cantidad de digitos no corresponde a un telefono valido"); return; }
 
@@ -310,9 +319,46 @@ namespace WindowsFormsApp1
             byte[] firma = convert_image_to_blob(box_firma.Text);
             string tipo_cliente = ((KeyValuePair<string, string>)combo_tipo.SelectedItem).Key;
 
-            Add_Client(box_nombre.Text, box_direccion.Text, Int32.Parse(box_nit.Text), Int32.Parse(box_telefono.Text), box_correo.Text, Int32.Parse(tipo_cliente), foto, firma, box_dpi.Text);
+            int resultado = Add_Client(box_nombre.Text, box_direccion.Text, Int32.Parse(box_nit.Text), Int32.Parse(box_telefono.Text), box_correo.Text, Int32.Parse(tipo_cliente), foto, firma, box_dpi.Text);
+            if(resultado != -1)
+            {
+                box_dpi.Text = "";
+                box_nombre.Text = "";
+                box_direccion.Text = "";
+                box_nit.Text = "";
+                box_telefono.Text = "";
+                box_correo.Text = "";
+                box_foto.Text = "";
+                pic_foto.Image = null;
+                box_firma.Text = "";
+                pic_firma.Image = null;
+            }
+        }
 
-            //System.Windows.Forms.MessageBox.Show("operacion realizada con exito");
+        private bool IsValidNit(string nit)
+        {
+            if (nit == null)
+                throw new ArgumentNullException(nameof(nit));
+            if (nit.Length != 7)
+                return false;
+            var digitos = new byte[7];
+            for (int i = 0; i < nit.Length; i++)
+            {
+                if (!char.IsDigit(nit[i]))
+                    return false;
+                digitos[i] = byte.Parse(nit[i].ToString());
+            }
+            var v = 7 * digitos[0] +
+                    6 * digitos[1] +
+                    5 * digitos[2] +
+                    4 * digitos[3] +
+                    3 * digitos[4] +
+                    2 * digitos[5]
+                    ;
+            v = v % 11;
+            if (v >= 2)
+                v = 11 - v;
+            return v == digitos[6];
         }
     }
     

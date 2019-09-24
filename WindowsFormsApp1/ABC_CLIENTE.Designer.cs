@@ -30,6 +30,8 @@
         {
             this.tab_cliente = new System.Windows.Forms.TabControl();
             this.add_cliente = new System.Windows.Forms.TabPage();
+            this.label11 = new System.Windows.Forms.Label();
+            this.box_dpi = new System.Windows.Forms.TextBox();
             this.but_enviar = new System.Windows.Forms.Button();
             this.label10 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
@@ -56,8 +58,6 @@
             this.get_cliente = new System.Windows.Forms.TabPage();
             this.remove_cliente = new System.Windows.Forms.TabPage();
             this.modif_cliente = new System.Windows.Forms.TabPage();
-            this.label11 = new System.Windows.Forms.Label();
-            this.box_dpi = new System.Windows.Forms.TextBox();
             this.tab_cliente.SuspendLayout();
             this.add_cliente.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pic_firma)).BeginInit();
@@ -110,6 +110,24 @@
             this.add_cliente.TabIndex = 1;
             this.add_cliente.Text = "Agregar Cliente";
             this.add_cliente.UseVisualStyleBackColor = true;
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(47, 36);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(30, 17);
+            this.label11.TabIndex = 24;
+            this.label11.Text = "DPI";
+            // 
+            // box_dpi
+            // 
+            this.box_dpi.Location = new System.Drawing.Point(203, 32);
+            this.box_dpi.MaxLength = 13;
+            this.box_dpi.Name = "box_dpi";
+            this.box_dpi.Size = new System.Drawing.Size(212, 22);
+            this.box_dpi.TabIndex = 23;
+            this.box_dpi.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox_KeyPress);
             // 
             // but_enviar
             // 
@@ -247,6 +265,7 @@
             // box_nit
             // 
             this.box_nit.Location = new System.Drawing.Point(203, 141);
+            this.box_nit.MaxLength = 7;
             this.box_nit.Name = "box_nit";
             this.box_nit.Size = new System.Drawing.Size(212, 22);
             this.box_nit.TabIndex = 7;
@@ -340,24 +359,6 @@
             this.modif_cliente.TabIndex = 4;
             this.modif_cliente.Text = "Modificar Cliente";
             this.modif_cliente.UseVisualStyleBackColor = true;
-            // 
-            // label11
-            // 
-            this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(47, 36);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(30, 17);
-            this.label11.TabIndex = 24;
-            this.label11.Text = "DPI";
-            // 
-            // box_dpi
-            // 
-            this.box_dpi.Location = new System.Drawing.Point(203, 32);
-            this.box_dpi.MaxLength = 13;
-            this.box_dpi.Name = "box_dpi";
-            this.box_dpi.Size = new System.Drawing.Size(212, 22);
-            this.box_dpi.TabIndex = 23;
-            this.box_dpi.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox_KeyPress);
             // 
             // ABC_CLIENTE
             // 
