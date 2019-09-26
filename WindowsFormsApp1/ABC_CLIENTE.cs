@@ -33,24 +33,6 @@ namespace WindowsFormsApp1
                 "PASSWORD="+ Properties.Settings.Default.contrasenia_db + ";"+
                 "USER ID="+ Properties.Settings.Default.usuario_db + ";"
                 );
-            /*try
-            {
-                ora.Open();
-                System.Windows.Forms.MessageBox.Show("conexion exitosa");
-                Properties.Settings.Default.empleado = "Hola";
-                Properties.Settings.Default.Save();
-                var mensaje = Properties.Settings.Default.empleado;
-                System.Windows.Forms.MessageBox.Show(mensaje);
-                Properties.Settings.Default.empleado = "Adios";
-                Properties.Settings.Default.Save();
-                mensaje = Properties.Settings.Default.empleado;
-                System.Windows.Forms.MessageBox.Show(mensaje);
-                ora.Close();
-            }
-            catch
-            {
-                System.Windows.Forms.MessageBox.Show("conexion fallida");
-            }*/
 
             ArrayList t_cuenta = Get_Tipes_Client();
 
@@ -63,7 +45,11 @@ namespace WindowsFormsApp1
             combo_tipo.DisplayMember = "Value";
             combo_tipo.ValueMember = "Key";
 
-            //string value = ((KeyValuePair<string, string>)comboBox1.SelectedItem).Value;
+
+            box_btipo.DataSource = new BindingSource(test, null);
+            box_btipo.DisplayMember = "Value";
+            box_btipo.ValueMember = "Key";
+            combo_buscar.SelectedIndex = 1;
         }
 
         private ArrayList Get_Tipes_Client() {
@@ -107,30 +93,51 @@ namespace WindowsFormsApp1
         }
 
         public String convert_blob_to_image(byte[] blob,String nombre) {
-            File.WriteAllBytes(@"C:\"+nombre+".jpg", blob);
-            return @"C:\"+nombre+".jpg";
+            string path = Path.GetTempPath();
+            File.WriteAllBytes(@path +nombre+".jpg", blob);
+            return path+nombre+".jpg";
         }
 
         public String[] Get_Client(int codigo_cliente ,int dpi) {
-            String[] s1 = new String[9];
+            String[] s1 = new String[10];
             DataTable tabla_tipos = new DataTable();
             try
             {
                 ora.Open();
+                comando = new OracleCommand();
+                comando.Connection = ora;
+                comando.CommandType = CommandType.Text;
+                OracleParameter parametro1;
                 if (codigo_cliente != 0)
-                {
-                    comando = new OracleCommand("SELECT * from CLIENTE where codigo_cliente = " + codigo_cliente);
-                    adaptador = new OracleDataAdapter();
-                    adaptador.SelectCommand = comando;
-                    adaptador.Fill(tabla_tipos);
+                {              
+                    comando.CommandText = "SELECT * from CLIENTE where codigo_cliente = :codigo_cliente";
+                    parametro1 = new OracleParameter("codigo_cliente", OracleType.Int32);
+                    parametro1.Value = codigo_cliente;
+                    comando.Parameters.Add(parametro1);
                 }
                 else
                 {
-                    comando = new OracleCommand("SELECT * from CLIENTE where dpi = " + dpi);
-                    adaptador = new OracleDataAdapter();
-                    adaptador.SelectCommand = comando;
-                    adaptador.Fill(tabla_tipos);
+                    comando.CommandText = "SELECT * from CLIENTE where dpi = :dpi";
+                    parametro1 = new OracleParameter("dpi", OracleType.Int32);
+                    parametro1.Value = dpi;
+                    comando.Parameters.Add(parametro1);
                 }
+                OracleDataReader lector = comando.ExecuteReader();
+                lector.Read();
+                
+                s1[0] = lector.GetInt32(0).ToString(); //codigo cliente
+                s1[1] = lector.GetString(1); //nombre
+                s1[2] = lector.GetString(2); //direccion
+                s1[3] = lector.GetInt32(3).ToString(); //nit
+                s1[4] = lector.GetInt32(4).ToString(); //telefono
+                s1[5] = lector.GetString(5); //correo
+                s1[6] = lector.GetInt32(6).ToString(); //tipo_cliente
+                byte[] foto = (byte [])(lector["foto"]); //foto
+                s1[7] = convert_blob_to_image(foto, "foto"); //foto
+                byte[] firma = (byte [])(lector["firma"]); //firma
+                s1[8] = convert_blob_to_image(firma, "firma"); //firma
+                s1[9] = lector.GetString(9); //dpi
+                ora.Dispose();
             }
             catch (Exception e) {
                 System.Windows.Forms.MessageBox.Show("se produjo un error: " + e.Message);
@@ -138,23 +145,6 @@ namespace WindowsFormsApp1
             finally
             {
                 ora.Close();
-            }
-
-            foreach (DataRow row in tabla_tipos.Rows)
-            {
-                s1[0] = row["codigo_cliente"].ToString();
-                s1[1] = row["nombre"].ToString();
-                s1[2] = row["direccion"].ToString();
-                s1[3] = row["nit"].ToString();
-                s1[4] = row["telefono"].ToString();
-                s1[5] = row["correo"].ToString();
-                s1[6] = row["tipo_cliente"].ToString();
-                byte[] foto = Convert.FromBase64String(row["foto"].ToString());
-                s1[7] = convert_blob_to_image(foto,"foto");
-                byte[] firma = Convert.FromBase64String(row["firma"].ToString());
-                s1[7] = convert_blob_to_image(firma, "firma");
-                s1[9] = row["dpi"].ToString();
-                break;
             }
 
             return s1;
@@ -359,6 +349,33 @@ namespace WindowsFormsApp1
             if (v >= 2)
                 v = 11 - v;
             return v == digitos[6];
+        }
+
+        private void btn_buscar_Click(object sender, EventArgs e)
+        {
+            if (box_cliente.Text == "") { System.Windows.Forms.MessageBox.Show("debe ingresar un codigo o dpi valido"); return; }
+            if (combo_buscar.Text == "") { System.Windows.Forms.MessageBox.Show("debe seleccionar una opcion valida"); return; }
+            int codigo = System.Convert.ToInt32(box_cliente.Text);
+            String opcion = combo_buscar.Text;
+            String[] resultado;
+            if (opcion == "CODIGO USUARIO") {
+                resultado = Get_Client(codigo, 0);
+            } else {
+                resultado = Get_Client(0, codigo);
+            }
+            box_bcodigo.Text = resultado[0];//codigo de cliente
+            box_bnombre.Text = resultado[1];//nombre
+            box_bdireccion.Text = resultado[2];//direccion
+            box_bnit.Text = resultado[3];//nit
+            box_btelefono.Text = resultado[4];//telefono
+            box_bcorreo.Text = resultado[5];//correo
+            box_btipo.SelectedValue = resultado[6];//tipo_cliente
+            box_bfoto.Text = resultado[7];
+            box_bfirma.Text = resultado[8];
+            box_bdpi.Text = resultado[9];//dpi
+            pic_bfoto.Image = Image.FromFile(resultado[7]);
+            pic_bfirma.Image = Image.FromFile(resultado[8]);
+
         }
     }
     
