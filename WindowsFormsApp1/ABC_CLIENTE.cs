@@ -45,7 +45,6 @@ namespace WindowsFormsApp1
             combo_tipo.DisplayMember = "Value";
             combo_tipo.ValueMember = "Key";
 
-
             box_btipo.DataSource = new BindingSource(test, null);
             box_btipo.DisplayMember = "Value";
             box_btipo.ValueMember = "Key";
@@ -137,7 +136,6 @@ namespace WindowsFormsApp1
                 byte[] firma = (byte [])(lector["firma"]); //firma
                 s1[8] = convert_blob_to_image(firma, "firma"); //firma
                 s1[9] = lector.GetString(9); //dpi
-                ora.Dispose();
             }
             catch (Exception e) {
                 System.Windows.Forms.MessageBox.Show("se produjo un error: " + e.Message);
@@ -189,14 +187,32 @@ namespace WindowsFormsApp1
             return codigo_cliente;
         }
 
-        private void Remove_Client(int codigo)
+        private void Eliminar_Cliente(int codigo)
         {
             try
             {
                 ora.Open();
-                comando = new OracleCommand("DELETE * from CLIENTE where codigo_cliente = "+codigo);
+                comando = new OracleCommand();
+                comando.Connection = ora;
+                comando.CommandType = CommandType.Text;                
+                comando.CommandText = "DELETE FROM CLIENTE where codigo_cliente = :codigo_cliente";
+                OracleParameter parametro1 = new OracleParameter("codigo_cliente", OracleType.Int32);
+                parametro1.Value = codigo;
+                comando.Parameters.Add(parametro1);
                 comando.ExecuteNonQuery();
                 System.Windows.Forms.MessageBox.Show("Operacion exitosa, se ha removido el cliente " + codigo);
+                box_bcodigo.Text = "";
+                box_bdpi.Text = "";
+                box_bnombre.Text = "";
+                box_bdireccion.Text = "";
+                box_btelefono.Text = "";
+                box_bcorreo.Text = "";
+                box_bnit.Text = "";
+                box_bfirma.Text = "";
+                box_bfoto.Text = "";
+                pic_bfoto.Image = null;
+                pic_bfirma.Image = null;
+
             }
             catch(Exception e)
             {            
@@ -376,6 +392,15 @@ namespace WindowsFormsApp1
             pic_bfoto.Image = Image.FromFile(resultado[7]);
             pic_bfirma.Image = Image.FromFile(resultado[8]);
 
+        }
+
+        private void button7_Click(object sender, EventArgs e)
+        {
+            if (box_bcodigo.Text == "") {
+                System.Windows.Forms.MessageBox.Show("Debe selecionar un cliente para eliminarlo");
+                return;
+            }
+            Eliminar_Cliente(System.Convert.ToInt32(box_bcodigo.Text));
         }
     }
     
