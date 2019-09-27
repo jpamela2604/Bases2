@@ -29,37 +29,9 @@
         private void InitializeComponent()
         {
             this.get_cliente = new System.Windows.Forms.TabPage();
-            this.label12 = new System.Windows.Forms.Label();
-            this.btn_buscar = new System.Windows.Forms.Button();
-            this.box_cliente = new System.Windows.Forms.TextBox();
-            this.combo_buscar = new System.Windows.Forms.ComboBox();
-            this.add_cliente = new System.Windows.Forms.TabPage();
-            this.combo_tipo = new System.Windows.Forms.ComboBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.pic_foto = new System.Windows.Forms.PictureBox();
-            this.box_nombre = new System.Windows.Forms.TextBox();
-            this.label2 = new System.Windows.Forms.Label();
-            this.box_direccion = new System.Windows.Forms.TextBox();
-            this.label3 = new System.Windows.Forms.Label();
-            this.box_nit = new System.Windows.Forms.TextBox();
-            this.label4 = new System.Windows.Forms.Label();
-            this.box_telefono = new System.Windows.Forms.TextBox();
-            this.label5 = new System.Windows.Forms.Label();
-            this.box_correo = new System.Windows.Forms.TextBox();
-            this.label6 = new System.Windows.Forms.Label();
-            this.label7 = new System.Windows.Forms.Label();
-            this.label8 = new System.Windows.Forms.Label();
-            this.box_foto = new System.Windows.Forms.TextBox();
-            this.box_firma = new System.Windows.Forms.TextBox();
-            this.button1 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
-            this.pic_firma = new System.Windows.Forms.PictureBox();
-            this.label9 = new System.Windows.Forms.Label();
-            this.label10 = new System.Windows.Forms.Label();
-            this.but_enviar = new System.Windows.Forms.Button();
-            this.box_dpi = new System.Windows.Forms.TextBox();
-            this.label11 = new System.Windows.Forms.Label();
-            this.tab_cliente = new System.Windows.Forms.TabControl();
+            this.box_bcodigo = new System.Windows.Forms.TextBox();
+            this.label24 = new System.Windows.Forms.Label();
+            this.button7 = new System.Windows.Forms.Button();
             this.label13 = new System.Windows.Forms.Label();
             this.box_bdpi = new System.Windows.Forms.TextBox();
             this.box_bfirma = new System.Windows.Forms.TextBox();
@@ -85,16 +57,44 @@
             this.pic_bfoto = new System.Windows.Forms.PictureBox();
             this.label23 = new System.Windows.Forms.Label();
             this.box_btipo = new System.Windows.Forms.ComboBox();
-            this.button7 = new System.Windows.Forms.Button();
-            this.label24 = new System.Windows.Forms.Label();
-            this.box_bcodigo = new System.Windows.Forms.TextBox();
+            this.combo_buscar = new System.Windows.Forms.ComboBox();
+            this.box_cliente = new System.Windows.Forms.TextBox();
+            this.btn_buscar = new System.Windows.Forms.Button();
+            this.label12 = new System.Windows.Forms.Label();
+            this.add_cliente = new System.Windows.Forms.TabPage();
+            this.label11 = new System.Windows.Forms.Label();
+            this.box_dpi = new System.Windows.Forms.TextBox();
+            this.box_firma = new System.Windows.Forms.TextBox();
+            this.box_foto = new System.Windows.Forms.TextBox();
+            this.box_correo = new System.Windows.Forms.TextBox();
+            this.box_telefono = new System.Windows.Forms.TextBox();
+            this.box_nit = new System.Windows.Forms.TextBox();
+            this.box_direccion = new System.Windows.Forms.TextBox();
+            this.box_nombre = new System.Windows.Forms.TextBox();
+            this.but_enviar = new System.Windows.Forms.Button();
+            this.label10 = new System.Windows.Forms.Label();
+            this.label9 = new System.Windows.Forms.Label();
+            this.pic_firma = new System.Windows.Forms.PictureBox();
+            this.button2 = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
+            this.label8 = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.pic_foto = new System.Windows.Forms.PictureBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.combo_tipo = new System.Windows.Forms.ComboBox();
+            this.tab_cliente = new System.Windows.Forms.TabControl();
             this.get_cliente.SuspendLayout();
-            this.add_cliente.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pic_foto)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pic_firma)).BeginInit();
-            this.tab_cliente.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pic_bfirma)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pic_bfoto)).BeginInit();
+            this.add_cliente.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pic_firma)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pic_foto)).BeginInit();
+            this.tab_cliente.SuspendLayout();
             this.SuspendLayout();
             // 
             // get_cliente
@@ -138,310 +138,34 @@
             this.get_cliente.TabIndex = 2;
             this.get_cliente.Text = "Obtener Informacion ";
             this.get_cliente.UseVisualStyleBackColor = true;
+            this.get_cliente.Click += new System.EventHandler(this.get_cliente_Click);
             // 
-            // label12
+            // box_bcodigo
             // 
-            this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(39, 26);
-            this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(99, 17);
-            this.label12.TabIndex = 0;
-            this.label12.Text = "Buscar Cliente";
+            this.box_bcodigo.Location = new System.Drawing.Point(195, 55);
+            this.box_bcodigo.Name = "box_bcodigo";
+            this.box_bcodigo.ReadOnly = true;
+            this.box_bcodigo.Size = new System.Drawing.Size(212, 22);
+            this.box_bcodigo.TabIndex = 52;
             // 
-            // btn_buscar
+            // label24
             // 
-            this.btn_buscar.Location = new System.Drawing.Point(549, 22);
-            this.btn_buscar.Name = "btn_buscar";
-            this.btn_buscar.Size = new System.Drawing.Size(135, 30);
-            this.btn_buscar.TabIndex = 1;
-            this.btn_buscar.Text = "buscar";
-            this.btn_buscar.UseVisualStyleBackColor = true;
-            this.btn_buscar.Click += new System.EventHandler(this.btn_buscar_Click);
+            this.label24.AutoSize = true;
+            this.label24.Location = new System.Drawing.Point(39, 61);
+            this.label24.Name = "label24";
+            this.label24.Size = new System.Drawing.Size(125, 17);
+            this.label24.TabIndex = 51;
+            this.label24.Text = "Codigo de Usuario";
             // 
-            // box_cliente
+            // button7
             // 
-            this.box_cliente.Location = new System.Drawing.Point(165, 26);
-            this.box_cliente.MaxLength = 13;
-            this.box_cliente.Name = "box_cliente";
-            this.box_cliente.Size = new System.Drawing.Size(135, 22);
-            this.box_cliente.TabIndex = 2;
-            this.box_cliente.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox_KeyPress);
-            // 
-            // combo_buscar
-            // 
-            this.combo_buscar.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.combo_buscar.FormattingEnabled = true;
-            this.combo_buscar.Items.AddRange(new object[] {
-            "DPI",
-            "CODIGO USUARIO"});
-            this.combo_buscar.Location = new System.Drawing.Point(357, 26);
-            this.combo_buscar.Name = "combo_buscar";
-            this.combo_buscar.Size = new System.Drawing.Size(159, 24);
-            this.combo_buscar.TabIndex = 3;
-            // 
-            // add_cliente
-            // 
-            this.add_cliente.Controls.Add(this.label11);
-            this.add_cliente.Controls.Add(this.box_dpi);
-            this.add_cliente.Controls.Add(this.box_firma);
-            this.add_cliente.Controls.Add(this.box_foto);
-            this.add_cliente.Controls.Add(this.box_correo);
-            this.add_cliente.Controls.Add(this.box_telefono);
-            this.add_cliente.Controls.Add(this.box_nit);
-            this.add_cliente.Controls.Add(this.box_direccion);
-            this.add_cliente.Controls.Add(this.box_nombre);
-            this.add_cliente.Controls.Add(this.but_enviar);
-            this.add_cliente.Controls.Add(this.label10);
-            this.add_cliente.Controls.Add(this.label9);
-            this.add_cliente.Controls.Add(this.pic_firma);
-            this.add_cliente.Controls.Add(this.button2);
-            this.add_cliente.Controls.Add(this.button1);
-            this.add_cliente.Controls.Add(this.label8);
-            this.add_cliente.Controls.Add(this.label7);
-            this.add_cliente.Controls.Add(this.label6);
-            this.add_cliente.Controls.Add(this.label5);
-            this.add_cliente.Controls.Add(this.label4);
-            this.add_cliente.Controls.Add(this.label3);
-            this.add_cliente.Controls.Add(this.label2);
-            this.add_cliente.Controls.Add(this.pic_foto);
-            this.add_cliente.Controls.Add(this.label1);
-            this.add_cliente.Controls.Add(this.combo_tipo);
-            this.add_cliente.Location = new System.Drawing.Point(4, 25);
-            this.add_cliente.Name = "add_cliente";
-            this.add_cliente.Padding = new System.Windows.Forms.Padding(3);
-            this.add_cliente.Size = new System.Drawing.Size(905, 621);
-            this.add_cliente.TabIndex = 1;
-            this.add_cliente.Text = "Agregar Cliente";
-            this.add_cliente.UseVisualStyleBackColor = true;
-            // 
-            // combo_tipo
-            // 
-            this.combo_tipo.FormattingEnabled = true;
-            this.combo_tipo.Location = new System.Drawing.Point(208, 355);
-            this.combo_tipo.Name = "combo_tipo";
-            this.combo_tipo.Size = new System.Drawing.Size(212, 24);
-            this.combo_tipo.TabIndex = 0;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(52, 358);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(105, 17);
-            this.label1.TabIndex = 1;
-            this.label1.Text = "Tipo de Cuenta";
-            // 
-            // pic_foto
-            // 
-            this.pic_foto.Location = new System.Drawing.Point(702, 92);
-            this.pic_foto.Name = "pic_foto";
-            this.pic_foto.Size = new System.Drawing.Size(148, 178);
-            this.pic_foto.TabIndex = 2;
-            this.pic_foto.TabStop = false;
-            // 
-            // box_nombre
-            // 
-            this.box_nombre.Location = new System.Drawing.Point(208, 116);
-            this.box_nombre.MaxLength = 50;
-            this.box_nombre.Name = "box_nombre";
-            this.box_nombre.Size = new System.Drawing.Size(212, 22);
-            this.box_nombre.TabIndex = 3;
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(52, 120);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(58, 17);
-            this.label2.TabIndex = 4;
-            this.label2.Text = "Nombre";
-            // 
-            // box_direccion
-            // 
-            this.box_direccion.Location = new System.Drawing.Point(208, 153);
-            this.box_direccion.MaxLength = 50;
-            this.box_direccion.Name = "box_direccion";
-            this.box_direccion.Size = new System.Drawing.Size(212, 22);
-            this.box_direccion.TabIndex = 5;
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(52, 156);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(67, 17);
-            this.label3.TabIndex = 6;
-            this.label3.Text = "Direccion";
-            // 
-            // box_nit
-            // 
-            this.box_nit.Location = new System.Drawing.Point(208, 193);
-            this.box_nit.MaxLength = 7;
-            this.box_nit.Name = "box_nit";
-            this.box_nit.Size = new System.Drawing.Size(212, 22);
-            this.box_nit.TabIndex = 7;
-            this.box_nit.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox_KeyPress);
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(52, 196);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(25, 17);
-            this.label4.TabIndex = 8;
-            this.label4.Text = "Nit";
-            // 
-            // box_telefono
-            // 
-            this.box_telefono.Location = new System.Drawing.Point(208, 248);
-            this.box_telefono.MaxLength = 8;
-            this.box_telefono.Name = "box_telefono";
-            this.box_telefono.Size = new System.Drawing.Size(212, 22);
-            this.box_telefono.TabIndex = 9;
-            this.box_telefono.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox_KeyPress);
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(52, 251);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(64, 17);
-            this.label5.TabIndex = 10;
-            this.label5.Text = "Telefono";
-            // 
-            // box_correo
-            // 
-            this.box_correo.Location = new System.Drawing.Point(208, 301);
-            this.box_correo.Name = "box_correo";
-            this.box_correo.Size = new System.Drawing.Size(212, 22);
-            this.box_correo.TabIndex = 11;
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(52, 301);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(51, 17);
-            this.label6.TabIndex = 12;
-            this.label6.Text = "Correo";
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(52, 412);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(36, 17);
-            this.label7.TabIndex = 13;
-            this.label7.Text = "Foto";
-            // 
-            // label8
-            // 
-            this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(52, 456);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(43, 17);
-            this.label8.TabIndex = 14;
-            this.label8.Text = "Firma";
-            // 
-            // box_foto
-            // 
-            this.box_foto.Enabled = false;
-            this.box_foto.Location = new System.Drawing.Point(208, 406);
-            this.box_foto.Name = "box_foto";
-            this.box_foto.Size = new System.Drawing.Size(212, 22);
-            this.box_foto.TabIndex = 15;
-            // 
-            // box_firma
-            // 
-            this.box_firma.Enabled = false;
-            this.box_firma.Location = new System.Drawing.Point(208, 450);
-            this.box_firma.Name = "box_firma";
-            this.box_firma.Size = new System.Drawing.Size(212, 22);
-            this.box_firma.TabIndex = 16;
-            // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(456, 406);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(110, 23);
-            this.button1.TabIndex = 17;
-            this.button1.Text = "Seleccionar";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
-            // 
-            // button2
-            // 
-            this.button2.Location = new System.Drawing.Point(456, 449);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(110, 23);
-            this.button2.TabIndex = 18;
-            this.button2.Text = "Seleccionar";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
-            // 
-            // pic_firma
-            // 
-            this.pic_firma.Location = new System.Drawing.Point(702, 324);
-            this.pic_firma.Name = "pic_firma";
-            this.pic_firma.Size = new System.Drawing.Size(148, 178);
-            this.pic_firma.TabIndex = 19;
-            this.pic_firma.TabStop = false;
-            // 
-            // label9
-            // 
-            this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(651, 89);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(36, 17);
-            this.label9.TabIndex = 20;
-            this.label9.Text = "Foto";
-            // 
-            // label10
-            // 
-            this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(651, 324);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(43, 17);
-            this.label10.TabIndex = 21;
-            this.label10.Text = "Firma";
-            // 
-            // but_enviar
-            // 
-            this.but_enviar.Location = new System.Drawing.Point(258, 491);
-            this.but_enviar.Name = "but_enviar";
-            this.but_enviar.Size = new System.Drawing.Size(122, 34);
-            this.but_enviar.TabIndex = 22;
-            this.but_enviar.Text = "Enviar";
-            this.but_enviar.UseVisualStyleBackColor = true;
-            this.but_enviar.Click += new System.EventHandler(this.but_enviar_Click);
-            // 
-            // box_dpi
-            // 
-            this.box_dpi.Location = new System.Drawing.Point(208, 84);
-            this.box_dpi.MaxLength = 13;
-            this.box_dpi.Name = "box_dpi";
-            this.box_dpi.Size = new System.Drawing.Size(212, 22);
-            this.box_dpi.TabIndex = 23;
-            this.box_dpi.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox_KeyPress);
-            // 
-            // label11
-            // 
-            this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(52, 88);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(30, 17);
-            this.label11.TabIndex = 24;
-            this.label11.Text = "DPI";
-            // 
-            // tab_cliente
-            // 
-            this.tab_cliente.Controls.Add(this.add_cliente);
-            this.tab_cliente.Controls.Add(this.get_cliente);
-            this.tab_cliente.Location = new System.Drawing.Point(64, 30);
-            this.tab_cliente.Name = "tab_cliente";
-            this.tab_cliente.SelectedIndex = 0;
-            this.tab_cliente.Size = new System.Drawing.Size(913, 650);
-            this.tab_cliente.TabIndex = 0;
+            this.button7.Location = new System.Drawing.Point(588, 538);
+            this.button7.Name = "button7";
+            this.button7.Size = new System.Drawing.Size(124, 44);
+            this.button7.TabIndex = 50;
+            this.button7.Text = "Eliminar Cliente";
+            this.button7.UseVisualStyleBackColor = true;
+            this.button7.Click += new System.EventHandler(this.button7_Click);
             // 
             // label13
             // 
@@ -661,32 +385,309 @@
             this.box_btipo.Size = new System.Drawing.Size(212, 24);
             this.box_btipo.TabIndex = 25;
             // 
-            // button7
+            // combo_buscar
             // 
-            this.button7.Location = new System.Drawing.Point(588, 538);
-            this.button7.Name = "button7";
-            this.button7.Size = new System.Drawing.Size(124, 44);
-            this.button7.TabIndex = 50;
-            this.button7.Text = "Eliminar Cliente";
-            this.button7.UseVisualStyleBackColor = true;
-            this.button7.Click += new System.EventHandler(this.button7_Click);
+            this.combo_buscar.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.combo_buscar.FormattingEnabled = true;
+            this.combo_buscar.Items.AddRange(new object[] {
+            "DPI",
+            "CODIGO USUARIO"});
+            this.combo_buscar.Location = new System.Drawing.Point(357, 26);
+            this.combo_buscar.Name = "combo_buscar";
+            this.combo_buscar.Size = new System.Drawing.Size(159, 24);
+            this.combo_buscar.TabIndex = 3;
             // 
-            // label24
+            // box_cliente
             // 
-            this.label24.AutoSize = true;
-            this.label24.Location = new System.Drawing.Point(39, 61);
-            this.label24.Name = "label24";
-            this.label24.Size = new System.Drawing.Size(125, 17);
-            this.label24.TabIndex = 51;
-            this.label24.Text = "Codigo de Usuario";
+            this.box_cliente.Location = new System.Drawing.Point(165, 26);
+            this.box_cliente.MaxLength = 13;
+            this.box_cliente.Name = "box_cliente";
+            this.box_cliente.Size = new System.Drawing.Size(135, 22);
+            this.box_cliente.TabIndex = 2;
+            this.box_cliente.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox_KeyPress);
             // 
-            // box_bcodigo
+            // btn_buscar
             // 
-            this.box_bcodigo.Location = new System.Drawing.Point(195, 55);
-            this.box_bcodigo.Name = "box_bcodigo";
-            this.box_bcodigo.ReadOnly = true;
-            this.box_bcodigo.Size = new System.Drawing.Size(212, 22);
-            this.box_bcodigo.TabIndex = 52;
+            this.btn_buscar.Location = new System.Drawing.Point(549, 22);
+            this.btn_buscar.Name = "btn_buscar";
+            this.btn_buscar.Size = new System.Drawing.Size(135, 30);
+            this.btn_buscar.TabIndex = 1;
+            this.btn_buscar.Text = "buscar";
+            this.btn_buscar.UseVisualStyleBackColor = true;
+            this.btn_buscar.Click += new System.EventHandler(this.btn_buscar_Click);
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Location = new System.Drawing.Point(39, 26);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(99, 17);
+            this.label12.TabIndex = 0;
+            this.label12.Text = "Buscar Cliente";
+            // 
+            // add_cliente
+            // 
+            this.add_cliente.Controls.Add(this.label11);
+            this.add_cliente.Controls.Add(this.box_dpi);
+            this.add_cliente.Controls.Add(this.box_firma);
+            this.add_cliente.Controls.Add(this.box_foto);
+            this.add_cliente.Controls.Add(this.box_correo);
+            this.add_cliente.Controls.Add(this.box_telefono);
+            this.add_cliente.Controls.Add(this.box_nit);
+            this.add_cliente.Controls.Add(this.box_direccion);
+            this.add_cliente.Controls.Add(this.box_nombre);
+            this.add_cliente.Controls.Add(this.but_enviar);
+            this.add_cliente.Controls.Add(this.label10);
+            this.add_cliente.Controls.Add(this.label9);
+            this.add_cliente.Controls.Add(this.pic_firma);
+            this.add_cliente.Controls.Add(this.button2);
+            this.add_cliente.Controls.Add(this.button1);
+            this.add_cliente.Controls.Add(this.label8);
+            this.add_cliente.Controls.Add(this.label7);
+            this.add_cliente.Controls.Add(this.label6);
+            this.add_cliente.Controls.Add(this.label5);
+            this.add_cliente.Controls.Add(this.label4);
+            this.add_cliente.Controls.Add(this.label3);
+            this.add_cliente.Controls.Add(this.label2);
+            this.add_cliente.Controls.Add(this.pic_foto);
+            this.add_cliente.Controls.Add(this.label1);
+            this.add_cliente.Controls.Add(this.combo_tipo);
+            this.add_cliente.Location = new System.Drawing.Point(4, 25);
+            this.add_cliente.Name = "add_cliente";
+            this.add_cliente.Padding = new System.Windows.Forms.Padding(3);
+            this.add_cliente.Size = new System.Drawing.Size(905, 621);
+            this.add_cliente.TabIndex = 1;
+            this.add_cliente.Text = "Agregar Cliente";
+            this.add_cliente.UseVisualStyleBackColor = true;
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(52, 88);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(30, 17);
+            this.label11.TabIndex = 24;
+            this.label11.Text = "DPI";
+            // 
+            // box_dpi
+            // 
+            this.box_dpi.Location = new System.Drawing.Point(208, 84);
+            this.box_dpi.MaxLength = 13;
+            this.box_dpi.Name = "box_dpi";
+            this.box_dpi.Size = new System.Drawing.Size(212, 22);
+            this.box_dpi.TabIndex = 23;
+            this.box_dpi.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox_KeyPress);
+            // 
+            // box_firma
+            // 
+            this.box_firma.Enabled = false;
+            this.box_firma.Location = new System.Drawing.Point(208, 450);
+            this.box_firma.Name = "box_firma";
+            this.box_firma.Size = new System.Drawing.Size(212, 22);
+            this.box_firma.TabIndex = 16;
+            // 
+            // box_foto
+            // 
+            this.box_foto.Enabled = false;
+            this.box_foto.Location = new System.Drawing.Point(208, 406);
+            this.box_foto.Name = "box_foto";
+            this.box_foto.Size = new System.Drawing.Size(212, 22);
+            this.box_foto.TabIndex = 15;
+            // 
+            // box_correo
+            // 
+            this.box_correo.Location = new System.Drawing.Point(208, 301);
+            this.box_correo.Name = "box_correo";
+            this.box_correo.Size = new System.Drawing.Size(212, 22);
+            this.box_correo.TabIndex = 11;
+            // 
+            // box_telefono
+            // 
+            this.box_telefono.Location = new System.Drawing.Point(208, 248);
+            this.box_telefono.MaxLength = 8;
+            this.box_telefono.Name = "box_telefono";
+            this.box_telefono.Size = new System.Drawing.Size(212, 22);
+            this.box_telefono.TabIndex = 9;
+            this.box_telefono.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox_KeyPress);
+            // 
+            // box_nit
+            // 
+            this.box_nit.Location = new System.Drawing.Point(208, 193);
+            this.box_nit.MaxLength = 7;
+            this.box_nit.Name = "box_nit";
+            this.box_nit.Size = new System.Drawing.Size(212, 22);
+            this.box_nit.TabIndex = 7;
+            this.box_nit.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox_KeyPress);
+            // 
+            // box_direccion
+            // 
+            this.box_direccion.Location = new System.Drawing.Point(208, 153);
+            this.box_direccion.MaxLength = 50;
+            this.box_direccion.Name = "box_direccion";
+            this.box_direccion.Size = new System.Drawing.Size(212, 22);
+            this.box_direccion.TabIndex = 5;
+            // 
+            // box_nombre
+            // 
+            this.box_nombre.Location = new System.Drawing.Point(208, 116);
+            this.box_nombre.MaxLength = 50;
+            this.box_nombre.Name = "box_nombre";
+            this.box_nombre.Size = new System.Drawing.Size(212, 22);
+            this.box_nombre.TabIndex = 3;
+            // 
+            // but_enviar
+            // 
+            this.but_enviar.Location = new System.Drawing.Point(258, 491);
+            this.but_enviar.Name = "but_enviar";
+            this.but_enviar.Size = new System.Drawing.Size(122, 34);
+            this.but_enviar.TabIndex = 22;
+            this.but_enviar.Text = "Enviar";
+            this.but_enviar.UseVisualStyleBackColor = true;
+            this.but_enviar.Click += new System.EventHandler(this.but_enviar_Click);
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(651, 324);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(43, 17);
+            this.label10.TabIndex = 21;
+            this.label10.Text = "Firma";
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(651, 89);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(36, 17);
+            this.label9.TabIndex = 20;
+            this.label9.Text = "Foto";
+            // 
+            // pic_firma
+            // 
+            this.pic_firma.Location = new System.Drawing.Point(702, 324);
+            this.pic_firma.Name = "pic_firma";
+            this.pic_firma.Size = new System.Drawing.Size(148, 178);
+            this.pic_firma.TabIndex = 19;
+            this.pic_firma.TabStop = false;
+            // 
+            // button2
+            // 
+            this.button2.Location = new System.Drawing.Point(456, 449);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(110, 23);
+            this.button2.TabIndex = 18;
+            this.button2.Text = "Seleccionar";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(456, 406);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(110, 23);
+            this.button1.TabIndex = 17;
+            this.button1.Text = "Seleccionar";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(52, 456);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(43, 17);
+            this.label8.TabIndex = 14;
+            this.label8.Text = "Firma";
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(52, 412);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(36, 17);
+            this.label7.TabIndex = 13;
+            this.label7.Text = "Foto";
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(52, 301);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(51, 17);
+            this.label6.TabIndex = 12;
+            this.label6.Text = "Correo";
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(52, 251);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(64, 17);
+            this.label5.TabIndex = 10;
+            this.label5.Text = "Telefono";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(52, 196);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(25, 17);
+            this.label4.TabIndex = 8;
+            this.label4.Text = "Nit";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(52, 156);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(67, 17);
+            this.label3.TabIndex = 6;
+            this.label3.Text = "Direccion";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(52, 120);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(58, 17);
+            this.label2.TabIndex = 4;
+            this.label2.Text = "Nombre";
+            // 
+            // pic_foto
+            // 
+            this.pic_foto.Location = new System.Drawing.Point(702, 92);
+            this.pic_foto.Name = "pic_foto";
+            this.pic_foto.Size = new System.Drawing.Size(148, 178);
+            this.pic_foto.TabIndex = 2;
+            this.pic_foto.TabStop = false;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(52, 358);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(105, 17);
+            this.label1.TabIndex = 1;
+            this.label1.Text = "Tipo de Cuenta";
+            // 
+            // combo_tipo
+            // 
+            this.combo_tipo.FormattingEnabled = true;
+            this.combo_tipo.Location = new System.Drawing.Point(208, 355);
+            this.combo_tipo.Name = "combo_tipo";
+            this.combo_tipo.Size = new System.Drawing.Size(212, 24);
+            this.combo_tipo.TabIndex = 0;
+            // 
+            // tab_cliente
+            // 
+            this.tab_cliente.Controls.Add(this.add_cliente);
+            this.tab_cliente.Controls.Add(this.get_cliente);
+            this.tab_cliente.Location = new System.Drawing.Point(64, 30);
+            this.tab_cliente.Name = "tab_cliente";
+            this.tab_cliente.SelectedIndex = 0;
+            this.tab_cliente.Size = new System.Drawing.Size(913, 650);
+            this.tab_cliente.TabIndex = 0;
             // 
             // ABC_CLIENTE
             // 
@@ -699,13 +700,13 @@
             this.Load += new System.EventHandler(this.ABC_CLIENTE_Load);
             this.get_cliente.ResumeLayout(false);
             this.get_cliente.PerformLayout();
-            this.add_cliente.ResumeLayout(false);
-            this.add_cliente.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pic_foto)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pic_firma)).EndInit();
-            this.tab_cliente.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pic_bfirma)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pic_bfoto)).EndInit();
+            this.add_cliente.ResumeLayout(false);
+            this.add_cliente.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pic_firma)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pic_foto)).EndInit();
+            this.tab_cliente.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }

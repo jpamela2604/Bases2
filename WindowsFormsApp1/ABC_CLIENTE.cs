@@ -101,7 +101,7 @@ namespace WindowsFormsApp1
             if (File.Exists(direccion))
             {
                 File.Delete(direccion);
-            }            
+            }
             File.WriteAllBytes(direccion, blob);
             return direccion;
         }
@@ -109,7 +109,6 @@ namespace WindowsFormsApp1
         public String[] Get_Client(int codigo_cliente, int dpi)
         {
             String[] s1 = new String[10];
-            //DataTable tabla_tipos = new DataTable();
             try
             {
                 ora.Open();
@@ -134,18 +133,22 @@ namespace WindowsFormsApp1
                 OracleDataReader lector = comando.ExecuteReader();
                 lector.Read();
 
-                s1[0] = lector.GetInt32(0).ToString(); //codigo cliente
-                s1[1] = lector.GetString(1); //nombre
-                s1[2] = lector.GetString(2); //direccion
-                s1[3] = lector.GetInt32(3).ToString(); //nit
-                s1[4] = lector.GetInt32(4).ToString(); //telefono
-                s1[5] = lector.GetString(5); //correo
-                s1[6] = lector.GetInt32(6).ToString(); //tipo_cliente
-                byte[] foto = (byte[])(lector["foto"]); //foto
-                s1[7] = convert_blob_to_image(foto, "foto"); //foto
-                byte[] firma = (byte[])(lector["firma"]); //firma
-                s1[8] = convert_blob_to_image(firma, "firma"); //firma
-                s1[9] = lector.GetString(9); //dpi
+                if (lector.HasRows)
+                {
+                    s1[0] = lector.GetInt32(0).ToString(); //codigo cliente
+                    s1[1] = lector.GetString(1); //nombre
+                    s1[2] = lector.GetString(2); //direccion
+                    s1[3] = lector.GetInt32(3).ToString(); //nit
+                    s1[4] = lector.GetInt32(4).ToString(); //telefono
+                    s1[5] = lector.GetString(5); //correo
+                    s1[6] = lector.GetInt32(6).ToString(); //tipo_cliente
+                    byte[] foto = (byte[])(lector["foto"]); //foto
+                    s1[7] = convert_blob_to_image(foto, "foto"); //foto
+                    byte[] firma = (byte[])(lector["firma"]); //firma
+                    s1[8] = convert_blob_to_image(firma, "firma"); //firma
+                    s1[9] = lector.GetString(9); //dpi   
+                }
+
             }
             catch (Exception e)
             {
@@ -390,15 +393,15 @@ namespace WindowsFormsApp1
 
         private void btn_buscar_Click(object sender, EventArgs e)
         {
-            if(pic_bfoto.Image != null)
+            if (pic_bfoto.Image != null)
             {
                 pic_bfoto.Image.Dispose();
             }
-            if(pic_bfirma.Image != null)
+            if (pic_bfirma.Image != null)
             {
                 pic_bfirma.Image.Dispose();
-            }            
-            
+            }
+
             if (box_cliente.Text == "") { System.Windows.Forms.MessageBox.Show("debe ingresar un codigo o dpi valido"); return; }
             if (combo_buscar.Text == "") { System.Windows.Forms.MessageBox.Show("debe seleccionar una opcion valida"); return; }
             int codigo = System.Convert.ToInt32(box_cliente.Text);
@@ -412,6 +415,11 @@ namespace WindowsFormsApp1
             {
                 resultado = Get_Client(0, codigo);
             }
+            if (resultado[0] == null)
+            {
+                System.Windows.Forms.MessageBox.Show("No se encontro el codigo: " + box_cliente.Text);
+                return;
+            }
             box_bcodigo.Text = resultado[0];//codigo de cliente
             box_bnombre.Text = resultado[1];//nombre
             box_bdireccion.Text = resultado[2];//direccion
@@ -424,14 +432,12 @@ namespace WindowsFormsApp1
             box_bdpi.Text = resultado[9];//dpi
             pic_bfoto.Image = Image.FromFile(resultado[7]);
             pic_bfirma.Image = Image.FromFile(resultado[8]);
-
         }
 
         private void button7_Click(object sender, EventArgs e)
         {
-            if (box_bcodigo.Text == "")
-            {
-                System.Windows.Forms.MessageBox.Show("Debe selecionar un cliente para eliminarlo");
+            if (box_cliente.Text == "") {
+                System.Windows.Forms.MessageBox.Show("Debe ingresar un codigo");
                 return;
             }
             Eliminar_Cliente(System.Convert.ToInt32(box_bcodigo.Text));
@@ -439,6 +445,31 @@ namespace WindowsFormsApp1
 
         private void button4_Click(object sender, EventArgs e)
         {
+
+            if (box_bcodigo.Text == "") { System.Windows.Forms.MessageBox.Show("Debe buscar un codigo"); return; }
+            if (!IsValidNit(box_bnit.Text)) { System.Windows.Forms.MessageBox.Show("el verificador no puede validar su numero de nit, ingrese un nit valido"); return; }
+            if (box_bdpi.Text == "") { System.Windows.Forms.MessageBox.Show("debe ingresar informacion en el dpi"); return; }
+            if (box_bnombre.Text == "") { System.Windows.Forms.MessageBox.Show("debe ingresar informacion en el nombre"); return; }
+            if (box_bdireccion.Text == "") { System.Windows.Forms.MessageBox.Show("debe ingresar informacion en la direccion"); return; }
+            if (box_bnit.Text == "") { System.Windows.Forms.MessageBox.Show("debe ingresar informacion el nit"); return; }
+            if (box_btelefono.Text == "") { System.Windows.Forms.MessageBox.Show("debe ingresar informacion en el telefono"); return; }
+            if (box_bcorreo.Text == "") { System.Windows.Forms.MessageBox.Show("debe ingresar informacion en el correo"); return; }
+            if (combo_tipo.Text == "") { System.Windows.Forms.MessageBox.Show("debe seleccionar un tipo de cliente"); return; }
+            if (box_bfoto.Text == "") { System.Windows.Forms.MessageBox.Show("debe agregar una foto"); return; }
+            if (box_bfirma.Text == "") { System.Windows.Forms.MessageBox.Show("debe agregar una firma"); return; }
+            if (box_bdpi.Text.Length != 13) { System.Windows.Forms.MessageBox.Show("la cantidad de digitos no corresponde a un dpi valido"); return; }
+            if (box_btelefono.Text.Length != 8) { System.Windows.Forms.MessageBox.Show("la cantidad de digitos no corresponde a un telefono valido"); return; }
+
+            try
+            {
+                var eMailValidator = new System.Net.Mail.MailAddress(box_bcorreo.Text);
+            }
+            catch (FormatException ex)
+            {
+                System.Windows.Forms.MessageBox.Show("formato invalido de correo electronico");
+                return;
+            }
+
             int codigo_cliente = System.Convert.ToInt32(box_bcodigo.Text);
             String nombre = box_bnombre.Text;
             String direccion = box_bdireccion.Text;
@@ -480,6 +511,11 @@ namespace WindowsFormsApp1
                 pic_bfirma.Image = Image.FromFile(box_bfirma.Text);
                 pic_bfirma.SizeMode = PictureBoxSizeMode.StretchImage;
             }
+        }
+
+        private void get_cliente_Click(object sender, EventArgs e)
+        {
+
         }
     }
 
