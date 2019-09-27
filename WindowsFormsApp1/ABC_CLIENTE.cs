@@ -106,7 +106,7 @@ namespace WindowsFormsApp1
             return direccion;
         }
 
-        public String[] Get_Client(int codigo_cliente, int dpi)
+        public String[] Get_Client(long codigo_cliente,long dpi)
         {
             String[] s1 = new String[10];
             try
@@ -119,14 +119,14 @@ namespace WindowsFormsApp1
                 if (codigo_cliente != 0)
                 {
                     comando.CommandText = "SELECT * from CLIENTE where codigo_cliente = :codigo_cliente";
-                    parametro1 = new OracleParameter("codigo_cliente", OracleType.Int32);
+                    parametro1 = new OracleParameter("codigo_cliente", OracleType.Number);
                     parametro1.Value = codigo_cliente;
                     comando.Parameters.Add(parametro1);
                 }
                 else
                 {
                     comando.CommandText = "SELECT * from CLIENTE where dpi = :dpi";
-                    parametro1 = new OracleParameter("dpi", OracleType.Int32);
+                    parametro1 = new OracleParameter("dpi", OracleType.Number);
                     parametro1.Value = dpi;
                     comando.Parameters.Add(parametro1);
                 }
@@ -404,7 +404,7 @@ namespace WindowsFormsApp1
 
             if (box_cliente.Text == "") { System.Windows.Forms.MessageBox.Show("debe ingresar un codigo o dpi valido"); return; }
             if (combo_buscar.Text == "") { System.Windows.Forms.MessageBox.Show("debe seleccionar una opcion valida"); return; }
-            int codigo = System.Convert.ToInt32(box_cliente.Text);
+            long codigo = System.Convert.ToInt64(box_cliente.Text);
             String opcion = combo_buscar.Text;
             String[] resultado;
             if (opcion == "CODIGO USUARIO")
@@ -417,7 +417,7 @@ namespace WindowsFormsApp1
             }
             if (resultado[0] == null)
             {
-                System.Windows.Forms.MessageBox.Show("No se encontro el codigo: " + box_cliente.Text);
+                System.Windows.Forms.MessageBox.Show("No se encontro el "+combo_buscar.Text+": " + box_cliente.Text);
                 return;
             }
             box_bcodigo.Text = resultado[0];//codigo de cliente
