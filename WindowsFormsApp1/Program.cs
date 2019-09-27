@@ -16,7 +16,7 @@ namespace WindowsFormsApp1
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new ABC_CLIENTE());
+            Application.Run(new ABC_CUENTA());
         }
     }
 }

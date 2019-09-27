@@ -64,6 +64,12 @@
     <Compile Include="ABC_CLIENTE.Designer.cs">
       <DependentUpon>ABC_CLIENTE.cs</DependentUpon>
     </Compile>
+    <Compile Include="ABC_CUENTA.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ABC_CUENTA.Designer.cs">
+      <DependentUpon>ABC_CUENTA.cs</DependentUpon>
+    </Compile>
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -93,6 +99,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ABC_CLIENTE.resx">
       <DependentUpon>ABC_CLIENTE.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ABC_CUENTA.resx">
+      <DependentUpon>ABC_CUENTA.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
