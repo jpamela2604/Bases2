@@ -44,6 +44,16 @@ namespace WindowsFormsApp1
 
         private void btn_crear_Click(object sender, EventArgs e)
         {
+            if( box_saldo.Text == "") {
+                System.Windows.Forms.MessageBox.Show("Debe ingresar una cantidad inicial valida");
+                return;
+            }
+
+            if (flow_cuentas.Controls.Count == 0) {
+                System.Windows.Forms.MessageBox.Show("Debe ingresar al menos una cuenta");
+                return;
+            }
+
             var saldo_disponible = box_saldo.Text;
             var estado_cuenta = 1;
             var tipo_cuenta = 1;
@@ -110,6 +120,14 @@ namespace WindowsFormsApp1
 
         private void btn_buscar_Click(object sender, EventArgs e)
         {
+
+            data_cuenta.DataSource = null;
+
+            if (box_find_cuenta.Text == "") {
+                System.Windows.Forms.MessageBox.Show("Debe ingresar una cuenta");
+                return;
+            }
+
             ora.Open();
             try
             {
@@ -140,12 +158,22 @@ namespace WindowsFormsApp1
 
             }catch(Exception ex)
             {
-                System.Windows.Forms.MessageBox.Show("Ha ocurrido un error en la busqueda");
+                System.Windows.Forms.MessageBox.Show("No se ha encontrado la cuenta solicitada");
             }
             finally
             {
                 ora.Close();
             }
+        }
+
+        private void textBox_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            // Verify that the pressed key isn't CTRL or any non-numeric digit
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+            {
+                e.Handled = true;
+            }
+
         }
     }
 }

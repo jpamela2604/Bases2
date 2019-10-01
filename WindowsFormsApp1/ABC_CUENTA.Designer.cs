@@ -32,7 +32,6 @@
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.btn_crear = new System.Windows.Forms.Button();
-            this.box_saldo = new System.Windows.Forms.TextBox();
             this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.flow_cuentas = new System.Windows.Forms.FlowLayoutPanel();
@@ -41,7 +40,6 @@
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.label3 = new System.Windows.Forms.Label();
-            this.box_find_cuenta = new System.Windows.Forms.TextBox();
             this.btn_buscar = new System.Windows.Forms.Button();
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
@@ -50,6 +48,8 @@
             this.lbl_saldo_inicial = new System.Windows.Forms.Label();
             this.dataSet1 = new System.Data.DataSet();
             this.data_cuenta = new System.Windows.Forms.DataGridView();
+            this.box_saldo = new System.Windows.Forms.TextBox();
+            this.box_find_cuenta = new System.Windows.Forms.TextBox();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
@@ -69,8 +69,8 @@
             // 
             // tabPage1
             // 
-            this.tabPage1.Controls.Add(this.btn_crear);
             this.tabPage1.Controls.Add(this.box_saldo);
+            this.tabPage1.Controls.Add(this.btn_crear);
             this.tabPage1.Controls.Add(this.button1);
             this.tabPage1.Controls.Add(this.button2);
             this.tabPage1.Controls.Add(this.flow_cuentas);
@@ -93,13 +93,6 @@
             this.btn_crear.Text = "Aceptar";
             this.btn_crear.UseVisualStyleBackColor = true;
             this.btn_crear.Click += new System.EventHandler(this.btn_crear_Click);
-            // 
-            // box_saldo
-            // 
-            this.box_saldo.Location = new System.Drawing.Point(215, 62);
-            this.box_saldo.Name = "box_saldo";
-            this.box_saldo.Size = new System.Drawing.Size(163, 22);
-            this.box_saldo.TabIndex = 6;
             // 
             // button1
             // 
@@ -152,6 +145,7 @@
             // 
             // tabPage2
             // 
+            this.tabPage2.Controls.Add(this.box_find_cuenta);
             this.tabPage2.Controls.Add(this.data_cuenta);
             this.tabPage2.Controls.Add(this.lbl_saldo_inicial);
             this.tabPage2.Controls.Add(this.lbl_tipo_cuenta);
@@ -159,7 +153,6 @@
             this.tabPage2.Controls.Add(this.label5);
             this.tabPage2.Controls.Add(this.label4);
             this.tabPage2.Controls.Add(this.btn_buscar);
-            this.tabPage2.Controls.Add(this.box_find_cuenta);
             this.tabPage2.Controls.Add(this.label3);
             this.tabPage2.Location = new System.Drawing.Point(4, 25);
             this.tabPage2.Name = "tabPage2";
@@ -181,13 +174,6 @@
             this.label3.Size = new System.Drawing.Size(174, 17);
             this.label3.TabIndex = 0;
             this.label3.Text = "Ingrese numero de cuenta";
-            // 
-            // box_find_cuenta
-            // 
-            this.box_find_cuenta.Location = new System.Drawing.Point(300, 45);
-            this.box_find_cuenta.Name = "box_find_cuenta";
-            this.box_find_cuenta.Size = new System.Drawing.Size(166, 22);
-            this.box_find_cuenta.TabIndex = 1;
             // 
             // btn_buscar
             // 
@@ -257,6 +243,22 @@
             this.data_cuenta.Size = new System.Drawing.Size(309, 211);
             this.data_cuenta.TabIndex = 11;
             // 
+            // box_saldo
+            // 
+            this.box_saldo.Location = new System.Drawing.Point(202, 56);
+            this.box_saldo.Name = "box_saldo";
+            this.box_saldo.Size = new System.Drawing.Size(174, 22);
+            this.box_saldo.TabIndex = 8;
+            this.box_saldo.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox_KeyPress);
+            // 
+            // box_find_cuenta
+            // 
+            this.box_find_cuenta.Location = new System.Drawing.Point(303, 45);
+            this.box_find_cuenta.Name = "box_find_cuenta";
+            this.box_find_cuenta.Size = new System.Drawing.Size(153, 22);
+            this.box_find_cuenta.TabIndex = 12;
+            this.box_find_cuenta.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox_KeyPress);
+            // 
             // ABC_CUENTA
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -289,9 +291,7 @@
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.FlowLayoutPanel flow_cuentas;
         private System.Windows.Forms.Button btn_crear;
-        private System.Windows.Forms.TextBox box_saldo;
         private System.Windows.Forms.Button btn_buscar;
-        private System.Windows.Forms.TextBox box_find_cuenta;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label5;
@@ -300,5 +300,7 @@
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.DataGridView data_cuenta;
         private System.Data.DataSet dataSet1;
+        private System.Windows.Forms.TextBox box_saldo;
+        private System.Windows.Forms.TextBox box_find_cuenta;
     }
 }
