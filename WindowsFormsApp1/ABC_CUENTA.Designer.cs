@@ -40,8 +40,21 @@
             this.label1 = new System.Windows.Forms.Label();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this.label3 = new System.Windows.Forms.Label();
+            this.box_find_cuenta = new System.Windows.Forms.TextBox();
+            this.btn_buscar = new System.Windows.Forms.Button();
+            this.label4 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
+            this.lbl_tipo_cuenta = new System.Windows.Forms.Label();
+            this.lbl_saldo_inicial = new System.Windows.Forms.Label();
+            this.dataSet1 = new System.Data.DataSet();
+            this.data_cuenta = new System.Windows.Forms.DataGridView();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
+            this.tabPage2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataSet1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.data_cuenta)).BeginInit();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -139,10 +152,19 @@
             // 
             // tabPage2
             // 
+            this.tabPage2.Controls.Add(this.data_cuenta);
+            this.tabPage2.Controls.Add(this.lbl_saldo_inicial);
+            this.tabPage2.Controls.Add(this.lbl_tipo_cuenta);
+            this.tabPage2.Controls.Add(this.label6);
+            this.tabPage2.Controls.Add(this.label5);
+            this.tabPage2.Controls.Add(this.label4);
+            this.tabPage2.Controls.Add(this.btn_buscar);
+            this.tabPage2.Controls.Add(this.box_find_cuenta);
+            this.tabPage2.Controls.Add(this.label3);
             this.tabPage2.Location = new System.Drawing.Point(4, 25);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(1066, 677);
+            this.tabPage2.Size = new System.Drawing.Size(1066, 568);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "MODIFICAR";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -150,6 +172,90 @@
             // toolTip1
             // 
             this.toolTip1.Popup += new System.Windows.Forms.PopupEventHandler(this.toolTip1_Popup);
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(76, 45);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(174, 17);
+            this.label3.TabIndex = 0;
+            this.label3.Text = "Ingrese numero de cuenta";
+            // 
+            // box_find_cuenta
+            // 
+            this.box_find_cuenta.Location = new System.Drawing.Point(300, 45);
+            this.box_find_cuenta.Name = "box_find_cuenta";
+            this.box_find_cuenta.Size = new System.Drawing.Size(166, 22);
+            this.box_find_cuenta.TabIndex = 1;
+            // 
+            // btn_buscar
+            // 
+            this.btn_buscar.Location = new System.Drawing.Point(534, 45);
+            this.btn_buscar.Name = "btn_buscar";
+            this.btn_buscar.Size = new System.Drawing.Size(75, 23);
+            this.btn_buscar.TabIndex = 2;
+            this.btn_buscar.Text = "Buscar";
+            this.btn_buscar.UseVisualStyleBackColor = true;
+            this.btn_buscar.Click += new System.EventHandler(this.btn_buscar_Click);
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(79, 128);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(85, 17);
+            this.label4.TabIndex = 3;
+            this.label4.Text = "Tipo Cuenta";
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(82, 179);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(83, 17);
+            this.label5.TabIndex = 4;
+            this.label5.Text = "Saldo inicial";
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(85, 239);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(121, 17);
+            this.label6.TabIndex = 5;
+            this.label6.Text = "Cuenta Habientes";
+            // 
+            // lbl_tipo_cuenta
+            // 
+            this.lbl_tipo_cuenta.AutoSize = true;
+            this.lbl_tipo_cuenta.Location = new System.Drawing.Point(300, 128);
+            this.lbl_tipo_cuenta.Name = "lbl_tipo_cuenta";
+            this.lbl_tipo_cuenta.Size = new System.Drawing.Size(63, 17);
+            this.lbl_tipo_cuenta.TabIndex = 9;
+            this.lbl_tipo_cuenta.Text = "-----------";
+            // 
+            // lbl_saldo_inicial
+            // 
+            this.lbl_saldo_inicial.AutoSize = true;
+            this.lbl_saldo_inicial.Location = new System.Drawing.Point(303, 178);
+            this.lbl_saldo_inicial.Name = "lbl_saldo_inicial";
+            this.lbl_saldo_inicial.Size = new System.Drawing.Size(63, 17);
+            this.lbl_saldo_inicial.TabIndex = 10;
+            this.lbl_saldo_inicial.Text = "-----------";
+            // 
+            // dataSet1
+            // 
+            this.dataSet1.DataSetName = "NewDataSet";
+            // 
+            // data_cuenta
+            // 
+            this.data_cuenta.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.data_cuenta.Location = new System.Drawing.Point(300, 239);
+            this.data_cuenta.Name = "data_cuenta";
+            this.data_cuenta.RowTemplate.Height = 24;
+            this.data_cuenta.Size = new System.Drawing.Size(309, 211);
+            this.data_cuenta.TabIndex = 11;
             // 
             // ABC_CUENTA
             // 
@@ -163,6 +269,10 @@
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             this.tabPage1.PerformLayout();
+            this.tabPage2.ResumeLayout(false);
+            this.tabPage2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataSet1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.data_cuenta)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -180,5 +290,15 @@
         private System.Windows.Forms.FlowLayoutPanel flow_cuentas;
         private System.Windows.Forms.Button btn_crear;
         private System.Windows.Forms.TextBox box_saldo;
+        private System.Windows.Forms.Button btn_buscar;
+        private System.Windows.Forms.TextBox box_find_cuenta;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label lbl_saldo_inicial;
+        private System.Windows.Forms.Label lbl_tipo_cuenta;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.DataGridView data_cuenta;
+        private System.Data.DataSet dataSet1;
     }
 }

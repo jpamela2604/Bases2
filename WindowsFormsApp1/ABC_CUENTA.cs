@@ -107,5 +107,45 @@ namespace WindowsFormsApp1
                 "USER ID=" + Properties.Settings.Default.usuario_db + ";"
                 );
         }
+
+        private void btn_buscar_Click(object sender, EventArgs e)
+        {
+            ora.Open();
+            try
+            {
+                var numero_cuenta = box_find_cuenta.Text;
+                comando = new OracleCommand();
+                comando.Connection = ora;
+                comando.CommandText = "SELECT * FROM CUENTA WHERE NUMERO_CUENTA = :numero_cuenta";
+                OracleParameter param1 = new OracleParameter("numero_cuenta", OracleType.Number);
+                param1.Value = numero_cuenta;
+                comando.Parameters.Add(param1);
+                OracleDataReader dr = comando.ExecuteReader();
+                dr.Read();
+                lbl_saldo_inicial.Text = dr["SALDO_DISPONIBLE"].ToString();
+                if (dr["TIPO_CUENTA"].ToString() == "1")
+                {
+                    lbl_tipo_cuenta.Text = "PERSONAL";
+                }
+                else {
+                    lbl_tipo_cuenta.Text = "MANCOMUNADA";
+                }
+
+                comando.CommandText = "SELECT CLIENTE FROM CLIENTE_CUENTA WHERE CUENTA = :numero_cuenta";
+                OracleDataAdapter od = new OracleDataAdapter(comando);
+                DataTable table = new DataTable();
+                od.Fill(table);
+                data_cuenta.DataSource = table;
+
+
+            }catch(Exception ex)
+            {
+                System.Windows.Forms.MessageBox.Show("Ha ocurrido un error en la busqueda");
+            }
+            finally
+            {
+                ora.Close();
+            }
+        }
     }
 }
