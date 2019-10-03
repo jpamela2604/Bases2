@@ -83,8 +83,13 @@ namespace WindowsFormsApp1
 
                 //por cada cliente se relaciona con la cuenta 
                 foreach (object obj_cuenta in flow_cuentas.Controls)
-                {
+                {                    
                     TextBox box_cuenta = (TextBox)obj_cuenta;
+                    if(box_cuenta.Text == "")
+                    {
+                        System.Windows.Forms.MessageBox.Show("Debe llenar cada una de las casillas con codigos validos");
+                        throw new Exception();
+                    }
                     comando.Parameters.Clear();
                     comando.CommandText = "INSERT INTO CLIENTE_CUENTA(CLIENTE, CUENTA) VALUES(:cliente,:cuenta)";
                     OracleParameter cliente = new OracleParameter("cliente", OracleType.Number);
@@ -98,7 +103,7 @@ namespace WindowsFormsApp1
                 trans.Commit();
                 System.Windows.Forms.MessageBox.Show("Se ha creado la cuenta exitosamente no." + variable2);
             }
-            catch (DataException ex)
+            catch (Exception ex)
             {
                 trans.Rollback();
                 System.Windows.Forms.MessageBox.Show("Ha ocurrido un error durante la transacción");
@@ -202,12 +207,21 @@ namespace WindowsFormsApp1
 
         private void btn_bloquear_Click(object sender, EventArgs e)
         {
+            
+
             if (data_cuenta.DataSource == null)
             {
                 System.Windows.Forms.MessageBox.Show("Debe ingresar una cuenta valida");
                 return;
             }
-            ora.Open();
+
+            if (lbl_estado_cuenta.Text != "activa")
+            {
+                System.Windows.Forms.MessageBox.Show("La cuenta debe estar activa para poder bloquearse");
+                return;
+            }
+            ora.Open();           
+
             try
             {
                 comando = new OracleCommand();
@@ -227,6 +241,7 @@ namespace WindowsFormsApp1
             {
                 ora.Close();
             }
+            btn_buscar_Click(null, null);
         }
 
         private void btn_cancelar_Click(object sender, EventArgs e)
@@ -236,6 +251,13 @@ namespace WindowsFormsApp1
                 System.Windows.Forms.MessageBox.Show("Debe ingresar una cuenta valida");
                 return;
             }
+
+            if(lbl_estado_cuenta.Text == "cancelada")
+            {
+                System.Windows.Forms.MessageBox.Show("La cuenta ya ha sido cancelada");
+                return;
+            }
+
             ora.Open();
             try
             {
@@ -256,11 +278,16 @@ namespace WindowsFormsApp1
             {
                 ora.Close();
             }
-
+            btn_buscar_Click(null, null);
         }
 
         private void btn_fcuentas_Click(object sender, EventArgs e)
         {
+            if(box_codigo_fcuentas.Text == "")
+            {
+                System.Windows.Forms.MessageBox.Show("Debe ingresar un codigo de cliente");
+                return;
+            }
             ora.Open();
             try
             {
@@ -293,6 +320,11 @@ namespace WindowsFormsApp1
                 System.Windows.Forms.MessageBox.Show("Debe ingresar una cuenta valida");
                 return;
             }
+
+            if (lbl_estado_cuenta.Text != "bloqueada") {
+                System.Windows.Forms.MessageBox.Show("La cuenta debe estar bloqueada para ser desbloqueada");
+                return;
+            }
             ora.Open();
             try
             {
@@ -313,6 +345,7 @@ namespace WindowsFormsApp1
             {
                 ora.Close();
             }
+            btn_buscar_Click(null, null);
         }
     }
 }

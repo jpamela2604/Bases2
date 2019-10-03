@@ -104,6 +104,7 @@
             // 
             this.box_saldo.Location = new System.Drawing.Point(152, 46);
             this.box_saldo.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.box_saldo.MaxLength = 7;
             this.box_saldo.Name = "box_saldo";
             this.box_saldo.Size = new System.Drawing.Size(132, 20);
             this.box_saldo.TabIndex = 8;
@@ -203,6 +204,7 @@
             // 
             this.box_find_cuenta.Location = new System.Drawing.Point(227, 37);
             this.box_find_cuenta.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.box_find_cuenta.MaxLength = 3;
             this.box_find_cuenta.Name = "box_find_cuenta";
             this.box_find_cuenta.Size = new System.Drawing.Size(116, 20);
             this.box_find_cuenta.TabIndex = 12;
@@ -364,9 +366,11 @@
             // box_codigo_fcuentas
             // 
             this.box_codigo_fcuentas.Location = new System.Drawing.Point(249, 57);
+            this.box_codigo_fcuentas.MaxLength = 3;
             this.box_codigo_fcuentas.Name = "box_codigo_fcuentas";
             this.box_codigo_fcuentas.Size = new System.Drawing.Size(100, 20);
             this.box_codigo_fcuentas.TabIndex = 2;
+            this.box_codigo_fcuentas.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox_KeyPress);
             // 
             // label8
             // 
