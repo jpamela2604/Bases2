@@ -57,9 +57,15 @@ namespace WindowsFormsApp1
                     comando.ExecuteNonQuery();
                     comando.Connection.Close();
                     /*ASIGNAR A VARIABLE DE CONFIGURACION*/
-                    var codigoRol = Convert.ToInt32(comando.Parameters["resultado"].Value);
+                    var codigoRol = System.Convert.ToInt32(comando.Parameters["resultado"].Value);
                     Properties.Settings.Default.rol = codigoRol;
                     MessageBox.Show("Bienvenido");
+                    this.Hide();
+                    Form menu = new Menu();
+                    Usuario.Text = "";
+                    Contrasena.Text = "";
+                    menu.ShowDialog();
+                    this.Show();
                 }
                 catch (Exception EX)
                 {

@@ -28,5 +28,15 @@ namespace WindowsFormsApp1
             Form f2 = new ABC_CUENTA();
             f2.Show();
         }
+
+        private void Menu_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void Menu_FormClosing(object sender, EventArgs e)
+        {
+           
+        }
     }
 }
