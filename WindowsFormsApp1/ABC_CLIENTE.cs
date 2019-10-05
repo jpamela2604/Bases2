@@ -321,7 +321,6 @@ namespace WindowsFormsApp1
         private void but_enviar_Click(object sender, EventArgs e)
         {
             if (!IsValidNit(box_nit.Text)) { System.Windows.Forms.MessageBox.Show("el verificador no puede validar su numero de nit, ingrese un nit valido"); return; }
-
             if (box_dpi.Text == "") { System.Windows.Forms.MessageBox.Show("debe ingresar informacion en el dpi"); return; }
             if (box_nombre.Text == "") { System.Windows.Forms.MessageBox.Show("debe ingresar informacion en el nombre"); return; }
             if (box_direccion.Text == "") { System.Windows.Forms.MessageBox.Show("debe ingresar informacion en la direccion"); return; }
@@ -344,6 +343,7 @@ namespace WindowsFormsApp1
                 System.Windows.Forms.MessageBox.Show("formato invalido de correo electronico");
                 return;
             }
+
 
             byte[] foto = convert_image_to_blob(box_foto.Text);
             byte[] firma = convert_image_to_blob(box_firma.Text);
