@@ -112,10 +112,6 @@ namespace WindowsFormsApp1
             {
                 ora.Close();
             }
-
-
-
-
         }
 
         private void ABC_CUENTA_Load(object sender, EventArgs e)

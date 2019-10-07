@@ -38,5 +38,11 @@ namespace WindowsFormsApp1
         {
            
         }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            Form f2 = new depositomonetario();
+            f2.Show();
+        }
     }
 }
