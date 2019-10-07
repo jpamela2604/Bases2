@@ -135,3 +135,11 @@ BEGIN
 UPDATE empleado SET rol = id_rol
 WHERE codigo_empleado = pce;
 END empleado_update;
+
+--------------------------------------------------------------------------------------------------------------------------------- AUDITORIA Cuenta
+CREATE OR REPLACE PROCEDURE equipo_select(registros out sys_refcursor, cuenta_id in INT)
+AS
+BEGIN
+    OPEN registros FOR select t.correlativo_transaccion, t.fecha, t.saldo_inicial, t.saldo_final, t.valor, t.cuenta, tt.nombre from transaccion t, tipo_transaccion tt
+                     where t.tipo_transaccion = tt.codigo_tipo_transac and t.cuenta = cuenta_id
+END;

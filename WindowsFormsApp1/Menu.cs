@@ -45,5 +45,12 @@ namespace WindowsFormsApp1
             this.Hide();
             m.Show();
         }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            AUDITORIA a = new AUDITORIA();
+            this.Hide();
+            a.Show();
+        }
     }
 }
