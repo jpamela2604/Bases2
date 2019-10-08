@@ -61,10 +61,10 @@ namespace WindowsFormsApp1.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("non")]
-        public string empleado {
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public int empleado {
             get {
-                return ((string)(this["empleado"]));
+                return ((int)(this["empleado"]));
             }
             set {
                 this["empleado"] = value;

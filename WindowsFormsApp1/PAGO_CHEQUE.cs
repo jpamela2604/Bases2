@@ -58,7 +58,8 @@ namespace WindowsFormsApp1
                 String ruta = b.convert_blob_to_image(firma, "firma");
                 pic_firma.Image = Image.FromFile(ruta);
                 this.btn_cobrar.Enabled = true;
-            }catch(Exception ex)
+            }
+            catch (Exception ex)
             {
                 this.btn_cobrar.Enabled = false;
                 System.Windows.Forms.MessageBox.Show("Debe ingresar un numero de cuenta valido");
@@ -66,12 +67,12 @@ namespace WindowsFormsApp1
             finally
             {
                 ora.Close();
-            }           
+            }
         }
 
         private void btn_cobrar_Click(object sender, EventArgs e)
         {
-            ora.Open();            
+            ora.Open();
             comando = new OracleCommand();
             comando.Connection = ora;
             OracleTransaction trans = ora.BeginTransaction();
@@ -82,47 +83,55 @@ namespace WindowsFormsApp1
                 comando.CommandText = "select estado_cheque from cheque_local where codigo_cheque = :cheque";
                 comando.Parameters.Add("cheque", OracleType.Number).Value = Convert.ToInt32(txt_nocheque.Text);
                 OracleDataReader dr = comando.ExecuteReader();
-                dr.Read();
-                if(dr["estado_cheque"] != null)
+                //dr.Read();
+                if (dr.Read())
                 {
                     Int32 estado_chequera = Convert.ToInt32(dr["estado_cheque"]);
                     String mensaje = "";
-                    if(estado_chequera == 5)
+                    if (estado_chequera == 5)
                     {
                         mensaje = "rechazado";
-                    }else if(estado_chequera == 4)
+                    }
+                    else if (estado_chequera == 4)
                     {
                         mensaje = "cobrado";
-                    }else if(estado_chequera == 3)
+                    }
+                    else if (estado_chequera == 3)
                     {
                         mensaje = "robado";
-                    }else if(estado_chequera == 2)
+                    }
+                    else if (estado_chequera == 2)
                     {
                         mensaje = "extraviado";
                     }
-                    System.Windows.Forms.MessageBox.Show("Error el cheque aparece: "+mensaje);
+                    System.Windows.Forms.MessageBox.Show("Error el cheque aparece: " + mensaje);
                     return;
                 }
-                
+
                 //VERIFICAR EL CHEQUE
+                comando.Parameters.Clear();
+                bool verif_cheq = false;
+                Int32 chequera = 0;
+                Int32 cod_cheque = Convert.ToInt32(txt_nocheque.Text);
                 comando.CommandText = "SELECT * FROM chequera WHERE cuenta = :cuenta";
                 comando.Parameters.Add("cuenta", OracleType.Number).Value = Convert.ToInt32(txt_nocuenta.Text);
                 dr = comando.ExecuteReader();
-                dr.Read();      
-
-                //CHEQUE PERTENEZCA A CUENTA
-                if (Convert.ToInt32(dr["cuenta"]) != Convert.ToInt32(txt_nocuenta.Text))
-                {
-                    System.Windows.Forms.MessageBox.Show("El cheque no pertenece a la cuenta asociada");
-                    //RECHAZAR CHEQUE
-                    return;
+                //dr.Read();
+                while (!verif_cheq && dr.Read())
+                {                    
+                    //CHEQUE PERTENEZCA A CHEQUERA
+                    if (cod_cheque >= Convert.ToInt32(dr["numero_inicio"])  && cod_cheque <= Convert.ToInt32(dr["numero_final"]))
+                    {
+                        verif_cheq = true;
+                        chequera = Convert.ToInt32(dr["codigo_chequera"]);
+                    }
+                    dr.NextResult();
                 }
 
-                //CHEQUE PERTENEZCA A CHEQUERA
-                if (Convert.ToInt32(dr["codigo_chequera"]) != Convert.ToInt32(txt_nocuenta.Text))
+                if (!verif_cheq)
                 {
-                    System.Windows.Forms.MessageBox.Show("El cheque no pertenece a la chequera ");
                     //RECHAZAR CHEQUE
+                    System.Windows.Forms.MessageBox.Show("El cheque no pertenece a ninguna chequera o a esa cuenta");
                     return;
                 }
 
@@ -132,10 +141,35 @@ namespace WindowsFormsApp1
                 dr.Read();
                 Int32 saldo = Convert.ToInt32(dr["saldo_disponible"]);
                 Int32 monto = Convert.ToInt32(txt_monto.Text);
+                DateTime fecha = DateTime.Now;
                 if (saldo < monto)
                 {
                     System.Windows.Forms.MessageBox.Show("Saldo Insuficiente");
                     //RECHAZAR CHEQUE
+                    comando.Parameters.Clear();
+                    comando.CommandText = "INSERT INTO CHEQUE_LOCAL (codigo_cheque,fecha,monto,chequera,estado_cheque)" +
+                        "VALUES(:codigo_cheque,:fecha,:monto,:chequera,:estado_cheque)";
+                    comando.Parameters.Add("codigo_cheque", OracleType.Number).Value = cod_cheque;
+                    comando.Parameters.Add("fecha",OracleType.DateTime).Value = DateTime.Now.ToString("MM/dd/yyyy hh:mm:ss tt");
+                    comando.Parameters.Add("monto", OracleType.Number).Value = Convert.ToInt32(txt_monto.Text);
+                    comando.Parameters.Add("chequera",OracleType.Number).Value = chequera;
+                    comando.Parameters.Add("estado_cheque", OracleType.Number).Value = 5;
+                    comando.ExecuteNonQuery();
+
+                    //GRABAR TRANSACCION
+                    comando.Parameters.Clear();
+                    comando.CommandText = "INSERT INTO TRANSACCION (NO_RECHAZO, RAZON_RECHAZO, FECHA,SALDO_INICIAL, SALDO_FINAL, VALOR,EMPLEADO, AGENCIA, CUENTA,TIPO_TRANSACCION, EQUIPO,CHEQUE_LOCAL) " +
+                        "VALUES(:rechazo, :razon,:fecha,'0','0',:valor,:empleado,:agencia,:cuenta,'0',:equipo,:cheque)";
+                    comando.Parameters.Add("rechazo", OracleType.Number).Value = 1;
+                    comando.Parameters.Add("razon",OracleType.VarChar).Value = "NO TIENE FONDOS";
+                    comando.Parameters.Add("fecha", OracleType.DateTime).Value = fecha;
+                    comando.Parameters.Add("valor", OracleType.Number).Value = Convert.ToInt32(txt_monto.Text);
+                    comando.Parameters.Add("cuenta", OracleType.Number).Value = Convert.ToInt32(txt_nocuenta.Text);
+                    comando.Parameters.Add("cheque", OracleType.Number).Value = Convert.ToInt32(txt_nocheque.Text);
+                    comando.Parameters.Add("empleado", OracleType.Number).Value = Properties.Settings.Default.empleado;
+                    comando.Parameters.Add("agencia", OracleType.Number).Value = 1;
+                    comando.Parameters.Add("equipo", OracleType.Number).Value = 0;
+                    comando.ExecuteNonQuery();
                     return;
                 }
 
@@ -143,13 +177,31 @@ namespace WindowsFormsApp1
                 comando.CommandText = "UPDATE cuenta SET saldo_disponible = saldo_disponible - :monto WHERE numero_cuenta = :cuenta";
                 comando.Parameters.Add("monto", OracleType.Number).Value = Convert.ToInt32(txt_monto.Text);
                 comando.ExecuteNonQuery();
-                //CHEQUE COBRADO
 
+                //CHEQUE COBRADO
+                comando.Parameters.Clear();
+                comando.CommandText = "INSERT INTO CHEQUE_LOCAL (codigo_cheque,fecha,monto,chequera,estado_cheque)" +
+                        "VALUES(:codigo_cheque,:fecha,:monto,:chequera,:estado_cheque)";
+                comando.Parameters.Add("codigo_cheque", OracleType.Number).Value = cod_cheque;
+                comando.Parameters.Add("fecha", OracleType.DateTime).Value = fecha.ToString("MM/dd/yyyy hh:mm:ss tt");
+                comando.Parameters.Add("monto", OracleType.Number).Value = Convert.ToInt32(txt_monto.Text);
+                comando.Parameters.Add("chequera", OracleType.Number).Value = chequera;
+                comando.Parameters.Add("estado_cheque", OracleType.Number).Value = 4;
+                comando.ExecuteNonQuery();
 
                 //SE REGISTRA LA TRANSACCION
-
-                trans.Commit();
-                ora.Close();
+                comando.Parameters.Clear();
+                comando.CommandText = "INSERT INTO TRANSACCION (FECHA,SALDO_INICIAL, SALDO_FINAL, VALOR,EMPLEADO, AGENCIA, CUENTA,TIPO_TRANSACCION, EQUIPO,CHEQUE_LOCAL) " +
+                    "VALUES(:fecha,'0','0',:valor,:empleado,:agencia,:cuenta,'0',:equipo,:cheque)";
+                comando.Parameters.Add("fecha",OracleType.DateTime).Value = fecha;
+                comando.Parameters.Add("valor", OracleType.Number).Value = Convert.ToInt32(txt_monto.Text);
+                comando.Parameters.Add("cuenta", OracleType.Number).Value = Convert.ToInt32(txt_nocuenta.Text);
+                comando.Parameters.Add("cheque",OracleType.Number).Value = Convert.ToInt32(txt_nocheque.Text);
+                comando.Parameters.Add("empleado", OracleType.Number).Value = Properties.Settings.Default.empleado;
+                comando.Parameters.Add("agencia", OracleType.Number).Value = 1;
+                comando.Parameters.Add("equipo", OracleType.Number).Value = 0;
+                comando.ExecuteNonQuery();
+                System.Windows.Forms.MessageBox.Show("se ha realizado la operacion exitosamente");
             }
             catch (Exception ex)
             {
@@ -157,7 +209,7 @@ namespace WindowsFormsApp1
             }
             finally
             {
-                trans.Rollback();
+                trans.Commit();
                 ora.Close();
             }
         }

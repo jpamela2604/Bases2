@@ -58,6 +58,7 @@ namespace WindowsFormsApp1
                     comando.Connection.Close();
                     /*ASIGNAR A VARIABLE DE CONFIGURACION*/
                     var codigoRol = System.Convert.ToInt32(comando.Parameters["resultado"].Value);
+                    Properties.Settings.Default.empleado = Convert.ToInt32(Usuario.Text);
                     Properties.Settings.Default.rol = codigoRol;
                     MessageBox.Show("Bienvenido");
                     this.Hide();
