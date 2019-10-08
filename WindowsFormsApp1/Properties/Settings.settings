@@ -11,19 +11,19 @@
     <Setting Name="nombre_db" Type="System.String" Scope="User">
       <Value Profile="(Default)">ORCL</Value>
     </Setting>
-    <Setting Name="empleado" Type="System.Int32" Scope="User">
-      <Value Profile="(Default)">0</Value>
-    </Setting>
     <Setting Name="rol" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">-1</Value>
     </Setting>
-    <Setting Name="empleado" Type="System.Int32" Scope="User">
+    <Setting Name="empleado1" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">1</Value>
     </Setting>
     <Setting Name="agencia" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">1</Value>
     </Setting>
     <Setting Name="equipo" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">1</Value>
+    </Setting>
+    <Setting Name="empleado" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">1</Value>
     </Setting>
   </Settings>

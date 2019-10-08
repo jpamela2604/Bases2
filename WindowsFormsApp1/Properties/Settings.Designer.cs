@@ -61,18 +61,6 @@ namespace WindowsFormsApp1.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("0")]
-        public int empleado {
-            get {
-                return ((int)(this["empleado"]));
-            }
-            set {
-                this["empleado"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("-1")]
         public int rol {
             get {
@@ -86,12 +74,12 @@ namespace WindowsFormsApp1.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("1")]
-        public int empleado {
+        public int empleado1 {
             get {
-                return ((int)(this["empleado"]));
+                return ((int)(this["empleado1"]));
             }
             set {
-                this["empleado"] = value;
+                this["empleado1"] = value;
             }
         }
         
@@ -116,6 +104,18 @@ namespace WindowsFormsApp1.Properties {
             }
             set {
                 this["equipo"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("1")]
+        public int empleado {
+            get {
+                return ((int)(this["empleado"]));
+            }
+            set {
+                this["empleado"] = value;
             }
         }
     }
