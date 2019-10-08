@@ -14,9 +14,13 @@ namespace WindowsFormsApp1
     public partial class SolicitudChequera : Form
     {
         public String conexion;
+        public System.Data.IsolationLevel lectura;
+        public System.Data.IsolationLevel escritura;
         public SolicitudChequera()
         {
             conexion = "DATA SOURCE = " + Properties.Settings.Default.nombre_db + "; PASSWORD=" + Properties.Settings.Default.contrasenia_db + "; USER ID=" + Properties.Settings.Default.usuario_db + ";";
+            lectura = IsolationLevel.ReadCommitted;
+            escritura = IsolationLevel.ReadCommitted;
             InitializeComponent();            
         }
         bool CheckTextBox(TextBox tb)
@@ -40,27 +44,32 @@ namespace WindowsFormsApp1
 
         bool ComprobarCuenta()
         {
-            try
+            using (OracleConnection connection = new OracleConnection(conexion))
             {
-
-                OracleConnection ora = new OracleConnection(conexion);
-
-                ora.Open();
-                OracleCommand comando = new OracleCommand("validar_cuenta", ora);
-                comando.CommandType = System.Data.CommandType.StoredProcedure;
-                comando.Parameters.Add("cuent", OracleType.Number).Value = Convert.ToInt32(NumeroCuenta.Text);
-                comando.Parameters.Add("resultado", OracleType.Number);
-                comando.Parameters["resultado"].Direction = ParameterDirection.ReturnValue;
-                comando.ExecuteNonQuery();
-                comando.Connection.Close();
-                /*ASIGNAR A VARIABLE DE CONFIGURACION*/
-                var codigoRol = Convert.ToString(comando.Parameters["resultado"].Value);
-                return true;
-            }
-            catch (Exception EX)
-            {
-                MessageBox.Show("Cuenta inexistente");
-                return false;
+                connection.Open();
+                OracleCommand comando = new OracleCommand("validar_cuenta", connection);
+                OracleTransaction transaction;
+                transaction = connection.BeginTransaction(lectura);
+                comando.Transaction = transaction;
+                try
+                {
+                    
+                    comando.CommandType = System.Data.CommandType.StoredProcedure;
+                    comando.Parameters.Add("cuent", OracleType.Number).Value = Convert.ToInt32(NumeroCuenta.Text);
+                    comando.Parameters.Add("resultado", OracleType.Number);
+                    comando.Parameters["resultado"].Direction = ParameterDirection.ReturnValue;
+                    comando.ExecuteNonQuery();
+                    transaction.Commit();
+                    /*ASIGNAR A VARIABLE DE CONFIGURACION*/
+                    var codigoRol = Convert.ToString(comando.Parameters["resultado"].Value);
+                    return true;
+                }
+                catch (Exception EX)
+                {
+                    MessageBox.Show("Cuenta inexistente");
+                    transaction.Rollback();
+                    return false;
+                }
             }
         }
 
@@ -70,26 +79,30 @@ namespace WindowsFormsApp1
             {
                 return;
             }
-            OracleConnection ora = new OracleConnection(conexion);
-
-            try
-           {
-               ora.Open();
-                OracleCommand comando = new OracleCommand("solicitar_chequera", ora);
-                comando.CommandType = System.Data.CommandType.StoredProcedure;
-                comando.Parameters.Add("numero_cuenta", OracleType.VarChar).Value = Convert.ToInt32(NumeroCuenta.Text);
-                comando.Parameters.Add("cantidad", OracleType.VarChar).Value = (int)numericUpDown1.Value; 
-                comando.ExecuteNonQuery();
-                ora.Close();
-                MessageBox.Show("Se envió la solicitud");
-            }
-            catch (Exception)
+            using (OracleConnection connection = new OracleConnection(conexion))
             {
-                MessageBox.Show("Algo fallo");
-                ora.Close();
+                connection.Open();
+                OracleCommand comando = new OracleCommand("solicitar_chequera", connection);
+                OracleTransaction transaction;
+                transaction = connection.BeginTransaction(lectura);
+                comando.Transaction = transaction;
+
+                try
+                {
+                    comando.CommandType = System.Data.CommandType.StoredProcedure;
+                    comando.Parameters.Add("numero_cuenta", OracleType.VarChar).Value = Convert.ToInt32(NumeroCuenta.Text);
+                    comando.Parameters.Add("cantidad", OracleType.VarChar).Value = (int)numericUpDown1.Value;
+                    comando.ExecuteNonQuery();
+                    transaction.Commit();
+                    MessageBox.Show("Se envió la solicitud");
+                }
+                catch (Exception)
+                {
+                    MessageBox.Show("Algo fallo");
+                    transaction.Rollback();
+                }
+
             }
-            
-            
         }
 
         private void button2_Click(object sender, EventArgs e)

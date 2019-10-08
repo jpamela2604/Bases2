@@ -65,11 +65,23 @@
       <DependentUpon>ABC_Empleado.cs</DependentUpon>
     </Compile>
     <Compile Include="Conexion.cs" />
+    <Compile Include="ConsultaSaldos.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ConsultaSaldos.Designer.cs">
+      <DependentUpon>ConsultaSaldos.cs</DependentUpon>
+    </Compile>
     <Compile Include="Declarar_Anomalia_Cheque.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Declarar_Anomalia_Cheque.Designer.cs">
       <DependentUpon>Declarar_Anomalia_Cheque.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DepositoMonetario.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DepositoMonetario.Designer.cs">
+      <DependentUpon>DepositoMonetario.cs</DependentUpon>
     </Compile>
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
@@ -112,8 +124,14 @@
     <EmbeddedResource Include="ABC_Empleado.resx">
       <DependentUpon>ABC_Empleado.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="ConsultaSaldos.resx">
+      <DependentUpon>ConsultaSaldos.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Declarar_Anomalia_Cheque.resx">
       <DependentUpon>Declarar_Anomalia_Cheque.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DepositoMonetario.resx">
+      <DependentUpon>DepositoMonetario.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>

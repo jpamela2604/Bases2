@@ -13,11 +13,14 @@ namespace WindowsFormsApp1
 {
     public partial class Login : Form
     {
-        Conexion c = new Conexion();
-        OracleConnection ora = new OracleConnection("DATA SOURCE = " + Properties.Settings.Default.nombre_db + "; PASSWORD=" + Properties.Settings.Default.contrasenia_db + "; USER ID=" + Properties.Settings.Default.usuario_db + ";");
+        String cad;
+        //Conexion c = new Conexion();
+        //OracleConnection ora;
         public Login()
         {
+            cad = "DATA SOURCE = " + Properties.Settings.Default.nombre_db + "; PASSWORD=" + Properties.Settings.Default.contrasenia_db + "; USER ID=" + Properties.Settings.Default.usuario_db + ";";
             InitializeComponent();
+            //ora = new OracleConnection(cad);
         }
 
         private void label1_Click(object sender, EventArgs e)
@@ -42,30 +45,36 @@ namespace WindowsFormsApp1
         {
             if (CheckTextBox(Usuario) && CheckTextBox(Contrasena))
             {
-                try
+                using (OracleConnection connection = new OracleConnection(cad))
                 {
+                    connection.Open();
+                    OracleCommand comando = new OracleCommand("login", connection);
+                    OracleTransaction transaction;
+                    transaction = connection.BeginTransaction(IsolationLevel.ReadCommitted);
+                    try
+                    {
 
-                    
-
-                    ora.Open();
-                    OracleCommand comando = new OracleCommand("login", ora);
-                    comando.CommandType = System.Data.CommandType.StoredProcedure;
-                    comando.Parameters.Add("usuario", OracleType.Number).Value = Convert.ToInt32(Usuario.Text);
-                    comando.Parameters.Add("password", OracleType.VarChar).Value = Contrasena.Text;
-                    comando.Parameters.Add("resultado", OracleType.Number);
-                    comando.Parameters["resultado"].Direction = ParameterDirection.ReturnValue;
-                    comando.ExecuteNonQuery();
-                    comando.Connection.Close();
-                    /*ASIGNAR A VARIABLE DE CONFIGURACION*/
-                    var codigoRol = Convert.ToInt32(comando.Parameters["resultado"].Value);
-                    Properties.Settings.Default.rol = codigoRol;
-                    MessageBox.Show("Bienvenido");
-                }
-                catch (Exception EX)
-                {
-                    Usuario.Text = "";
-                    Contrasena.Text = "";
-                    MessageBox.Show("usuario y/o contraseña invalidos");
+                        comando.CommandType = System.Data.CommandType.StoredProcedure;
+                        comando.Parameters.Add("usuario", OracleType.Number).Value = Convert.ToInt32(Usuario.Text);
+                        comando.Parameters.Add("password", OracleType.VarChar).Value = Contrasena.Text;
+                        comando.Parameters.Add("resultado", OracleType.Number);
+                        comando.Parameters["resultado"].Direction = ParameterDirection.ReturnValue;
+                        comando.Transaction = transaction;
+                        comando.ExecuteNonQuery();
+                        transaction.Commit();
+                        comando.Connection.Close();
+                        /*ASIGNAR A VARIABLE DE CONFIGURACION*/
+                        var codigoRol = Convert.ToInt32(comando.Parameters["resultado"].Value);
+                        Properties.Settings.Default.rol = codigoRol;
+                        MessageBox.Show("Bienvenido");
+                    }
+                    catch (Exception EX)
+                    {
+                        transaction.Rollback();
+                        Usuario.Text = "";
+                        Contrasena.Text = "";
+                        MessageBox.Show("usuario y/o contraseña invalidos");
+                    }
                 }
             }
         }
