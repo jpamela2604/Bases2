@@ -56,9 +56,9 @@ namespace WindowsFormsApp1
                 ABC_CLIENTE b = new ABC_CLIENTE();
                 byte[] firma = (byte[])(dr["firma"]);
                 byte[] foto = (byte[])(dr["foto"]);
-                String ruta = b.convert_blob_to_image(firma, "firma");
+                String ruta = b.convert_blob_to_image(firma, "firmax");
                 pic_firma.Image = Image.FromFile(ruta);
-                ruta = b.convert_blob_to_image(foto, "foto");
+                ruta = b.convert_blob_to_image(foto, "fotox");
                 pic_foto.Image = Image.FromFile(ruta);
                 label7.Text = dr["dpi"].ToString();
                 this.btn_transf.Enabled = true;

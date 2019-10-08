@@ -43,25 +43,47 @@ namespace WindowsFormsApp1
         {
             Form f2 = new PAGO_CHEQUE();
             f2.Show();
-            Form1 m = new Form1();
-            this.Hide();
-            m.Show();
+            
         }
 
         private void button4_Click(object sender, EventArgs e)
         {
             Form f2 = new TRANSFERENCIA_FONDOS();
             f2.Show();
-            AUDITORIA a = new AUDITORIA();
-            this.Hide();
-            a.Show();
+            
         }
 
         private void button5_Click(object sender, EventArgs e)
         {
+            Form1 m = new Form1();
+            //this.Hide();
+            m.Show();
+        }
+
+        private void button6_Click(object sender, EventArgs e)
+        {
+            AUDITORIA a = new AUDITORIA();
+            //this.Hide();
+            a.Show();
+        }
+
+        private void button7_Click(object sender, EventArgs e)
+        {
             Consultas c = new Consultas();
-            this.Hide();
+            //this.Hide();
             c.Show();
+        }
+
+        private void button8_Click(object sender, EventArgs e)
+        {
+            DepositoMonetario DE = new DepositoMonetario();
+            DE.Show();
+        }
+
+        private void button9_Click(object sender, EventArgs e)
+        {
+            ConsultaSaldos S = new ConsultaSaldos();
+            S.Show();
         }
     }
 }

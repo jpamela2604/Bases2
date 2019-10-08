@@ -6,7 +6,7 @@
       <Value Profile="(Default)">system</Value>
     </Setting>
     <Setting Name="contrasenia_db" Type="System.String" Scope="User">
-      <Value Profile="(Default)">admin</Value>
+      <Value Profile="(Default)">bases2</Value>
     </Setting>
     <Setting Name="nombre_db" Type="System.String" Scope="User">
       <Value Profile="(Default)">ORCL</Value>
@@ -25,7 +25,7 @@
     </Setting>
     <Setting Name="empleado" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">1</Value>
-    </Settings>
+    </Setting>
     <Setting Name="id_empledo" Type="System.String" Scope="User">
       <Value Profile="(Default)">-1</Value>
     </Setting>

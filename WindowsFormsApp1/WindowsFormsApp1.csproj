@@ -109,6 +109,7 @@
     </Compile>
     <Compile Include="ConsultaSaldos.Designer.cs">
       <DependentUpon>ConsultaSaldos.cs</DependentUpon>
+    </Compile>
     <Compile Include="Consultas.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -162,6 +163,12 @@
     </Compile>
     <Compile Include="MenuMantenimientoDBA.Designer.cs">
       <DependentUpon>MenuMantenimientoDBA.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PAGO_CHEQUE.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PAGO_CHEQUE.Designer.cs">
+      <DependentUpon>PAGO_CHEQUE.cs</DependentUpon>
     </Compile>
     <Compile Include="Permisos.cs" />
     <Compile Include="Program.cs" />

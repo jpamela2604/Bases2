@@ -14,13 +14,13 @@ namespace WindowsFormsApp1
     public partial class Login : Form
     {
         String cad;
-        Conexion c = new Conexion();
-        OracleConnection ora;
+        //Conexion c = new Conexion();
+        //OracleConnection ora;
         public Login()
         {
             cad = "DATA SOURCE = " + Properties.Settings.Default.nombre_db + "; PASSWORD=" + Properties.Settings.Default.contrasenia_db + "; USER ID=" + Properties.Settings.Default.usuario_db + ";";
             InitializeComponent();
-            ora = new OracleConnection(cad);
+            //ora = new OracleConnection(cad);
         }
 
         private void label1_Click(object sender, EventArgs e)
@@ -48,16 +48,17 @@ namespace WindowsFormsApp1
                 using (OracleConnection connection = new OracleConnection(cad))
                 {
                     connection.Open();
-                    OracleCommand comando = new OracleCommand("login", connection);
-                    OracleTransaction transaction;
-                    transaction = connection.BeginTransaction(IsolationLevel.ReadCommitted);
                     try
                     {
+                    OracleCommand comando = new OracleCommand("login", connection);
+                    //OracleTransaction transaction;
+                    //transaction = connection.BeginTransaction(IsolationLevel.ReadCommitted);
+                    
 
 
 
-                        ora.Open();
-                        comando = new OracleCommand("login", ora);
+                        //ora.Open();
+                        //comando = new OracleCommand("login", ora);
                         comando.CommandType = System.Data.CommandType.StoredProcedure;
                         comando.Parameters.Add("usuario", OracleType.Number).Value = Convert.ToInt32(Usuario.Text);
                         comando.Parameters.Add("password", OracleType.VarChar).Value = Contrasena.Text;
