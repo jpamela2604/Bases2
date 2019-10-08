@@ -44,5 +44,11 @@ namespace WindowsFormsApp1
             Form f2 = new PAGO_CHEQUE();
             f2.Show();
         }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            Form f2 = new TRANSFERENCIA_FONDOS();
+            f2.Show();
+        }
     }
 }
