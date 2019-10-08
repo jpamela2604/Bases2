@@ -368,7 +368,7 @@ namespace WindowsFormsApp1
         private bool IsValidNit(string nit)
         {
             if (nit == null)
-                throw new ArgumentNullException(nameof(nit));
+                //throw new ArgumentNullException(nameof(nit));
             if (nit.Length != 7)
                 return false;
             var digitos = new byte[7];

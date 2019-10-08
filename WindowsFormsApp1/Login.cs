@@ -69,6 +69,7 @@ namespace WindowsFormsApp1
                         var codigoRol = System.Convert.ToInt32(comando.Parameters["resultado"].Value);
                         Properties.Settings.Default.empleado = Convert.ToInt32(Usuario.Text);
                         Properties.Settings.Default.rol = codigoRol;
+                        Properties.Settings.Default.id_empledo = Usuario.Text;
                         MessageBox.Show("Bienvenido");
                         this.Hide();
                         Form menu = new Menu();

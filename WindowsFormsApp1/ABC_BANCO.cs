@@ -22,7 +22,24 @@ namespace WindowsFormsApp1
 
         private void button1_Click(object sender, EventArgs e)
         {
+        }
 
+        private void button2_Click(object sender, EventArgs e)
+        {
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button1_Click_1(object sender, EventArgs e)
+        {
 
             ora.Open();
             OracleCommand comando = new OracleCommand("banco_select", ora);
@@ -37,7 +54,14 @@ namespace WindowsFormsApp1
             ora.Close();
         }
 
-        private void button2_Click(object sender, EventArgs e)
+        private void button5_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            MenuMantenimientoDBA m = new MenuMantenimientoDBA();
+            m.Show();
+        }
+
+        private void button2_Click_1(object sender, EventArgs e)
         {
             try
             {
@@ -45,7 +69,6 @@ namespace WindowsFormsApp1
                 OracleCommand comando = new OracleCommand("banco_insert", ora);
                 comando.CommandType = System.Data.CommandType.StoredProcedure;
                 comando.Parameters.Add("nombre", OracleType.VarChar).Value = textBox1.Text;
-                comando.Parameters.Add("direccion", OracleType.VarChar).Value = textBox2.Text;
                 comando.ExecuteNonQuery();
             }
             catch (Exception)
@@ -56,7 +79,7 @@ namespace WindowsFormsApp1
             ora.Close();
         }
 
-        private void button3_Click(object sender, EventArgs e)
+        private void button3_Click_1(object sender, EventArgs e)
         {
             try
             {
@@ -65,7 +88,6 @@ namespace WindowsFormsApp1
                 comando.CommandType = System.Data.CommandType.StoredProcedure;
                 comando.Parameters.Add("pid_banco", OracleType.VarChar).Value = textBox5.Text;
                 comando.Parameters.Add("pnombre", OracleType.VarChar).Value = textBox4.Text;
-                comando.Parameters.Add("pdireccion", OracleType.VarChar).Value = textBox3.Text;
                 comando.ExecuteNonQuery();
             }
             catch (Exception)
@@ -76,7 +98,7 @@ namespace WindowsFormsApp1
             ora.Close();
         }
 
-        private void button4_Click(object sender, EventArgs e)
+        private void button4_Click_1(object sender, EventArgs e)
         {
             try
             {

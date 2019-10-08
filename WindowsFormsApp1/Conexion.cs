@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data;
 using System.Data.OracleClient;
 using System.Linq;
 using System.Text;
@@ -8,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace WindowsFormsApp1
 {
-    public class Conexion
+    class Conexion
     {
         public string connectionString = "DATA SOURCE = " + Properties.Settings.Default.nombre_db + "; PASSWORD=" + Properties.Settings.Default.contrasenia_db + "; USER ID=" + Properties.Settings.Default.usuario_db + ";";
         public void RunOracleTransaction(OracleCommand command)
@@ -38,6 +37,17 @@ namespace WindowsFormsApp1
                 }
                 connection.Close();
             }
+        public static OracleConnection ora = new OracleConnection("DATA SOURCE = ORCL; PASSWORD=admin; USER ID=system;");
+
+        public static void abrirConexion()
+        {
+            ora.Close();
+            ora.Open();
+        }
+
+        public static void cerrarConexion()
+        {
+            ora.Close();
         }
     }
 }
