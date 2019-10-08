@@ -14,28 +14,46 @@ namespace WindowsFormsApp1
     public partial class Declarar_Anomalia_Cheque : Form
     {
         public String conexion;
+        public System.Data.IsolationLevel lectura;
+        public System.Data.IsolationLevel escritura;
         public Declarar_Anomalia_Cheque()
         {
             conexion = "DATA SOURCE = " + Properties.Settings.Default.nombre_db + "; PASSWORD=" + Properties.Settings.Default.contrasenia_db + "; USER ID=" + Properties.Settings.Default.usuario_db + ";";
-            InitializeComponent();            
+            InitializeComponent();
+            lectura = IsolationLevel.ReadCommitted;
+            escritura = IsolationLevel.ReadCommitted;
         }
 
         private void Declarar_Anomalia_Cheque_Load(object sender, EventArgs e)
         {
-            OracleConnection ora = new OracleConnection(conexion);
-            ora.Open();
-            OracleCommand comando = new OracleCommand("estadocheque_select", ora);
-            comando.CommandType = System.Data.CommandType.StoredProcedure;
-            comando.Parameters.Add("registros", OracleType.Cursor).Direction = ParameterDirection.Output;
+            using (OracleConnection connection = new OracleConnection(conexion))
+            {
+                connection.Open();
+                OracleCommand comando = new OracleCommand("estadocheque_select", connection);
+                OracleTransaction transaction;
+                transaction = connection.BeginTransaction(lectura);
+                comando.Transaction = transaction;
+                try
+                {
 
-            OracleDataAdapter adaptador = new OracleDataAdapter();
-            adaptador.SelectCommand = comando;
-            DataTable tabla = new DataTable();
-            adaptador.Fill(tabla);
-            comboBox1.DataSource = tabla;
-            comboBox1.DisplayMember = "NOMBRE";
-            comboBox1.ValueMember = "CODIGO";
-            ora.Close();
+                    comando.CommandType = System.Data.CommandType.StoredProcedure;
+                    comando.Parameters.Add("registros", OracleType.Cursor).Direction = ParameterDirection.Output;
+
+                    OracleDataAdapter adaptador = new OracleDataAdapter();
+                    adaptador.SelectCommand = comando;
+                    transaction.Commit();
+                    DataTable tabla = new DataTable();
+                    adaptador.Fill(tabla);
+                    comboBox1.DataSource = tabla;
+                    comboBox1.DisplayMember = "NOMBRE";
+                    comboBox1.ValueMember = "CODIGO";
+                }
+                catch (Exception ex)
+                {
+                    transaction.Rollback();
+                    MessageBox.Show("algo salio mal");
+                }
+            }
         }
         bool CheckTextBox(TextBox tb)
         {
@@ -46,63 +64,77 @@ namespace WindowsFormsApp1
             }
             return true;
         }
-        bool RelacionarCuentaCheque()
-        {
-            try
+            bool RelacionarCuentaCheque()
             {
-                OracleConnection ora = new OracleConnection(conexion);
-                ora.Open();
-                OracleCommand comando = new OracleCommand("validad_cuenta_cheque", ora);
-                comando.CommandType = System.Data.CommandType.StoredProcedure;
-                comando.Parameters.Add("cuen", OracleType.Number).Value = Convert.ToInt32(NumeroCuenta.Text);
-                comando.Parameters.Add("che", OracleType.Number).Value = Convert.ToInt32(NumeroCheque.Text);
-                comando.Parameters.Add("resultado", OracleType.Number);
-                comando.Parameters["resultado"].Direction = ParameterDirection.ReturnValue;
-                comando.ExecuteNonQuery();
-                comando.Connection.Close();
-                /*ASIGNAR A VARIABLE DE CONFIGURACION*/
-                var codigoRol = Convert.ToInt32(comando.Parameters["resultado"].Value);
+                using (OracleConnection connection = new OracleConnection(conexion))
+                {
+                    connection.Open();
+                    OracleCommand comando = new OracleCommand("validad_cuenta_cheque", connection);
+                    OracleTransaction transaction;
+                    transaction = connection.BeginTransaction(lectura);
+                    comando.Transaction = transaction;
+                    try
+                    {
+                        comando.CommandType = System.Data.CommandType.StoredProcedure;
+                        comando.Parameters.Add("cuen", OracleType.Number).Value = Convert.ToInt32(NumeroCuenta.Text);
+                        comando.Parameters.Add("che", OracleType.Number).Value = Convert.ToInt32(NumeroCheque.Text);
+                        comando.Parameters.Add("resultado", OracleType.Number);
+                        comando.Parameters["resultado"].Direction = ParameterDirection.ReturnValue;
+                        comando.ExecuteNonQuery();
+                        transaction.Commit();
+                        /*ASIGNAR A VARIABLE DE CONFIGURACION*/
+                        var codigoRol = Convert.ToInt32(comando.Parameters["resultado"].Value);
 
-                if(codigoRol == 1)
-                {
-                    return true;
-                }else
-                {
-                    MessageBox.Show("La cuenta no esta relacionada con el cheque");
-                    return false;
+                        if (codigoRol == 1)
+                        {
+                            return true;
+                        }
+                        else
+                        {
+                            MessageBox.Show("La cuenta no esta relacionada con el cheque");
+                            return false;
+                        }
+
+                    }
+                    catch (Exception EX)
+                    {
+
+                        transaction.Rollback();
+                        MessageBox.Show("Algo salio mal");
+                    }
                 }
-                
+                return false;
             }
-            catch (Exception EX)
-            {
-                MessageBox.Show("La cuenta no esta relacionada con el cheque");
-            }
-           
-            return false;
-        }
-        private void button1_Click(object sender, EventArgs e)
+
+
+            private void button1_Click(object sender, EventArgs e)
         {
             if (!(CheckTextBox(NumeroCuenta)&&CheckTextBox(NumeroCheque)&& ComprobarCuenta()&& ComprobarCheque()&& RelacionarCuentaCheque()))
             {
                 return;
             }
-            OracleConnection ora = new OracleConnection(conexion);
+            using (OracleConnection connection = new OracleConnection(conexion))
+            {
+                connection.Open();
+                OracleCommand comando = new OracleCommand("reporte_cheque", connection);
+                OracleTransaction transaction;
+                transaction = connection.BeginTransaction(escritura);
+                comando.Transaction = transaction;                
 
-            try
-            {
-                ora.Open();
-                OracleCommand comando = new OracleCommand("reporte_cheque", ora);
-                comando.CommandType = System.Data.CommandType.StoredProcedure;
-                comando.Parameters.Add("estado", OracleType.Number).Value = Convert.ToInt32(comboBox1.SelectedValue.ToString());
-                comando.Parameters.Add("cod", OracleType.Number).Value = Convert.ToInt32(NumeroCheque.Text);
-                comando.ExecuteNonQuery();
-                ora.Close();
-                MessageBox.Show("Se reporto incidencia");
-            }
-            catch (Exception)
-            {
-                MessageBox.Show("Algo fallo");
-                ora.Close();
+                try
+                {
+                    comando.CommandType = System.Data.CommandType.StoredProcedure;
+                    comando.Parameters.Add("estado", OracleType.Number).Value = Convert.ToInt32(comboBox1.SelectedValue.ToString());
+                    comando.Parameters.Add("cod", OracleType.Number).Value = Convert.ToInt32(NumeroCheque.Text);
+                    comando.ExecuteNonQuery();
+                    transaction.Commit();
+                    MessageBox.Show("Se reporto incidencia");
+                }
+                catch (Exception)
+                {
+                    MessageBox.Show("Algo fallo");
+                    transaction.Rollback();
+                }
             }
         }
 
@@ -114,50 +146,62 @@ namespace WindowsFormsApp1
         }
         bool ComprobarCuenta()
         {
-            try
+            using (OracleConnection connection = new OracleConnection(conexion))
             {
-                OracleConnection ora = new OracleConnection(conexion);
-                ora.Open();
-                OracleCommand comando = new OracleCommand("validar_cuenta", ora);
-                comando.CommandType = System.Data.CommandType.StoredProcedure;
-                comando.Parameters.Add("cuent", OracleType.Number).Value = Convert.ToInt32(NumeroCuenta.Text);
-                comando.Parameters.Add("resultado", OracleType.Number);
-                comando.Parameters["resultado"].Direction = ParameterDirection.ReturnValue;
-                comando.ExecuteNonQuery();
-                comando.Connection.Close();
-                /*ASIGNAR A VARIABLE DE CONFIGURACION*/
-                var codigoRol = Convert.ToString(comando.Parameters["resultado"].Value);
-                return true;
-            }
-            catch (Exception EX)
-            {
-                MessageBox.Show("Cuenta inexistente");
-                return false;
+                connection.Open();
+                OracleCommand comando = new OracleCommand("validar_cuenta", connection);
+                OracleTransaction transaction;
+                transaction = connection.BeginTransaction(lectura);
+                comando.Transaction = transaction;
+
+                try
+                {
+                    comando.CommandType = System.Data.CommandType.StoredProcedure;
+                    comando.Parameters.Add("cuent", OracleType.Number).Value = Convert.ToInt32(NumeroCuenta.Text);
+                    comando.Parameters.Add("resultado", OracleType.Number);
+                    comando.Parameters["resultado"].Direction = ParameterDirection.ReturnValue;
+                    comando.ExecuteNonQuery();
+                    transaction.Commit();
+                    /*ASIGNAR A VARIABLE DE CONFIGURACION*/
+                    var codigoRol = Convert.ToString(comando.Parameters["resultado"].Value);
+                    return true;
+                }
+                catch (Exception EX)
+                {
+                    MessageBox.Show("Cuenta inexistente");
+                    transaction.Rollback();
+                    return false;
+                }
             }
         }
         bool ComprobarCheque()
         {
-            try
+            using (OracleConnection connection = new OracleConnection(conexion))
             {
-
-                OracleConnection ora = new OracleConnection(conexion);
-
-                ora.Open();
-                OracleCommand comando = new OracleCommand("validar_cheque", ora);
-                comando.CommandType = System.Data.CommandType.StoredProcedure;
-                comando.Parameters.Add("cod", OracleType.Number).Value = Convert.ToInt32(NumeroCheque.Text);
-                comando.Parameters.Add("resultado", OracleType.Number);
-                comando.Parameters["resultado"].Direction = ParameterDirection.ReturnValue;
-                comando.ExecuteNonQuery();
-                comando.Connection.Close();
-                /*ASIGNAR A VARIABLE DE CONFIGURACION*/
-                var codigoRol = Convert.ToString(comando.Parameters["resultado"].Value);
-                return true;
-            }
-            catch (Exception EX)
-            {
-                MessageBox.Show("Cheque inexistente");
-                return false;
+                connection.Open();
+                OracleCommand comando = new OracleCommand("validar_cheque", connection);
+                OracleTransaction transaction;
+                transaction = connection.BeginTransaction(lectura);
+                comando.Transaction = transaction;
+                try
+                {
+                    
+                    comando.CommandType = System.Data.CommandType.StoredProcedure;
+                    comando.Parameters.Add("cod", OracleType.Number).Value = Convert.ToInt32(NumeroCheque.Text);
+                    comando.Parameters.Add("resultado", OracleType.Number);
+                    comando.Parameters["resultado"].Direction = ParameterDirection.ReturnValue;
+                    comando.ExecuteNonQuery();
+                    transaction.Commit();
+                    /*ASIGNAR A VARIABLE DE CONFIGURACION*/
+                    var codigoRol = Convert.ToString(comando.Parameters["resultado"].Value);
+                    return true;
+                }
+                catch (Exception EX)
+                {
+                    MessageBox.Show("Cheque inexistente");
+                    transaction.Rollback();
+                    return false;
+                }
             }
         }
         private void NumeroCuenta_TextChanged(object sender, EventArgs e)

@@ -15,11 +15,16 @@ namespace WindowsFormsApp1
     public partial class ABC_Empleado : Form
     {
         public String conexion;
+        public System.Data.IsolationLevel lectura;
+        public System.Data.IsolationLevel escritura;
         public ABC_Empleado()
         {
             conexion = "DATA SOURCE = " + Properties.Settings.Default.nombre_db +"; PASSWORD="+Properties.Settings.Default.contrasenia_db +"; USER ID="+Properties.Settings.Default.usuario_db+";";
             InitializeComponent();
-            
+            lectura = IsolationLevel.ReadCommitted;
+            escritura = IsolationLevel.ReadCommitted;
+
+
         }
 
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
@@ -41,77 +46,92 @@ namespace WindowsFormsApp1
         }
         public void cargar_datos()
         {
-            try
-             {
-                OracleConnection ora = new OracleConnection(conexion);
-                ora.Open();
-                OracleCommand comando = new OracleCommand("empleado_select", ora);
-                comando.CommandType = System.Data.CommandType.StoredProcedure;
-                comando.Parameters.Add("registros", OracleType.Cursor).Direction = ParameterDirection.Output;
-
-                OracleDataAdapter adaptador = new OracleDataAdapter();
-                adaptador.SelectCommand = comando;
-                DataTable tabla = new DataTable();
-                adaptador.Fill(tabla);
-                dataGridView1.DataSource = tabla;
-                ora.Close();
-                ora.Dispose();
-
-            }
-            catch(Exception ex)
+            using (OracleConnection connection = new OracleConnection(conexion))
             {
-                MessageBox.Show("algo salio mal");
+                connection.Open();
+                OracleCommand comando = new OracleCommand("empleado_select", connection);
+                OracleTransaction transaction;
+                transaction = connection.BeginTransaction(lectura);
+                comando.Transaction = transaction;
+                try
+                {                   
+                    comando.CommandType = System.Data.CommandType.StoredProcedure;
+                    comando.Parameters.Add("registros", OracleType.Cursor).Direction = ParameterDirection.Output;
+                    OracleDataAdapter adaptador = new OracleDataAdapter();
+                    adaptador.SelectCommand = comando;
+                    transaction.Commit();
+                    DataTable tabla = new DataTable();
+                    adaptador.Fill(tabla);
+                    dataGridView1.DataSource = tabla;
+
+                }
+                catch (Exception ex)
+                {
+                    transaction.Rollback();
+                    MessageBox.Show("algo salio mal");
+                }
             }
         }
         public void cargar_roles()
         {
-            try
+            using (OracleConnection connection = new OracleConnection(conexion))
             {
-                OracleConnection ora = new OracleConnection(conexion);
-                ora.Open();
-                OracleCommand comando = new OracleCommand("rol_select", ora);
-                comando.CommandType = System.Data.CommandType.StoredProcedure;
-                comando.Parameters.Add("registros", OracleType.Cursor).Direction = ParameterDirection.Output;
+                connection.Open();
+                OracleCommand comando = new OracleCommand("rol_select", connection);
+                OracleTransaction transaction;
+                transaction = connection.BeginTransaction(lectura);
+                comando.Transaction = transaction;
+                try
+                {
 
-                OracleDataAdapter adaptador = new OracleDataAdapter();
-                adaptador.SelectCommand = comando;
-                DataTable tabla1 = new DataTable();
-                adaptador.Fill(tabla1);
-                comboBox1.DataSource = tabla1;
-                comboBox1.DisplayMember = "NOMBRE";
-                comboBox1.ValueMember = "ID_ROL";
-                ora.Close();
-                ora.Dispose();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("algo salio mal");
+                    comando.CommandType = System.Data.CommandType.StoredProcedure;
+                    comando.Parameters.Add("registros", OracleType.Cursor).Direction = ParameterDirection.Output;
+                    OracleDataAdapter adaptador = new OracleDataAdapter();
+                    adaptador.SelectCommand = comando;
+                    transaction.Commit();
+                    DataTable tabla1 = new DataTable();
+                    adaptador.Fill(tabla1);
+                    comboBox1.DataSource = tabla1;
+                    comboBox1.DisplayMember = "NOMBRE";
+                    comboBox1.ValueMember = "ID_ROL";
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("algo salio mal");
+                    transaction.Rollback();
+                }
             }
         }
         public void cargar_agencia()
         {
-            try
+            using (OracleConnection connection = new OracleConnection(conexion))
             {
-                OracleConnection ora = new OracleConnection(conexion);
-                ora.Open();
-                OracleCommand comando = new OracleCommand("agencia_select", ora);
-                comando.CommandType = System.Data.CommandType.StoredProcedure;
-                comando.Parameters.Add("registros", OracleType.Cursor).Direction = ParameterDirection.Output;
+                connection.Open();
+                OracleCommand comando = new OracleCommand("agencia_select", connection);
+                OracleTransaction transaction;
+                transaction = connection.BeginTransaction(lectura);
+                comando.Transaction = transaction;
+                try
+                {
+                    comando.CommandType = System.Data.CommandType.StoredProcedure;
+                    comando.Parameters.Add("registros", OracleType.Cursor).Direction = ParameterDirection.Output;
 
-                OracleDataAdapter adaptador = new OracleDataAdapter();
-                adaptador.SelectCommand = comando;
-                DataTable tabla = new DataTable();
-                adaptador.Fill(tabla);
-                comboBox2.DataSource = tabla;
-                comboBox2.DisplayMember = "DIRECCION";
-                comboBox2.ValueMember = "ID_AGENCIA";
-                comando.ExecuteNonQuery();
-                ora.Close();
-                ora.Dispose();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("algo salio mal");
+                    OracleDataAdapter adaptador = new OracleDataAdapter();
+                    adaptador.SelectCommand = comando;
+                    transaction.Commit();
+                    DataTable tabla = new DataTable();
+                    adaptador.Fill(tabla);
+                    comboBox2.DataSource = tabla;
+                    comboBox2.DisplayMember = "DIRECCION";
+                    comboBox2.ValueMember = "ID_AGENCIA";
+                    comando.ExecuteNonQuery();
+
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("algo salio mal");
+                    transaction.Rollback();
+                }
             }
         }
         private void ABC_Empleado_Load(object sender, EventArgs e)
@@ -126,29 +146,36 @@ namespace WindowsFormsApp1
 
         private void button4_Click(object sender, EventArgs e)
         {
+            //eliminar empleado
             if (!ComprobarEmpleado())
             {
+                MessageBox.Show("empleado inexistente");
                 return;
             }
-
-            OracleConnection ora = new OracleConnection(conexion);
-            try
+            using (OracleConnection connection = new OracleConnection(conexion))
             {
+                connection.Open();
+                OracleCommand comando = new OracleCommand("empleado_delete", connection);
+                OracleTransaction transaction;
+                transaction = connection.BeginTransaction(escritura);
+                comando.Transaction = transaction;
+                OracleConnection ora = new OracleConnection(conexion);
+                try
+                {
 
-                ora.Open();
-                OracleCommand comando = new OracleCommand("empleado_delete", ora);
-                comando.CommandType = System.Data.CommandType.StoredProcedure;
-                comando.Parameters.Add("id", OracleType.Number).Value =Convert.ToInt32( codigoEmpleado.Text);
-                comando.ExecuteNonQuery();
-                MessageBox.Show("Empleado eliminado correctamente");
+                    comando.CommandType = System.Data.CommandType.StoredProcedure;
+                    comando.Parameters.Add("id", OracleType.Number).Value = Convert.ToInt32(codigoEmpleado.Text);
+                    comando.ExecuteNonQuery();
+                    transaction.Commit();
+                    MessageBox.Show("Empleado eliminado correctamente");
 
+                }
+                catch (Exception)
+                {
+                    MessageBox.Show("Algo fallo");
+                    transaction.Rollback();
+                }
             }
-            catch (Exception)
-            {
-                MessageBox.Show("Algo fallo");
-            }
-
-            ora.Close();
             cargar_datos();
         }
         bool CheckTextBox(TextBox tb)
@@ -186,99 +213,125 @@ namespace WindowsFormsApp1
         }
         bool ComprobarEmpleado()
         {
-            try
+            using (OracleConnection connection = new OracleConnection(conexion))
             {
-
-                OracleConnection ora = new OracleConnection(conexion);
-
-                ora.Open();
-                OracleCommand comando = new OracleCommand("validar_empleado", ora);
-                comando.CommandType = System.Data.CommandType.StoredProcedure;
-                comando.Parameters.Add("cod", OracleType.Number).Value = Convert.ToInt32(codigoEmpleado.Text);
-                comando.Parameters.Add("resultado", OracleType.Number);
-                comando.Parameters["resultado"].Direction = ParameterDirection.ReturnValue;
-                comando.ExecuteNonQuery();
-                comando.Connection.Close();
-                /*ASIGNAR A VARIABLE DE CONFIGURACION*/
-                var codigoRol = Convert.ToString(comando.Parameters["resultado"].Value);
-                return true;
-            }
-            catch (Exception EX)
-            {
-                MessageBox.Show("Empleado inexistente");
-                return false;
+                connection.Open();
+                OracleCommand comando = new OracleCommand("validar_empleado", connection);
+                OracleTransaction transaction;
+                transaction = connection.BeginTransaction(lectura);
+                comando.Transaction = transaction;
+                try
+                {
+                    
+                    comando.CommandType = System.Data.CommandType.StoredProcedure;
+                    comando.Parameters.Add("cod", OracleType.Number).Value = Convert.ToInt32(codigoEmpleado.Text);
+                    comando.Parameters.Add("resultado", OracleType.Number);
+                    comando.Parameters["resultado"].Direction = ParameterDirection.ReturnValue;
+                    comando.ExecuteNonQuery();
+                    transaction.Commit();
+                    //comando.Connection.Close();
+                    /*ASIGNAR A VARIABLE DE CONFIGURACION*/
+                    var codigoRol = Convert.ToString(comando.Parameters["resultado"].Value);
+                    return true;
+                }
+                catch (Exception EX)
+                {
+                    transaction.Rollback();
+                   
+                    return false;
+                }
             }
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            if(!ValidarTodosCampos())
+            //modificar
+            if (!ComprobarEmpleado())
+            {
+                MessageBox.Show("empleado inexistente");
+                return;
+            }
+            if (!ValidarTodosCampos())
             {
                 return;
             }
 
-            if(!ComprobarEmpleado())
+            
+            using (OracleConnection connection = new OracleConnection(conexion))
             {
-                return;
+                connection.Open();
+                OracleCommand comando = new OracleCommand("empleado_actualizar", connection);
+                OracleTransaction transaction;
+                transaction = connection.BeginTransaction(escritura);
+                comando.Transaction = transaction;
+                try
+                {
+                    comando.CommandType = System.Data.CommandType.StoredProcedure;
+                    comando.Parameters.Add("cod", OracleType.Number).Value = Convert.ToInt32(codigoEmpleado.Text);
+                    comando.Parameters.Add("namee", OracleType.VarChar).Value = nombre.Text;
+                    comando.Parameters.Add("dir", OracleType.VarChar).Value = direccion.Text;
+                    comando.Parameters.Add("tel", OracleType.Number).Value = Convert.ToInt32(telefono.Text);
+                    comando.Parameters.Add("email", OracleType.VarChar).Value = correo.Text;
+                    comando.Parameters.Add("ro", OracleType.Number).Value = Convert.ToInt32(comboBox1.SelectedValue.ToString());
+                    comando.Parameters.Add("agen", OracleType.Number).Value = Convert.ToInt32(comboBox2.SelectedValue.ToString());
+                    comando.Parameters.Add("dp", OracleType.VarChar).Value = dpi.Text;
+                    comando.Parameters.Add("pass", OracleType.VarChar).Value = contrasena.Text;
+                    comando.ExecuteNonQuery();
+                    transaction.Commit();
+                    MessageBox.Show("Empleado modificado correctamente");
+                }
+                catch (Exception)
+                {
+                    transaction.Rollback();
+                    MessageBox.Show("Algo fallo");
+                }
             }
-
-            OracleConnection ora = new OracleConnection(conexion);
-            try
-            {
-                ora.Open();
-                OracleCommand comando = new OracleCommand("empleado_actualizar", ora);
-                comando.CommandType = System.Data.CommandType.StoredProcedure;
-                comando.Parameters.Add("cod", OracleType.Number).Value = Convert.ToInt32(codigoEmpleado.Text);
-                comando.Parameters.Add("namee", OracleType.VarChar).Value = nombre.Text;
-                comando.Parameters.Add("dir", OracleType.VarChar).Value = direccion.Text;
-                comando.Parameters.Add("tel", OracleType.Number).Value = Convert.ToInt32(telefono.Text);
-                comando.Parameters.Add("email", OracleType.VarChar).Value = correo.Text;
-                comando.Parameters.Add("ro", OracleType.Number).Value = Convert.ToInt32(comboBox1.SelectedValue.ToString());
-                comando.Parameters.Add("agen", OracleType.Number).Value = Convert.ToInt32(comboBox2.SelectedValue.ToString()) ;
-                comando.Parameters.Add("dp", OracleType.VarChar).Value = dpi.Text;
-                comando.Parameters.Add("pass", OracleType.VarChar).Value = contrasena.Text;
-                comando.ExecuteNonQuery();
-                MessageBox.Show("Empleado modificado correctamente");
-            }
-            catch (Exception)
-            {
-                MessageBox.Show("Algo fallo");
-            }
-
-            ora.Close();
             cargar_datos();
         }
 
         private void button3_Click(object sender, EventArgs e)
         {
+            //crear
             if (!ValidarTodosCampos())
             {
                 return;
             }
-            OracleConnection ora = new OracleConnection(conexion);
-            try
+            if(ComprobarEmpleado())
             {
-                ora.Open();
-                OracleCommand comando = new OracleCommand("empleado_crear", ora);
-                comando.CommandType = System.Data.CommandType.StoredProcedure;
-                comando.Parameters.Add("cod", OracleType.Number).Value = Convert.ToInt32(codigoEmpleado.Text);
-                comando.Parameters.Add("namee", OracleType.VarChar).Value = nombre.Text;
-                comando.Parameters.Add("dir", OracleType.VarChar).Value = direccion.Text;
-                comando.Parameters.Add("tel", OracleType.Number).Value = Convert.ToInt32(telefono.Text);
-                comando.Parameters.Add("email", OracleType.VarChar).Value = correo.Text;
-                comando.Parameters.Add("ro", OracleType.Number).Value = Convert.ToInt32(comboBox1.SelectedValue.ToString());
-                comando.Parameters.Add("agen", OracleType.Number).Value = Convert.ToInt32(comboBox2.SelectedValue.ToString());
-                comando.Parameters.Add("dp", OracleType.VarChar).Value = dpi.Text;
-                comando.Parameters.Add("pass", OracleType.VarChar).Value = contrasena.Text;
-                comando.ExecuteNonQuery();
-                MessageBox.Show("Empleado creado correctamente");
+                MessageBox.Show("Ya existe empleado con ese codigo de empleado");
+                return;
             }
-            catch (Exception)
+            using (OracleConnection connection = new OracleConnection(conexion))
             {
-                MessageBox.Show("Algo fallo");
-            }
+                connection.Open();
+                OracleCommand comando = new OracleCommand("empleado_crear", connection);
+                OracleTransaction transaction;
+                transaction = connection.BeginTransaction(escritura);
+                comando.Transaction = transaction;
+                OracleConnection ora = new OracleConnection(conexion);
+                try
+                {
+                    comando.CommandType = System.Data.CommandType.StoredProcedure;
+                    comando.Parameters.Add("cod", OracleType.Number).Value = Convert.ToInt32(codigoEmpleado.Text);
+                    comando.Parameters.Add("namee", OracleType.VarChar).Value = nombre.Text;
+                    comando.Parameters.Add("dir", OracleType.VarChar).Value = direccion.Text;
+                    comando.Parameters.Add("tel", OracleType.Number).Value = Convert.ToInt32(telefono.Text);
+                    comando.Parameters.Add("email", OracleType.VarChar).Value = correo.Text;
+                    comando.Parameters.Add("ro", OracleType.Number).Value = Convert.ToInt32(comboBox1.SelectedValue.ToString());
+                    comando.Parameters.Add("agen", OracleType.Number).Value = Convert.ToInt32(comboBox2.SelectedValue.ToString());
+                    comando.Parameters.Add("dp", OracleType.VarChar).Value = dpi.Text;
+                    comando.Parameters.Add("pass", OracleType.VarChar).Value = contrasena.Text;
+                    comando.ExecuteNonQuery();
+                    transaction.Commit();
+                    MessageBox.Show("Empleado creado correctamente");
+                }
+                catch (Exception)
+                {
+                    transaction.Rollback();
+                    MessageBox.Show("Algo fallo");
+                }
 
-            ora.Close();
+            }
             cargar_datos();
         }
 

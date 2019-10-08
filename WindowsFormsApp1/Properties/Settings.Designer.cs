@@ -82,5 +82,41 @@ namespace WindowsFormsApp1.Properties {
                 this["rol"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("1")]
+        public int empleado {
+            get {
+                return ((int)(this["empleado"]));
+            }
+            set {
+                this["empleado"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("1")]
+        public int agencia {
+            get {
+                return ((int)(this["agencia"]));
+            }
+            set {
+                this["agencia"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("1")]
+        public int equipo {
+            get {
+                return ((int)(this["equipo"]));
+            }
+            set {
+                this["equipo"] = value;
+            }
+        }
     }
 }
