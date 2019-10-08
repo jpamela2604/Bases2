@@ -80,16 +80,20 @@
             // txt_cuenta_a
             // 
             this.txt_cuenta_a.Location = new System.Drawing.Point(152, 87);
+            this.txt_cuenta_a.MaxLength = 4;
             this.txt_cuenta_a.Name = "txt_cuenta_a";
             this.txt_cuenta_a.Size = new System.Drawing.Size(121, 22);
             this.txt_cuenta_a.TabIndex = 3;
+            this.txt_cuenta_a.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox_KeyPress);
             // 
             // txt_monto
             // 
             this.txt_monto.Location = new System.Drawing.Point(152, 140);
+            this.txt_monto.MaxLength = 7;
             this.txt_monto.Name = "txt_monto";
             this.txt_monto.Size = new System.Drawing.Size(121, 22);
             this.txt_monto.TabIndex = 4;
+            this.txt_monto.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox_KeyPress);
             // 
             // label2
             // 
@@ -121,9 +125,11 @@
             // txt_cuenta_b
             // 
             this.txt_cuenta_b.Location = new System.Drawing.Point(152, 295);
+            this.txt_cuenta_b.MaxLength = 4;
             this.txt_cuenta_b.Name = "txt_cuenta_b";
             this.txt_cuenta_b.Size = new System.Drawing.Size(121, 22);
             this.txt_cuenta_b.TabIndex = 8;
+            this.txt_cuenta_b.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox_KeyPress);
             // 
             // label5
             // 

@@ -27,6 +27,16 @@ namespace WindowsFormsApp1
 
         }
 
+        private void textBox_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            // Verify that the pressed key isn't CTRL or any non-numeric digit
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+            {
+                e.Handled = true;
+            }
+
+        }
+
         private void label3_Click(object sender, EventArgs e)
         {
 
@@ -72,6 +82,12 @@ namespace WindowsFormsApp1
 
         private void btn_cobrar_Click(object sender, EventArgs e)
         {
+            if (txt_monto.Text == "" || txt_nocheque.Text == "" || txt_nocuenta.Text == "")
+            {
+                System.Windows.Forms.MessageBox.Show("Debe llenar todos los campos");
+                return;
+            }
+
             ora.Open();
             comando = new OracleCommand();
             comando.Connection = ora;
