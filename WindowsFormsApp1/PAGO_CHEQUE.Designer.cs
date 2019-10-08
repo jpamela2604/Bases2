@@ -72,23 +72,29 @@
             // txt_nocuenta
             // 
             this.txt_nocuenta.Location = new System.Drawing.Point(204, 71);
+            this.txt_nocuenta.MaxLength = 4;
             this.txt_nocuenta.Name = "txt_nocuenta";
             this.txt_nocuenta.Size = new System.Drawing.Size(165, 22);
             this.txt_nocuenta.TabIndex = 3;
+            this.txt_nocuenta.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox_KeyPress);
             // 
             // txt_nocheque
             // 
             this.txt_nocheque.Location = new System.Drawing.Point(204, 137);
+            this.txt_nocheque.MaxLength = 4;
             this.txt_nocheque.Name = "txt_nocheque";
             this.txt_nocheque.Size = new System.Drawing.Size(165, 22);
             this.txt_nocheque.TabIndex = 4;
+            this.txt_nocheque.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox_KeyPress);
             // 
             // txt_monto
             // 
             this.txt_monto.Location = new System.Drawing.Point(204, 206);
+            this.txt_monto.MaxLength = 7;
             this.txt_monto.Name = "txt_monto";
             this.txt_monto.Size = new System.Drawing.Size(165, 22);
             this.txt_monto.TabIndex = 5;
+            this.txt_monto.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox_KeyPress);
             // 
             // btn_verif
             // 

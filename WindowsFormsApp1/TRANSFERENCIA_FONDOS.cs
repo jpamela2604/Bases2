@@ -22,6 +22,16 @@ namespace WindowsFormsApp1
             InitializeComponent();
         }
 
+        private void textBox_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            // Verify that the pressed key isn't CTRL or any non-numeric digit
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+            {
+                e.Handled = true;
+            }
+
+        }
+
         private void TRANSFERENCIA_FONDOS_Load(object sender, EventArgs e)
         {
             ora = new OracleConnection(
@@ -66,6 +76,12 @@ namespace WindowsFormsApp1
 
         private void btn_transf_Click(object sender, EventArgs e)
         {
+            if (txt_monto.Text == "" || txt_cuenta_a.Text == "" || txt_cuenta_b.Text == "")
+            {
+                System.Windows.Forms.MessageBox.Show("Debe llenar todos los campos");
+                return;
+            }
+
             ora.Open();
             comando = new OracleCommand();
             comando.Connection = ora;
