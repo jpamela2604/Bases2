@@ -52,5 +52,12 @@ namespace WindowsFormsApp1
             this.Hide();
             a.Show();
         }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            Consultas c = new Consultas();
+            this.Hide();
+            c.Show();
+        }
     }
 }

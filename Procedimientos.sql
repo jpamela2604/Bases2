@@ -143,3 +143,18 @@ BEGIN
     OPEN registros FOR select t.correlativo_transaccion, t.fecha, t.saldo_inicial, t.saldo_final, t.valor, t.cuenta, tt.nombre from transaccion t, tipo_transaccion tt
                      where t.tipo_transaccion = tt.codigo_tipo_transac and t.cuenta = cuenta_id
 END;
+
+--------------------------------------------------------------------------------------------------------------------------------- CONSULTAS
+CREATE OR REPLACE PROCEDURE saldos_por_agencia(registros out sys_refcursor, id_agencia_ in INT)
+AS
+BEGIN
+    OPEN registros FOR select sum(t.saldo_inicial) AS "Saldo Inicial", sum(t.saldo_final) AS "Saldo Final", (sum(t.saldo_inicial)+ sum(t.saldo_final)) AS "Saldo Real" 
+                       from transaccion t where t.agencia = id_agencia_;
+END;
+
+CREATE OR REPLACE PROCEDURE clientes_no_agencia(registros out sys_refcursor, agencia_num in INT)
+AS
+BEGIN
+    OPEN registros FOR select unique(cl.nombre) from cuenta c, cliente_cuenta cc, cliente cl, transaccion t
+                        where (c.numero_cuenta = t.cuenta and cc.cuenta = c.numero_cuenta and cl.codigo_cliente = cc.cliente and t.cuenta = c.numero_cuenta and t.agencia != agencia_num);
+END;
