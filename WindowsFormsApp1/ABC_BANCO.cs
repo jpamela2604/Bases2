@@ -13,7 +13,7 @@ namespace WindowsFormsApp1
 {
     public partial class ABC_BANCO : Form
     {
-        OracleConnection ora = new OracleConnection("DATA SOURCE = ORCL; PASSWORD=admin; USER ID=system;");
+        OracleConnection ora = new OracleConnection("DATA SOURCE = ORCL; PASSWORD=bases2; USER ID=system;");
 
         public ABC_BANCO()
         {

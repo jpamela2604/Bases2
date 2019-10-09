@@ -14,7 +14,7 @@ namespace WindowsFormsApp1
     public partial class ABC_Agencia : Form
     {
         //Cadena de conexion
-        OracleConnection ora = new OracleConnection("DATA SOURCE = ORCL; PASSWORD=admin; USER ID=system;");
+        OracleConnection ora = new OracleConnection("DATA SOURCE = ORCL; PASSWORD=bases2; USER ID=system;");
 
         public ABC_Agencia()
         {
