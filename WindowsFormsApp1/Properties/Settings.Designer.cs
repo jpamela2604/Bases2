@@ -37,7 +37,7 @@ namespace WindowsFormsApp1.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("bases2")]
+        [global::System.Configuration.DefaultSettingValueAttribute("oracle")]
         public string contrasenia_db {
             get {
                 return ((string)(this["contrasenia_db"]));
@@ -47,15 +47,12 @@ namespace WindowsFormsApp1.Properties {
             }
         }
         
-        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("ORCL")]
+        [global::System.Configuration.DefaultSettingValueAttribute("//35.223.254.79/XE")]
         public string nombre_db {
             get {
                 return ((string)(this["nombre_db"]));
-            }
-            set {
-                this["nombre_db"] = value;
             }
         }
         
