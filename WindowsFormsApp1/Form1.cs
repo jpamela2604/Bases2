@@ -23,5 +23,20 @@ namespace WindowsFormsApp1
             MenuMantenimientoDBA menu = new MenuMantenimientoDBA();
             menu.Show();
         }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            if (Permisos.esDBA(Properties.Settings.Default.id_empledo.ToString()) == false)
+            {
+                btnMantenimientoDBA.Visible = false;
+            }
+        }
+
+        private void btnNuevasCuentas_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            MenuCuentasNuevas menu = new MenuCuentasNuevas();
+            menu.Show();
+        }
     }
 }

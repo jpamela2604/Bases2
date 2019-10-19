@@ -43,7 +43,6 @@
             this.Usuario.Name = "Usuario";
             this.Usuario.Size = new System.Drawing.Size(145, 22);
             this.Usuario.TabIndex = 0;
-            this.Usuario.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
             // 
             // Contrasena
             // 

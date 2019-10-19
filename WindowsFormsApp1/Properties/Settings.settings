@@ -6,15 +6,27 @@
       <Value Profile="(Default)">system</Value>
     </Setting>
     <Setting Name="contrasenia_db" Type="System.String" Scope="User">
-      <Value Profile="(Default)">bases2</Value>
+      <Value Profile="(Default)">oracle</Value>
     </Setting>
-    <Setting Name="nombre_db" Type="System.String" Scope="User">
-      <Value Profile="(Default)">ORCL</Value>
-    </Setting>
-    <Setting Name="empleado" Type="System.Int32" Scope="User">
-      <Value Profile="(Default)">0</Value>
+    <Setting Name="nombre_db" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">//35.223.254.79/XE</Value>
     </Setting>
     <Setting Name="rol" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">-1</Value>
+    </Setting>
+    <Setting Name="empleado1" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">1</Value>
+    </Setting>
+    <Setting Name="agencia" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">1</Value>
+    </Setting>
+    <Setting Name="equipo" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">1</Value>
+    </Setting>
+    <Setting Name="empleado" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">1</Value>
+    </Setting>
+    <Setting Name="id_empledo" Type="System.String" Scope="User">
       <Value Profile="(Default)">-1</Value>
     </Setting>
   </Settings>

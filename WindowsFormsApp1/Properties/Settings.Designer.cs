@@ -37,7 +37,7 @@ namespace WindowsFormsApp1.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("bases2")]
+        [global::System.Configuration.DefaultSettingValueAttribute("oracle")]
         public string contrasenia_db {
             get {
                 return ((string)(this["contrasenia_db"]));
@@ -47,27 +47,12 @@ namespace WindowsFormsApp1.Properties {
             }
         }
         
-        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("ORCL")]
+        [global::System.Configuration.DefaultSettingValueAttribute("//35.223.254.79/XE")]
         public string nombre_db {
             get {
                 return ((string)(this["nombre_db"]));
-            }
-            set {
-                this["nombre_db"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("0")]
-        public int empleado {
-            get {
-                return ((int)(this["empleado"]));
-            }
-            set {
-                this["empleado"] = value;
             }
         }
         
@@ -80,6 +65,66 @@ namespace WindowsFormsApp1.Properties {
             }
             set {
                 this["rol"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("1")]
+        public int empleado1 {
+            get {
+                return ((int)(this["empleado1"]));
+            }
+            set {
+                this["empleado1"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("1")]
+        public int agencia {
+            get {
+                return ((int)(this["agencia"]));
+            }
+            set {
+                this["agencia"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("1")]
+        public int equipo {
+            get {
+                return ((int)(this["equipo"]));
+            }
+            set {
+                this["equipo"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("1")]
+        public int empleado {
+            get {
+                return ((int)(this["empleado"]));
+            }
+            set {
+                this["empleado"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("-1")]
+        public string id_empledo {
+            get {
+                return ((string)(this["id_empledo"]));
+            }
+            set {
+                this["id_empledo"] = value;
             }
         }
     }

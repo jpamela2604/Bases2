@@ -14,14 +14,14 @@ namespace WindowsFormsApp1
     public partial class ABC_Agencia : Form
     {
         //Cadena de conexion
-        OracleConnection ora = new OracleConnection("DATA SOURCE = orcl; PASSWORD=pampam; USER ID=SYSTEM;");
+        OracleConnection ora = new OracleConnection("DATA SOURCE = ORCL; PASSWORD=bases2; USER ID=system;");
 
         public ABC_Agencia()
         {
             InitializeComponent();
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void button1_Click_1(object sender, EventArgs e)
         {
             ora.Open();
             OracleCommand comando = new OracleCommand("agencia_select", ora);
@@ -36,7 +36,7 @@ namespace WindowsFormsApp1
             ora.Close();
         }
 
-        private void button2_Click(object sender, EventArgs e)
+        private void button2_Click_1(object sender, EventArgs e)
         {
             try
             {
@@ -44,6 +44,7 @@ namespace WindowsFormsApp1
                 OracleCommand comando = new OracleCommand("agencia_insert", ora);
                 comando.CommandType = System.Data.CommandType.StoredProcedure;
                 comando.Parameters.Add("direccion", OracleType.VarChar).Value = textBox2.Text;
+                comando.Parameters.Add("descripcion", OracleType.VarChar).Value = richTextBox1.Text;
                 comando.ExecuteNonQuery();
             }
             catch (Exception)
@@ -54,7 +55,7 @@ namespace WindowsFormsApp1
             ora.Close();
         }
 
-        private void button3_Click(object sender, EventArgs e)
+        private void button3_Click_1(object sender, EventArgs e)
         {
             try
             {
@@ -63,6 +64,7 @@ namespace WindowsFormsApp1
                 comando.CommandType = System.Data.CommandType.StoredProcedure;
                 comando.Parameters.Add("pid_agencia", OracleType.VarChar).Value = textBox5.Text;
                 comando.Parameters.Add("pdireccion", OracleType.VarChar).Value = textBox3.Text;
+                comando.Parameters.Add("pdescripcion", OracleType.VarChar).Value = richTextBox2.Text;
                 comando.ExecuteNonQuery();
             }
             catch (Exception)
@@ -73,7 +75,7 @@ namespace WindowsFormsApp1
             ora.Close();
         }
 
-        private void button4_Click(object sender, EventArgs e)
+        private void button4_Click_1(object sender, EventArgs e)
         {
             try
             {
@@ -90,5 +92,20 @@ namespace WindowsFormsApp1
 
             ora.Close();
         }
+
+        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            MenuMantenimientoDBA m = new MenuMantenimientoDBA();
+            m.Show();
+
+        }
+
+
     }
 }

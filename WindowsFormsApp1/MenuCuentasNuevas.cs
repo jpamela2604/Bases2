@@ -28,5 +28,16 @@ namespace WindowsFormsApp1
         {
 
         }
+
+        private void MenuCuentasNuevas_Load(object sender, EventArgs e)
+        {
+
+            if (Permisos.esCajero(Properties.Settings.Default.id_empledo.ToString()) == true)
+            {
+                btnAperturarCuenta.Visible = false;
+                btnBloquearCuenta.Visible = false;
+
+            }
+        }
     }
 }

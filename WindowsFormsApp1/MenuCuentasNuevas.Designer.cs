@@ -105,6 +105,7 @@
             this.Controls.Add(this.btnDatosCliente);
             this.Name = "MenuCuentasNuevas";
             this.Text = "MenuCuentasNuevas";
+            this.Load += new System.EventHandler(this.MenuCuentasNuevas_Load);
             this.ResumeLayout(false);
 
         }
