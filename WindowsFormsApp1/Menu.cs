@@ -85,5 +85,10 @@ namespace WindowsFormsApp1
             ConsultaSaldos S = new ConsultaSaldos();
             S.Show();
         }
+
+        private void groupBox1_Enter(object sender, EventArgs e)
+        {
+
+        }
     }
 }
