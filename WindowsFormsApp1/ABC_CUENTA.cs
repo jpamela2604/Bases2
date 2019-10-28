@@ -50,6 +50,15 @@ namespace WindowsFormsApp1
                 return;
             }
 
+
+            double distance = 0;
+            if (!double.TryParse(box_saldo.Text, out distance))
+            {
+                System.Windows.Forms.MessageBox.Show("Debe ingresar un numero valido para el saldo");
+                return;
+            }
+            
+
             if (flow_cuentas.Controls.Count == 0)
             {
                 System.Windows.Forms.MessageBox.Show("Debe ingresar al menos una cuenta");
@@ -190,15 +199,18 @@ namespace WindowsFormsApp1
                 ora.Close();
             }
         }
+        
 
         private void textBox_KeyPress(object sender, KeyPressEventArgs e)
         {
             // Verify that the pressed key isn't CTRL or any non-numeric digit
-            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+            //
+            
+            if (!char.IsControl(e.KeyChar) && !char.IsPunctuation(e.KeyChar) && !char.IsDigit(e.KeyChar))
             {
                 e.Handled = true;
             }
-
+            
         }
 
         private void btn_bloquear_Click(object sender, EventArgs e)

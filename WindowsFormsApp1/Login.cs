@@ -50,13 +50,9 @@ namespace WindowsFormsApp1
                     connection.Open();
                     try
                     {
-                    OracleCommand comando = new OracleCommand("login", connection);
-                    //OracleTransaction transaction;
-                    //transaction = connection.BeginTransaction(IsolationLevel.ReadCommitted);
-                    
-
-
-
+                        OracleCommand comando = new OracleCommand("login", connection);
+                        //OracleTransaction transaction;
+                        //transaction = connection.BeginTransaction(IsolationLevel.ReadCommitted);
                         //ora.Open();
                         //comando = new OracleCommand("login", ora);
                         comando.CommandType = System.Data.CommandType.StoredProcedure;
