@@ -51,10 +51,16 @@
             this.bnt_generar = new System.Windows.Forms.Button();
             this.label7 = new System.Windows.Forms.Label();
             this.combo_makebank = new System.Windows.Forms.ComboBox();
+            this.upload_conciliados = new System.Windows.Forms.TabPage();
+            this.label8 = new System.Windows.Forms.Label();
+            this.label9 = new System.Windows.Forms.Label();
+            this.btn_conciliar = new System.Windows.Forms.Button();
+            this.btn_conciliado = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
             this.gen_comp.SuspendLayout();
+            this.upload_conciliados.SuspendLayout();
             this.SuspendLayout();
             // 
             // label1
@@ -129,6 +135,7 @@
             this.tabControl1.Controls.Add(this.tabPage1);
             this.tabControl1.Controls.Add(this.tabPage2);
             this.tabControl1.Controls.Add(this.gen_comp);
+            this.tabControl1.Controls.Add(this.upload_conciliados);
             this.tabControl1.Location = new System.Drawing.Point(43, 48);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
@@ -284,6 +291,58 @@
             this.combo_makebank.Size = new System.Drawing.Size(213, 24);
             this.combo_makebank.TabIndex = 2;
             // 
+            // upload_conciliados
+            // 
+            this.upload_conciliados.Controls.Add(this.btn_conciliado);
+            this.upload_conciliados.Controls.Add(this.btn_conciliar);
+            this.upload_conciliados.Controls.Add(this.label9);
+            this.upload_conciliados.Controls.Add(this.label8);
+            this.upload_conciliados.Location = new System.Drawing.Point(4, 25);
+            this.upload_conciliados.Name = "upload_conciliados";
+            this.upload_conciliados.Padding = new System.Windows.Forms.Padding(3);
+            this.upload_conciliados.Size = new System.Drawing.Size(399, 415);
+            this.upload_conciliados.TabIndex = 3;
+            this.upload_conciliados.Text = "Cargar Conciliados";
+            this.upload_conciliados.UseVisualStyleBackColor = true;
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(103, 38);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(203, 51);
+            this.label8.TabIndex = 0;
+            this.label8.Text = "Cargar archivo que generaron \r\notros grupos como resultado\r\nde la conciliacion";
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(103, 246);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(203, 51);
+            this.label9.TabIndex = 1;
+            this.label9.Text = "Cargar archivo que generaron \r\notros grupos para lleva a cabo\r\nla conciliacion po" +
+    "r mi banco";
+            // 
+            // btn_conciliar
+            // 
+            this.btn_conciliar.Location = new System.Drawing.Point(139, 115);
+            this.btn_conciliar.Name = "btn_conciliar";
+            this.btn_conciliar.Size = new System.Drawing.Size(128, 61);
+            this.btn_conciliar.TabIndex = 2;
+            this.btn_conciliar.Text = "Cargar archivo generados de la conciliacion";
+            this.btn_conciliar.UseVisualStyleBackColor = true;
+            // 
+            // btn_conciliado
+            // 
+            this.btn_conciliado.Location = new System.Drawing.Point(139, 326);
+            this.btn_conciliado.Name = "btn_conciliado";
+            this.btn_conciliado.Size = new System.Drawing.Size(128, 61);
+            this.btn_conciliado.TabIndex = 3;
+            this.btn_conciliado.Text = "Cargar archivo para conciliar";
+            this.btn_conciliado.UseVisualStyleBackColor = true;
+            this.btn_conciliado.Click += new System.EventHandler(this.btn_conciliado_Click);
+            // 
             // PAGO_OTRO_BANCO
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -300,6 +359,8 @@
             this.tabPage2.PerformLayout();
             this.gen_comp.ResumeLayout(false);
             this.gen_comp.PerformLayout();
+            this.upload_conciliados.ResumeLayout(false);
+            this.upload_conciliados.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -329,5 +390,10 @@
         private System.Windows.Forms.ComboBox combo_makebank;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Button bnt_generar;
+        private System.Windows.Forms.TabPage upload_conciliados;
+        private System.Windows.Forms.Button btn_conciliado;
+        private System.Windows.Forms.Button btn_conciliar;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.Label label8;
     }
 }

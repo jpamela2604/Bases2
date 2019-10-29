@@ -147,7 +147,7 @@ namespace WindowsFormsApp1
                         verif_cheq = true;
                         chequera = Convert.ToInt32(dr["codigo_chequera"]);
                     }
-                    dr.NextResult();
+                    //dr.NextResult();
                 }
 
                 if (!verif_cheq)
