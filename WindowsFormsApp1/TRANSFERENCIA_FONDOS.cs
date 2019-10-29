@@ -25,7 +25,7 @@ namespace WindowsFormsApp1
         private void textBox_KeyPress(object sender, KeyPressEventArgs e)
         {
             // Verify that the pressed key isn't CTRL or any non-numeric digit
-            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+            if (!char.IsControl(e.KeyChar) && !char.IsPunctuation(e.KeyChar) && !char.IsDigit(e.KeyChar))
             {
                 e.Handled = true;
             }
@@ -82,6 +82,13 @@ namespace WindowsFormsApp1
                 return;
             }
 
+            double distance = 0;
+            if (!double.TryParse(txt_monto.Text, out distance))
+            {
+                System.Windows.Forms.MessageBox.Show("Debe ingresar un numero valido para el monto");
+                return;
+            }
+
             ora.Open();
             comando = new OracleCommand();
             comando.Connection = ora;
@@ -94,8 +101,8 @@ namespace WindowsFormsApp1
                 comando.Parameters.Add("cuenta", OracleType.Number).Value = Convert.ToInt32(txt_cuenta_a.Text);
                 OracleDataReader dr = comando.ExecuteReader();
                 dr.Read();
-                Int32 saldo = Convert.ToInt32(dr["saldo_disponible"]);
-                Int32 monto = Convert.ToInt32(txt_monto.Text);
+                double saldo = Convert.ToDouble(dr["saldo_disponible"]);
+                double monto = Convert.ToDouble(txt_monto.Text);
                 if (saldo < monto)
                 {
                     System.Windows.Forms.MessageBox.Show("Saldo Insuficiente");
@@ -114,13 +121,13 @@ namespace WindowsFormsApp1
                 comando.Parameters.Clear();
                 comando.CommandText = "UPDATE cuenta SET saldo_disponible = saldo_disponible - :monto WHERE numero_cuenta = :cuenta";
                 comando.Parameters.Add("cuenta", OracleType.Number).Value = Convert.ToInt32(txt_cuenta_a.Text);
-                comando.Parameters.Add("monto", OracleType.Number).Value = Convert.ToInt32(txt_monto.Text);
+                comando.Parameters.Add("monto", OracleType.Number).Value = Convert.ToDouble(txt_monto.Text);
                 comando.ExecuteNonQuery();
 
                 comando.Parameters.Clear();
                 comando.CommandText = "UPDATE cuenta SET saldo_disponible = saldo_disponible + :monto WHERE numero_cuenta = :cuenta";
                 comando.Parameters.Add("cuenta", OracleType.Number).Value = Convert.ToInt32(txt_cuenta_b.Text);
-                comando.Parameters.Add("monto", OracleType.Number).Value = Convert.ToInt32(txt_monto.Text);
+                comando.Parameters.Add("monto", OracleType.Number).Value = Convert.ToDouble(txt_monto.Text);
                 comando.ExecuteNonQuery();
                 //registar transaccion
                 DateTime fecha = DateTime.Now;
@@ -128,7 +135,7 @@ namespace WindowsFormsApp1
                 comando.CommandText = "INSERT INTO TRANSACCION (FECHA,SALDO_INICIAL, SALDO_FINAL, VALOR,EMPLEADO, AGENCIA, CUENTA,TIPO_TRANSACCION, EQUIPO) " +
                     "VALUES(:fecha,'0','0',:valor,:empleado,:agencia,:cuenta,'0',:equipo)";
                 comando.Parameters.Add("fecha", OracleType.DateTime).Value = fecha;
-                comando.Parameters.Add("valor", OracleType.Number).Value = Convert.ToInt32(txt_monto.Text);
+                comando.Parameters.Add("valor", OracleType.Number).Value = Convert.ToDouble(txt_monto.Text);
                 comando.Parameters.Add("cuenta", OracleType.Number).Value = Convert.ToInt32(txt_cuenta_a.Text);
                 comando.Parameters.Add("empleado", OracleType.Number).Value = Properties.Settings.Default.empleado;
                 comando.Parameters.Add("agencia", OracleType.Number).Value = 1;
@@ -139,7 +146,7 @@ namespace WindowsFormsApp1
                 comando.CommandText = "INSERT INTO TRANSACCION (FECHA,SALDO_INICIAL, SALDO_FINAL, VALOR,EMPLEADO, AGENCIA, CUENTA,TIPO_TRANSACCION, EQUIPO) " +
                     "VALUES(:fecha,'0','0',:valor,:empleado,:agencia,:cuenta,'1',:equipo)";
                 comando.Parameters.Add("fecha", OracleType.DateTime).Value = fecha;
-                comando.Parameters.Add("valor", OracleType.Number).Value = Convert.ToInt32(txt_monto.Text);
+                comando.Parameters.Add("valor", OracleType.Number).Value = Convert.ToDouble(txt_monto.Text);
                 comando.Parameters.Add("cuenta", OracleType.Number).Value = Convert.ToInt32(txt_cuenta_b.Text);
                 comando.Parameters.Add("empleado", OracleType.Number).Value = Properties.Settings.Default.empleado;
                 comando.Parameters.Add("agencia", OracleType.Number).Value = 1;

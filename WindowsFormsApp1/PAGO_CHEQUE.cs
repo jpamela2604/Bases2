@@ -50,10 +50,16 @@ namespace WindowsFormsApp1
                 "PASSWORD=" + Properties.Settings.Default.contrasenia_db + ";" +
                 "USER ID=" + Properties.Settings.Default.usuario_db + ";"
                 );
+
+
+
+
+
         }
 
         private void btn_verif_Click(object sender, EventArgs e)
-        {
+        {          
+
             ora.Open();
             try
             {
@@ -141,7 +147,7 @@ namespace WindowsFormsApp1
                         verif_cheq = true;
                         chequera = Convert.ToInt32(dr["codigo_chequera"]);
                     }
-                    dr.NextResult();
+                    //dr.NextResult();
                 }
 
                 if (!verif_cheq)
@@ -156,8 +162,9 @@ namespace WindowsFormsApp1
                 dr = comando.ExecuteReader();
                 dr.Read();
                 Int32 saldo = Convert.ToInt32(dr["saldo_disponible"]);
-                Int32 monto = Convert.ToInt32(txt_monto.Text);
+                double monto = Convert.ToDouble(txt_monto.Text);
                 DateTime fecha = DateTime.Now;
+                //.ToString("MM/dd/yyyy hh:mm:ss tt")
                 if (saldo < monto)
                 {
                     System.Windows.Forms.MessageBox.Show("Saldo Insuficiente");
@@ -166,8 +173,8 @@ namespace WindowsFormsApp1
                     comando.CommandText = "INSERT INTO CHEQUE_LOCAL (codigo_cheque,fecha,monto,chequera,estado_cheque)" +
                         "VALUES(:codigo_cheque,:fecha,:monto,:chequera,:estado_cheque)";
                     comando.Parameters.Add("codigo_cheque", OracleType.Number).Value = cod_cheque;
-                    comando.Parameters.Add("fecha",OracleType.DateTime).Value = DateTime.Now.ToString("MM/dd/yyyy hh:mm:ss tt");
-                    comando.Parameters.Add("monto", OracleType.Number).Value = Convert.ToInt32(txt_monto.Text);
+                    comando.Parameters.Add("fecha",OracleType.DateTime).Value = fecha;
+                    comando.Parameters.Add("monto", OracleType.Number).Value = Convert.ToDouble(txt_monto.Text);
                     comando.Parameters.Add("chequera",OracleType.Number).Value = chequera;
                     comando.Parameters.Add("estado_cheque", OracleType.Number).Value = 5;
                     comando.ExecuteNonQuery();
@@ -179,7 +186,7 @@ namespace WindowsFormsApp1
                     comando.Parameters.Add("rechazo", OracleType.Number).Value = 1;
                     comando.Parameters.Add("razon",OracleType.VarChar).Value = "NO TIENE FONDOS";
                     comando.Parameters.Add("fecha", OracleType.DateTime).Value = fecha;
-                    comando.Parameters.Add("valor", OracleType.Number).Value = Convert.ToInt32(txt_monto.Text);
+                    comando.Parameters.Add("valor", OracleType.Number).Value = Convert.ToDouble(txt_monto.Text);
                     comando.Parameters.Add("cuenta", OracleType.Number).Value = Convert.ToInt32(txt_nocuenta.Text);
                     comando.Parameters.Add("cheque", OracleType.Number).Value = Convert.ToInt32(txt_nocheque.Text);
                     comando.Parameters.Add("empleado", OracleType.Number).Value = Properties.Settings.Default.empleado;
@@ -191,7 +198,7 @@ namespace WindowsFormsApp1
 
                 //SE DEBITA DE LA CUENTA
                 comando.CommandText = "UPDATE cuenta SET saldo_disponible = saldo_disponible - :monto WHERE numero_cuenta = :cuenta";
-                comando.Parameters.Add("monto", OracleType.Number).Value = Convert.ToInt32(txt_monto.Text);
+                comando.Parameters.Add("monto", OracleType.Number).Value = Convert.ToDouble(txt_monto.Text);
                 comando.ExecuteNonQuery();
 
                 //CHEQUE COBRADO
@@ -199,8 +206,8 @@ namespace WindowsFormsApp1
                 comando.CommandText = "INSERT INTO CHEQUE_LOCAL (codigo_cheque,fecha,monto,chequera,estado_cheque)" +
                         "VALUES(:codigo_cheque,:fecha,:monto,:chequera,:estado_cheque)";
                 comando.Parameters.Add("codigo_cheque", OracleType.Number).Value = cod_cheque;
-                comando.Parameters.Add("fecha", OracleType.DateTime).Value = fecha.ToString("MM/dd/yyyy hh:mm:ss tt");
-                comando.Parameters.Add("monto", OracleType.Number).Value = Convert.ToInt32(txt_monto.Text);
+                comando.Parameters.Add("fecha", OracleType.DateTime).Value = fecha;
+                comando.Parameters.Add("monto", OracleType.Number).Value = Convert.ToDouble(txt_monto.Text);
                 comando.Parameters.Add("chequera", OracleType.Number).Value = chequera;
                 comando.Parameters.Add("estado_cheque", OracleType.Number).Value = 4;
                 comando.ExecuteNonQuery();
@@ -210,7 +217,7 @@ namespace WindowsFormsApp1
                 comando.CommandText = "INSERT INTO TRANSACCION (FECHA,SALDO_INICIAL, SALDO_FINAL, VALOR,EMPLEADO, AGENCIA, CUENTA,TIPO_TRANSACCION, EQUIPO,CHEQUE_LOCAL) " +
                     "VALUES(:fecha,'0','0',:valor,:empleado,:agencia,:cuenta,'0',:equipo,:cheque)";
                 comando.Parameters.Add("fecha",OracleType.DateTime).Value = fecha;
-                comando.Parameters.Add("valor", OracleType.Number).Value = Convert.ToInt32(txt_monto.Text);
+                comando.Parameters.Add("valor", OracleType.Number).Value = Convert.ToDouble(txt_monto.Text);
                 comando.Parameters.Add("cuenta", OracleType.Number).Value = Convert.ToInt32(txt_nocuenta.Text);
                 comando.Parameters.Add("cheque",OracleType.Number).Value = Convert.ToInt32(txt_nocheque.Text);
                 comando.Parameters.Add("empleado", OracleType.Number).Value = Properties.Settings.Default.empleado;
@@ -228,6 +235,16 @@ namespace WindowsFormsApp1
                 trans.Commit();
                 ora.Close();
             }
+        }
+
+        private void checkBox1_CheckedChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void txt_monto_TextChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

@@ -90,5 +90,11 @@ namespace WindowsFormsApp1
         {
 
         }
+
+        private void pgobnk_Click(object sender, EventArgs e)
+        {
+            PAGO_OTRO_BANCO S = new PAGO_OTRO_BANCO();
+            S.Show();
+        }
     }
 }

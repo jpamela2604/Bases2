@@ -517,6 +517,11 @@ namespace WindowsFormsApp1
         {
 
         }
+
+        private void add_cliente_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 
 }

@@ -47,9 +47,10 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(254, 29);
+            this.label1.Location = new System.Drawing.Point(339, 36);
+            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(217, 25);
+            this.label1.Size = new System.Drawing.Size(267, 31);
             this.label1.TabIndex = 0;
             this.label1.Text = "Deposito Monetario";
             this.label1.Click += new System.EventHandler(this.label1_Click);
@@ -57,17 +58,19 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(75, 97);
+            this.label2.Location = new System.Drawing.Point(100, 119);
+            this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(102, 13);
+            this.label2.Size = new System.Drawing.Size(135, 17);
             this.label2.TabIndex = 1;
             this.label2.Text = "Número de Cuenta: ";
             // 
             // NumeroCuenta
             // 
-            this.NumeroCuenta.Location = new System.Drawing.Point(193, 97);
+            this.NumeroCuenta.Location = new System.Drawing.Point(257, 119);
+            this.NumeroCuenta.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.NumeroCuenta.Name = "NumeroCuenta";
-            this.NumeroCuenta.Size = new System.Drawing.Size(246, 20);
+            this.NumeroCuenta.Size = new System.Drawing.Size(327, 22);
             this.NumeroCuenta.TabIndex = 2;
             this.NumeroCuenta.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
             // 
@@ -75,34 +78,38 @@
             // 
             this.tbTipoCheque.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.tbTipoCheque.FormattingEnabled = true;
-            this.tbTipoCheque.Location = new System.Drawing.Point(207, 283);
+            this.tbTipoCheque.Location = new System.Drawing.Point(276, 348);
+            this.tbTipoCheque.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.tbTipoCheque.Name = "tbTipoCheque";
-            this.tbTipoCheque.Size = new System.Drawing.Size(121, 21);
+            this.tbTipoCheque.Size = new System.Drawing.Size(160, 24);
             this.tbTipoCheque.TabIndex = 3;
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(75, 129);
+            this.label3.Location = new System.Drawing.Point(100, 159);
+            this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(40, 13);
+            this.label3.Size = new System.Drawing.Size(51, 17);
             this.label3.TabIndex = 4;
             this.label3.Text = "Monto:";
             // 
             // Monto
             // 
-            this.Monto.Location = new System.Drawing.Point(193, 126);
+            this.Monto.Location = new System.Drawing.Point(257, 155);
+            this.Monto.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Monto.Name = "Monto";
-            this.Monto.Size = new System.Drawing.Size(100, 20);
+            this.Monto.Size = new System.Drawing.Size(132, 22);
             this.Monto.TabIndex = 5;
             this.Monto.TextChanged += new System.EventHandler(this.textBox2_TextChanged);
             // 
             // checkEfectivo
             // 
             this.checkEfectivo.AutoSize = true;
-            this.checkEfectivo.Location = new System.Drawing.Point(92, 225);
+            this.checkEfectivo.Location = new System.Drawing.Point(123, 277);
+            this.checkEfectivo.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.checkEfectivo.Name = "checkEfectivo";
-            this.checkEfectivo.Size = new System.Drawing.Size(65, 17);
+            this.checkEfectivo.Size = new System.Drawing.Size(80, 21);
             this.checkEfectivo.TabIndex = 6;
             this.checkEfectivo.Text = "Efectivo";
             this.checkEfectivo.UseVisualStyleBackColor = true;
@@ -111,9 +118,10 @@
             // checkCheque
             // 
             this.checkCheque.AutoSize = true;
-            this.checkCheque.Location = new System.Drawing.Point(92, 248);
+            this.checkCheque.Location = new System.Drawing.Point(123, 305);
+            this.checkCheque.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.checkCheque.Name = "checkCheque";
-            this.checkCheque.Size = new System.Drawing.Size(63, 17);
+            this.checkCheque.Size = new System.Drawing.Size(79, 21);
             this.checkCheque.TabIndex = 7;
             this.checkCheque.Text = "Cheque";
             this.checkCheque.UseVisualStyleBackColor = true;
@@ -121,9 +129,10 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(259, 182);
+            this.button1.Location = new System.Drawing.Point(345, 224);
+            this.button1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(122, 40);
+            this.button1.Size = new System.Drawing.Size(163, 49);
             this.button1.TabIndex = 8;
             this.button1.Text = "Hacer Deposito";
             this.button1.UseVisualStyleBackColor = true;
@@ -132,34 +141,38 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(89, 283);
+            this.label4.Location = new System.Drawing.Point(119, 348);
+            this.label4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(71, 13);
+            this.label4.Size = new System.Drawing.Size(93, 17);
             this.label4.TabIndex = 9;
             this.label4.Text = "Tipo Cheque:";
             // 
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(92, 319);
+            this.label5.Location = new System.Drawing.Point(123, 393);
+            this.label5.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(102, 13);
+            this.label5.Size = new System.Drawing.Size(135, 17);
             this.label5.TabIndex = 10;
             this.label5.Text = "Número de Cheque:";
             // 
             // NumeroCheque
             // 
-            this.NumeroCheque.Location = new System.Drawing.Point(207, 319);
+            this.NumeroCheque.Location = new System.Drawing.Point(276, 393);
+            this.NumeroCheque.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.NumeroCheque.Name = "NumeroCheque";
-            this.NumeroCheque.Size = new System.Drawing.Size(246, 20);
+            this.NumeroCheque.Size = new System.Drawing.Size(327, 22);
             this.NumeroCheque.TabIndex = 11;
             this.NumeroCheque.TextChanged += new System.EventHandler(this.tbNoCheque_TextChanged);
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(522, 12);
+            this.button2.Location = new System.Drawing.Point(696, 15);
+            this.button2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(82, 23);
+            this.button2.Size = new System.Drawing.Size(109, 28);
             this.button2.TabIndex = 12;
             this.button2.Text = "Cerrar Sesión";
             this.button2.UseVisualStyleBackColor = true;
@@ -167,9 +180,9 @@
             // 
             // DepositoMonetario
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(633, 336);
+            this.ClientSize = new System.Drawing.Size(886, 446);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.NumeroCheque);
             this.Controls.Add(this.label5);
@@ -183,6 +196,7 @@
             this.Controls.Add(this.NumeroCuenta);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
+            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Name = "DepositoMonetario";
             this.Text = "DepositoMonetario";
             this.ResumeLayout(false);

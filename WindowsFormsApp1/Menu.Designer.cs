@@ -43,6 +43,7 @@
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.tabPage4 = new System.Windows.Forms.TabPage();
             this.tabPage5 = new System.Windows.Forms.TabPage();
+            this.pgobnk = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
@@ -78,7 +79,7 @@
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(261, 121);
             this.button3.TabIndex = 2;
-            this.button3.Text = "PAGO CHEQUE";
+            this.button3.Text = "PAGO CHEQUE LOCAL";
             this.button3.UseVisualStyleBackColor = true;
             this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
@@ -178,6 +179,7 @@
             // tabPage2
             // 
             this.tabPage2.AutoScroll = true;
+            this.tabPage2.Controls.Add(this.pgobnk);
             this.tabPage2.Controls.Add(this.button9);
             this.tabPage2.Controls.Add(this.button4);
             this.tabPage2.Controls.Add(this.button3);
@@ -223,6 +225,17 @@
             this.tabPage5.Text = "DBA";
             this.tabPage5.UseVisualStyleBackColor = true;
             // 
+            // pgobnk
+            // 
+            this.pgobnk.Location = new System.Drawing.Point(355, 323);
+            this.pgobnk.Margin = new System.Windows.Forms.Padding(4);
+            this.pgobnk.Name = "pgobnk";
+            this.pgobnk.Size = new System.Drawing.Size(261, 121);
+            this.pgobnk.TabIndex = 9;
+            this.pgobnk.Text = "PAGO CHEQUE\r\nOTRO BANCO";
+            this.pgobnk.UseVisualStyleBackColor = true;
+            this.pgobnk.Click += new System.EventHandler(this.pgobnk_Click);
+            // 
             // Menu
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -258,5 +271,6 @@
         private System.Windows.Forms.TabPage tabPage3;
         private System.Windows.Forms.TabPage tabPage4;
         private System.Windows.Forms.TabPage tabPage5;
+        private System.Windows.Forms.Button pgobnk;
     }
 }
