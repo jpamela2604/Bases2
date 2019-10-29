@@ -94,6 +94,7 @@
             this.txt_monto.Name = "txt_monto";
             this.txt_monto.Size = new System.Drawing.Size(165, 22);
             this.txt_monto.TabIndex = 5;
+            this.txt_monto.TextChanged += new System.EventHandler(this.txt_monto_TextChanged);
             this.txt_monto.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox_KeyPress);
             // 
             // btn_verif
@@ -108,7 +109,7 @@
             // 
             // btn_cobrar
             // 
-            this.btn_cobrar.Location = new System.Drawing.Point(92, 302);
+            this.btn_cobrar.Location = new System.Drawing.Point(92, 299);
             this.btn_cobrar.Name = "btn_cobrar";
             this.btn_cobrar.Size = new System.Drawing.Size(137, 57);
             this.btn_cobrar.TabIndex = 7;
@@ -138,7 +139,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(890, 463);
+            this.ClientSize = new System.Drawing.Size(890, 389);
             this.Controls.Add(this.pic_firma);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.btn_cobrar);
