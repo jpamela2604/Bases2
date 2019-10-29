@@ -439,6 +439,7 @@ namespace WindowsFormsApp1
                 finally
                 {
                     ora.Close();
+                    System.Windows.Forms.MessageBox.Show("Se ha terminado de cargar el archivo "+ selectedFileName);
                 }                
             }
         }
