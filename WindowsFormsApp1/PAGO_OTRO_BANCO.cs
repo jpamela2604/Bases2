@@ -273,18 +273,7 @@ namespace WindowsFormsApp1
                         Int32 saldo = Convert.ToInt32(dr["saldo_disponible"]);
                         double monto = Convert.ToDouble(linea[4]);
                         if (saldo < monto)
-                        {                           
-                            //RECHAZAR CHEQUE
-                            comando.Parameters.Clear();
-                            comando.CommandText = "INSERT INTO CHEQUE_LOCAL (codigo_cheque,fecha,monto,chequera,estado_cheque)" +
-                                "VALUES(:codigo_cheque,:fecha,:monto,:chequera,:estado_cheque)";
-                            comando.Parameters.Add("codigo_cheque", OracleType.Number).Value = linea[3];
-                            comando.Parameters.Add("fecha", OracleType.DateTime).Value = fecha;
-                            comando.Parameters.Add("monto", OracleType.Number).Value = linea[4];
-                            comando.Parameters.Add("chequera", OracleType.Number).Value = chequera;
-                            comando.Parameters.Add("estado_cheque", OracleType.Number).Value = 5;
-                            comando.ExecuteNonQuery();
-
+                        {
                             throw new Exception("NO TIENE FONDOS");
                         }
 
@@ -323,7 +312,20 @@ namespace WindowsFormsApp1
                     }
                     catch (Exception ex)
                     {
-                        trans.Rollback();                       
+                        trans.Rollback();
+
+                        if (ex.Message == "NO TIENE FONDOS") {
+                            //RECHAZAR CHEQUE
+                            comando.Parameters.Clear();
+                            comando.CommandText = "INSERT INTO CHEQUE_LOCAL (codigo_cheque,fecha,monto,chequera,estado_cheque)" +
+                                "VALUES(:codigo_cheque,:fecha,:monto,:chequera,:estado_cheque)";
+                            comando.Parameters.Add("codigo_cheque", OracleType.Number).Value = linea[3];
+                            comando.Parameters.Add("fecha", OracleType.DateTime).Value = fecha;
+                            comando.Parameters.Add("monto", OracleType.Number).Value = linea[4];
+                            comando.Parameters.Add("chequera", OracleType.Number).Value = chequera;
+                            comando.Parameters.Add("estado_cheque", OracleType.Number).Value = 5;
+                            comando.ExecuteNonQuery();
+                        }
 
                         //REGISTRAR LA TRANSACCION
                         comando.Parameters.Clear();
