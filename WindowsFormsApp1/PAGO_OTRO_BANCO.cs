@@ -297,11 +297,10 @@ namespace WindowsFormsApp1
 
                         //REGISTRAR LA TRANSACCION
                         comando.Parameters.Clear();
-                        comando.CommandText = "INSERT INTO TRANSACCION (FECHA,SALDO_INICIAL, SALDO_FINAL, VALOR,EMPLEADO, AGENCIA, CUENTA,TIPO_TRANSACCION, EQUIPO,CHEQUE_LOCAL) " +
-                            "VALUES(:fecha,'0','0',:valor,:empleado,:agencia,:cuenta,'0',:equipo,:cheque)";
+                        comando.CommandText = "INSERT INTO TRANSACCION (FECHA,SALDO_INICIAL, SALDO_FINAL, VALOR,EMPLEADO, AGENCIA, TIPO_TRANSACCION, EQUIPO,CHEQUE_LOCAL) " +
+                            "VALUES(:fecha,'0','0',:valor,:empleado,:agencia,'0',:equipo,:cheque)";
                         comando.Parameters.Add("fecha", OracleType.DateTime).Value = fecha;
                         comando.Parameters.Add("valor", OracleType.Number).Value = Convert.ToDouble(linea[4]);
-                        comando.Parameters.Add("cuenta", OracleType.Number).Value = Convert.ToInt32(linea[2]);
                         comando.Parameters.Add("cheque", OracleType.Number).Value = Convert.ToInt32(linea[3]);
                         comando.Parameters.Add("empleado", OracleType.Number).Value = Properties.Settings.Default.empleado;
                         comando.Parameters.Add("agencia", OracleType.Number).Value = 1;
@@ -329,13 +328,12 @@ namespace WindowsFormsApp1
 
                         //REGISTRAR LA TRANSACCION
                         comando.Parameters.Clear();
-                        comando.CommandText = "INSERT INTO TRANSACCION (NO_RECHAZO, RAZON_RECHAZO,FECHA,SALDO_INICIAL, SALDO_FINAL, VALOR,EMPLEADO, AGENCIA, CUENTA,TIPO_TRANSACCION, EQUIPO,CHEQUE_LOCAL) " +
-                            "VALUES(:norechazo,:razonrechazo,:fecha,'0','0',:valor,:empleado,:agencia,:cuenta,'0',:equipo,:cheque)";
+                        comando.CommandText = "INSERT INTO TRANSACCION (NO_RECHAZO, RAZON_RECHAZO,FECHA,SALDO_INICIAL, SALDO_FINAL, VALOR,EMPLEADO, AGENCIA, TIPO_TRANSACCION, EQUIPO,CHEQUE_LOCAL) " +
+                            "VALUES(:norechazo,:razonrechazo,:fecha,'0','0',:valor,:empleado,:agencia,'0',:equipo,:cheque)";
                         comando.Parameters.Add("norechazo", OracleType.Number).Value = 1;
                         comando.Parameters.Add("razonrechazo", OracleType.Number).Value = ex.Message;
                         comando.Parameters.Add("fecha", OracleType.DateTime).Value = fecha;
                         comando.Parameters.Add("valor", OracleType.Number).Value = Convert.ToDouble(linea[4]);
-                        comando.Parameters.Add("cuenta", OracleType.Number).Value = Convert.ToInt32(linea[2]);
                         comando.Parameters.Add("cheque", OracleType.Number).Value = Convert.ToInt32(linea[3]);
                         comando.Parameters.Add("empleado", OracleType.Number).Value = Properties.Settings.Default.empleado;
                         comando.Parameters.Add("agencia", OracleType.Number).Value = 1;
@@ -356,6 +354,92 @@ namespace WindowsFormsApp1
                 string path = Directory.GetCurrentDirectory() + "\\IN_2_00.txt";
                 File.WriteAllText(path, RESPUESTA);
                 System.Windows.Forms.MessageBox.Show("El archivo \n" + path + "\n se ha creado correctamente");
+            }
+        }
+
+        private void btn_conciliar_Click(object sender, EventArgs e)
+        {
+            //CARGAR ARCHIVO
+            OpenFileDialog openFileDialog1 = new OpenFileDialog();
+            if (openFileDialog1.ShowDialog() == DialogResult.OK)
+            {
+                ora.Open();
+                comando = new OracleCommand();
+                comando.Connection = ora;
+                OracleTransaction trans = ora.BeginTransaction();
+                comando.Transaction = trans;
+                string selectedFileName = openFileDialog1.FileName;
+                try
+                {
+                    //POR CADA REGISTRO HACER LO SIGUIENTE
+                    var lines = File.ReadLines(selectedFileName);
+                    foreach (var line in lines)
+                    {
+                        try
+                        {
+                            DateTime fecha = DateTime.Now;
+                            //BANCO|REFERENCIA|CUENTA|NO_CHEQUE|MONTO|RESPONSE
+                            String[] linea = line.Split('|');
+                            if (linea[5].ToLower() == "ok")
+                            {
+                                //GRABAR TRANSACCION
+                                comando.Parameters.Clear();
+                                comando.CommandText = "INSERT INTO TRANSACCION (FECHA,SALDO_INICIAL, SALDO_FINAL, VALOR,EMPLEADO, AGENCIA, TIPO_TRANSACCION, EQUIPO,CHEQUE_EXTERNO) " +
+                                    "VALUES(:fecha,'0','0',:valor,:empleado,:agencia,'3',:equipo,:cheque)";
+                                comando.Parameters.Add("fecha", OracleType.DateTime).Value = fecha;
+                                comando.Parameters.Add("valor", OracleType.Number).Value = linea[4];
+                                comando.Parameters.Add("cheque", OracleType.Number).Value = linea[3];
+                                comando.Parameters.Add("empleado", OracleType.Number).Value = Properties.Settings.Default.empleado;
+                                comando.Parameters.Add("agencia", OracleType.Number).Value = 1;
+                                comando.Parameters.Add("equipo", OracleType.Number).Value = 0;
+                                comando.ExecuteNonQuery();
+
+                                //  REGISTRAR CAMBIO EN CHEQUE_EXTRANGERO
+                                comando.Parameters.Clear();
+                                comando.CommandText = "UPDATE cheque_externo SET estado_cheque = 6 WHERE codigo_cheque = :cheque";
+                                comando.Parameters.Add("cheque", OracleType.Number).Value = linea[3];
+                                comando.ExecuteNonQuery();
+                                trans.Commit();
+                            }
+                            else
+                            {
+                                //GRABAR TRANSACCION
+                                comando.Parameters.Clear();
+                                comando.CommandText = "INSERT INTO TRANSACCION (NO_RECHAZO, RAZON_RECHAZO, FECHA,SALDO_INICIAL, SALDO_FINAL, VALOR,EMPLEADO, AGENCIA, TIPO_TRANSACCION, EQUIPO,CHEQUE_EXTERNO) " +
+                                    "VALUES(:rechazo, :razon,:fecha,'0','0',:valor,:empleado,:agencia,'3',:equipo,:cheque)";
+                                comando.Parameters.Add("rechazo", OracleType.Number).Value = 1;
+                                comando.Parameters.Add("razon", OracleType.VarChar).Value = "NO TIENE FONDOS";
+                                comando.Parameters.Add("fecha", OracleType.DateTime).Value = fecha;
+                                comando.Parameters.Add("valor", OracleType.Number).Value = linea[4];
+                                comando.Parameters.Add("cheque", OracleType.Number).Value = linea[3];
+                                comando.Parameters.Add("empleado", OracleType.Number).Value = Properties.Settings.Default.empleado;
+                                comando.Parameters.Add("agencia", OracleType.Number).Value = 1;
+                                comando.Parameters.Add("equipo", OracleType.Number).Value = 0;
+                                comando.ExecuteNonQuery();
+
+                                //  REGISTRAR CAMBIO EN CHEQUE_EXTRANGERO
+                                comando.Parameters.Clear();
+                                comando.CommandText = "UPDATE cheque_externo SET estado_cheque = 5 WHERE codigo_cheque = :cheque";
+                                comando.Parameters.Add("cheque", OracleType.Number).Value = linea[3];
+                                comando.ExecuteNonQuery();
+                                trans.Commit();
+                            }
+                        }
+                        catch (Exception ex)
+                        {
+                            trans.Rollback();
+                            System.Windows.Forms.MessageBox.Show(ex.Message);
+                        }
+                    }
+                }
+                catch(Exception ex)
+                {
+                    System.Windows.Forms.MessageBox.Show(ex.Message);
+                }
+                finally
+                {
+                    ora.Close();
+                }                
             }
         }
     }

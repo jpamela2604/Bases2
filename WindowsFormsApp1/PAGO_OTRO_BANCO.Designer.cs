@@ -332,6 +332,7 @@
             this.btn_conciliar.TabIndex = 2;
             this.btn_conciliar.Text = "Cargar archivo generados de la conciliacion";
             this.btn_conciliar.UseVisualStyleBackColor = true;
+            this.btn_conciliar.Click += new System.EventHandler(this.btn_conciliar_Click);
             // 
             // btn_conciliado
             // 
