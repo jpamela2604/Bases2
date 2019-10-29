@@ -442,5 +442,28 @@ namespace WindowsFormsApp1
                 }                
             }
         }
+
+        private void btn_cobrar_Click(object sender, EventArgs e)
+        {
+            //cambiar el estado del cheque a cobrado
+            ora.Open();
+            comando = new OracleCommand();
+            comando.Connection = ora;
+            try
+            {
+                comando.Parameters.Clear();
+                comando.CommandText = "UPDATE cheque_externo SET estado_cheque = 4WHERE codigo_cheque = :cheque";
+                comando.Parameters.Add("cheque", OracleType.Number).Value = txt_nocheque.Text;
+                comando.ExecuteNonQuery();
+                System.Windows.Forms.MessageBox.Show("Operacion realizada con exito!");
+            }catch(Exception ex)
+            {
+                System.Windows.Forms.MessageBox.Show(ex.Message);
+            }
+            finally
+            {
+                ora.Close();
+            }
+        }
     }
 }

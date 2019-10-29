@@ -195,6 +195,7 @@
             this.btn_cobrar.TabIndex = 5;
             this.btn_cobrar.Text = "Cobrar";
             this.btn_cobrar.UseVisualStyleBackColor = true;
+            this.btn_cobrar.Click += new System.EventHandler(this.btn_cobrar_Click);
             // 
             // lbl_nombre
             // 
