@@ -234,6 +234,7 @@
             this.pgobnk.TabIndex = 9;
             this.pgobnk.Text = "PAGO CHEQUE\r\nOTRO BANCO";
             this.pgobnk.UseVisualStyleBackColor = true;
+            this.pgobnk.Click += new System.EventHandler(this.pgobnk_Click);
             // 
             // Menu
             // 

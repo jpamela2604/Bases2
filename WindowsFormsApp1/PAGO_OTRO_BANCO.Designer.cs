@@ -36,7 +36,6 @@
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.textBox3 = new System.Windows.Forms.TextBox();
-            this.textBox4 = new System.Windows.Forms.TextBox();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.tabPage2 = new System.Windows.Forms.TabPage();
@@ -46,6 +45,7 @@
             this.label6 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.cobrar = new System.Windows.Forms.Button();
+            this.combo_bank = new System.Windows.Forms.ComboBox();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
@@ -117,13 +117,6 @@
             this.textBox3.Size = new System.Drawing.Size(151, 22);
             this.textBox3.TabIndex = 7;
             // 
-            // textBox4
-            // 
-            this.textBox4.Location = new System.Drawing.Point(173, 201);
-            this.textBox4.Name = "textBox4";
-            this.textBox4.Size = new System.Drawing.Size(151, 22);
-            this.textBox4.TabIndex = 8;
-            // 
             // tabControl1
             // 
             this.tabControl1.Controls.Add(this.tabPage1);
@@ -136,8 +129,8 @@
             // 
             // tabPage1
             // 
+            this.tabPage1.Controls.Add(this.combo_bank);
             this.tabPage1.Controls.Add(this.label1);
-            this.tabPage1.Controls.Add(this.textBox4);
             this.tabPage1.Controls.Add(this.label2);
             this.tabPage1.Controls.Add(this.textBox3);
             this.tabPage1.Controls.Add(this.label3);
@@ -222,6 +215,14 @@
             this.cobrar.Text = "Cobrar";
             this.cobrar.UseVisualStyleBackColor = true;
             // 
+            // combo_bank
+            // 
+            this.combo_bank.FormattingEnabled = true;
+            this.combo_bank.Location = new System.Drawing.Point(173, 201);
+            this.combo_bank.Name = "combo_bank";
+            this.combo_bank.Size = new System.Drawing.Size(151, 24);
+            this.combo_bank.TabIndex = 8;
+            // 
             // PAGO_OTRO_BANCO
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -230,6 +231,7 @@
             this.Controls.Add(this.tabControl1);
             this.Name = "PAGO_OTRO_BANCO";
             this.Text = "PAGO_OTRO_BANCO";
+            this.Load += new System.EventHandler(this.PAGO_OTRO_BANCO_Load);
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             this.tabPage1.PerformLayout();
@@ -249,7 +251,6 @@
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.TextBox textBox2;
         private System.Windows.Forms.TextBox textBox3;
-        private System.Windows.Forms.TextBox textBox4;
         private System.Windows.Forms.TabControl tabControl1;
         private System.Windows.Forms.TabPage tabPage1;
         private System.Windows.Forms.TabPage tabPage2;
@@ -259,5 +260,6 @@
         private System.Windows.Forms.Button buscar;
         private System.Windows.Forms.TextBox box_nocheque;
         private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.ComboBox combo_bank;
     }
 }
