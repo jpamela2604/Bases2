@@ -164,6 +164,7 @@ namespace WindowsFormsApp1
                 Int32 saldo = Convert.ToInt32(dr["saldo_disponible"]);
                 double monto = Convert.ToDouble(txt_monto.Text);
                 DateTime fecha = DateTime.Now;
+                //.ToString("MM/dd/yyyy hh:mm:ss tt")
                 if (saldo < monto)
                 {
                     System.Windows.Forms.MessageBox.Show("Saldo Insuficiente");
@@ -172,7 +173,7 @@ namespace WindowsFormsApp1
                     comando.CommandText = "INSERT INTO CHEQUE_LOCAL (codigo_cheque,fecha,monto,chequera,estado_cheque)" +
                         "VALUES(:codigo_cheque,:fecha,:monto,:chequera,:estado_cheque)";
                     comando.Parameters.Add("codigo_cheque", OracleType.Number).Value = cod_cheque;
-                    comando.Parameters.Add("fecha",OracleType.DateTime).Value = DateTime.Now.ToString("MM/dd/yyyy hh:mm:ss tt");
+                    comando.Parameters.Add("fecha",OracleType.DateTime).Value = fecha;
                     comando.Parameters.Add("monto", OracleType.Number).Value = Convert.ToDouble(txt_monto.Text);
                     comando.Parameters.Add("chequera",OracleType.Number).Value = chequera;
                     comando.Parameters.Add("estado_cheque", OracleType.Number).Value = 5;
@@ -205,7 +206,7 @@ namespace WindowsFormsApp1
                 comando.CommandText = "INSERT INTO CHEQUE_LOCAL (codigo_cheque,fecha,monto,chequera,estado_cheque)" +
                         "VALUES(:codigo_cheque,:fecha,:monto,:chequera,:estado_cheque)";
                 comando.Parameters.Add("codigo_cheque", OracleType.Number).Value = cod_cheque;
-                comando.Parameters.Add("fecha", OracleType.DateTime).Value = fecha.ToString("MM/dd/yyyy hh:mm:ss tt");
+                comando.Parameters.Add("fecha", OracleType.DateTime).Value = fecha;
                 comando.Parameters.Add("monto", OracleType.Number).Value = Convert.ToDouble(txt_monto.Text);
                 comando.Parameters.Add("chequera", OracleType.Number).Value = chequera;
                 comando.Parameters.Add("estado_cheque", OracleType.Number).Value = 4;
