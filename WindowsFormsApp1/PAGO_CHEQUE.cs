@@ -27,6 +27,22 @@ namespace WindowsFormsApp1
 
         }
 
+        private void decimal_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsPunctuation(e.KeyChar) && !char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void entero_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+            {
+                e.Handled = true;
+            }
+        }
+
         private void textBox_KeyPress(object sender, KeyPressEventArgs e)
         {
             // Verify that the pressed key isn't CTRL or any non-numeric digit
@@ -49,12 +65,7 @@ namespace WindowsFormsApp1
                 "DATA SOURCE = " + Properties.Settings.Default.nombre_db + ";" +
                 "PASSWORD=" + Properties.Settings.Default.contrasenia_db + ";" +
                 "USER ID=" + Properties.Settings.Default.usuario_db + ";"
-                );
-
-
-
-
-
+                );            
         }
 
         private void btn_verif_Click(object sender, EventArgs e)
@@ -93,6 +104,8 @@ namespace WindowsFormsApp1
                 System.Windows.Forms.MessageBox.Show("Debe llenar todos los campos");
                 return;
             }
+
+            if(!double.TryParse(txt_monto.Text, out double distance)) { System.Windows.Forms.MessageBox.Show("El monto no es un numero valido"); return; }
 
             ora.Open();
             comando = new OracleCommand();

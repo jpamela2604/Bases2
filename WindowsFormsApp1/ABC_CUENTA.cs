@@ -22,6 +22,22 @@ namespace WindowsFormsApp1
             InitializeComponent();
         }
 
+        private void decimal_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsPunctuation(e.KeyChar) && !char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void entero_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+            {
+                e.Handled = true;
+            }
+        }
+
         private void toolTip1_Popup(object sender, PopupEventArgs e)
         {
 
@@ -44,26 +60,9 @@ namespace WindowsFormsApp1
 
         private void btn_crear_Click(object sender, EventArgs e)
         {
-            if (box_saldo.Text == "")
-            {
-                System.Windows.Forms.MessageBox.Show("Debe ingresar una cantidad inicial valida");
-                return;
-            }
-
-
-            double distance = 0;
-            if (!double.TryParse(box_saldo.Text, out distance))
-            {
-                System.Windows.Forms.MessageBox.Show("Debe ingresar un numero valido para el saldo");
-                return;
-            }
-            
-
-            if (flow_cuentas.Controls.Count == 0)
-            {
-                System.Windows.Forms.MessageBox.Show("Debe ingresar al menos una cuenta");
-                return;
-            }
+            if (box_saldo.Text == ""){System.Windows.Forms.MessageBox.Show("Debe ingresar una cantidad inicial valida"); return;}
+            if (!double.TryParse(box_saldo.Text, out double distance)) { System.Windows.Forms.MessageBox.Show("Debe ingresar un numero valido para el saldo");return;}           
+            if (flow_cuentas.Controls.Count == 0) { System.Windows.Forms.MessageBox.Show("Debe ingresar al menos una cuenta"); return; }
 
             var saldo_disponible = box_saldo.Text;
             var estado_cuenta = 1;

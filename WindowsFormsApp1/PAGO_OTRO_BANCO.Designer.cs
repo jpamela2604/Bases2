@@ -40,22 +40,22 @@
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.combo_bank = new System.Windows.Forms.ComboBox();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.lbl_descripcion = new System.Windows.Forms.Label();
             this.btn_cobrar = new System.Windows.Forms.Button();
             this.lbl_nombre = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.btn_buscar = new System.Windows.Forms.Button();
             this.txt_nocheque = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
-            this.lbl_descripcion = new System.Windows.Forms.Label();
             this.gen_comp = new System.Windows.Forms.TabPage();
-            this.bnt_generar = new System.Windows.Forms.Button();
-            this.label7 = new System.Windows.Forms.Label();
             this.combo_makebank = new System.Windows.Forms.ComboBox();
+            this.label7 = new System.Windows.Forms.Label();
+            this.bnt_generar = new System.Windows.Forms.Button();
             this.upload_conciliados = new System.Windows.Forms.TabPage();
-            this.label8 = new System.Windows.Forms.Label();
-            this.label9 = new System.Windows.Forms.Label();
-            this.btn_conciliar = new System.Windows.Forms.Button();
             this.btn_conciliado = new System.Windows.Forms.Button();
+            this.btn_conciliar = new System.Windows.Forms.Button();
+            this.label9 = new System.Windows.Forms.Label();
+            this.label8 = new System.Windows.Forms.Label();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
@@ -115,6 +115,7 @@
             this.txtnocuenta.Name = "txtnocuenta";
             this.txtnocuenta.Size = new System.Drawing.Size(151, 22);
             this.txtnocuenta.TabIndex = 5;
+            this.txtnocuenta.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.entero_KeyPress);
             // 
             // txtmonto
             // 
@@ -122,6 +123,7 @@
             this.txtmonto.Name = "txtmonto";
             this.txtmonto.Size = new System.Drawing.Size(151, 22);
             this.txtmonto.TabIndex = 6;
+            this.txtmonto.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.decimal_KeyPress);
             // 
             // txtnocheque
             // 
@@ -129,6 +131,7 @@
             this.txtnocheque.Name = "txtnocheque";
             this.txtnocheque.Size = new System.Drawing.Size(151, 22);
             this.txtnocheque.TabIndex = 7;
+            this.txtnocheque.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.entero_KeyPress);
             // 
             // tabControl1
             // 
@@ -186,6 +189,15 @@
             this.tabPage2.Text = "Consulta cheque";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
+            // lbl_descripcion
+            // 
+            this.lbl_descripcion.AutoSize = true;
+            this.lbl_descripcion.Location = new System.Drawing.Point(149, 247);
+            this.lbl_descripcion.Name = "lbl_descripcion";
+            this.lbl_descripcion.Size = new System.Drawing.Size(46, 17);
+            this.lbl_descripcion.TabIndex = 6;
+            this.lbl_descripcion.Text = "label7";
+            // 
             // btn_cobrar
             // 
             this.btn_cobrar.Enabled = false;
@@ -231,6 +243,7 @@
             this.txt_nocheque.Name = "txt_nocheque";
             this.txt_nocheque.Size = new System.Drawing.Size(149, 22);
             this.txt_nocheque.TabIndex = 1;
+            this.txt_nocheque.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.entero_KeyPress);
             // 
             // label5
             // 
@@ -240,15 +253,6 @@
             this.label5.Size = new System.Drawing.Size(83, 17);
             this.label5.TabIndex = 0;
             this.label5.Text = "No. Cheque";
-            // 
-            // lbl_descripcion
-            // 
-            this.lbl_descripcion.AutoSize = true;
-            this.lbl_descripcion.Location = new System.Drawing.Point(149, 247);
-            this.lbl_descripcion.Name = "lbl_descripcion";
-            this.lbl_descripcion.Size = new System.Drawing.Size(46, 17);
-            this.lbl_descripcion.TabIndex = 6;
-            this.lbl_descripcion.Text = "label7";
             // 
             // gen_comp
             // 
@@ -263,15 +267,13 @@
             this.gen_comp.Text = "Genera Archivo";
             this.gen_comp.UseVisualStyleBackColor = true;
             // 
-            // bnt_generar
+            // combo_makebank
             // 
-            this.bnt_generar.Location = new System.Drawing.Point(128, 255);
-            this.bnt_generar.Name = "bnt_generar";
-            this.bnt_generar.Size = new System.Drawing.Size(147, 91);
-            this.bnt_generar.TabIndex = 0;
-            this.bnt_generar.Text = "Generar Archivo";
-            this.bnt_generar.UseVisualStyleBackColor = true;
-            this.bnt_generar.Click += new System.EventHandler(this.bnt_generar_Click);
+            this.combo_makebank.FormattingEnabled = true;
+            this.combo_makebank.Location = new System.Drawing.Point(90, 154);
+            this.combo_makebank.Name = "combo_makebank";
+            this.combo_makebank.Size = new System.Drawing.Size(213, 24);
+            this.combo_makebank.TabIndex = 2;
             // 
             // label7
             // 
@@ -284,13 +286,15 @@
     "con el formato y sera \r\ndevuelto en un archivo txt para poderse compartir \r\ncon " +
     "los otros grupos";
             // 
-            // combo_makebank
+            // bnt_generar
             // 
-            this.combo_makebank.FormattingEnabled = true;
-            this.combo_makebank.Location = new System.Drawing.Point(90, 154);
-            this.combo_makebank.Name = "combo_makebank";
-            this.combo_makebank.Size = new System.Drawing.Size(213, 24);
-            this.combo_makebank.TabIndex = 2;
+            this.bnt_generar.Location = new System.Drawing.Point(128, 255);
+            this.bnt_generar.Name = "bnt_generar";
+            this.bnt_generar.Size = new System.Drawing.Size(147, 91);
+            this.bnt_generar.TabIndex = 0;
+            this.bnt_generar.Text = "Generar Archivo";
+            this.bnt_generar.UseVisualStyleBackColor = true;
+            this.bnt_generar.Click += new System.EventHandler(this.bnt_generar_Click);
             // 
             // upload_conciliados
             // 
@@ -306,24 +310,15 @@
             this.upload_conciliados.Text = "Cargar Conciliados";
             this.upload_conciliados.UseVisualStyleBackColor = true;
             // 
-            // label8
+            // btn_conciliado
             // 
-            this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(103, 38);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(203, 51);
-            this.label8.TabIndex = 0;
-            this.label8.Text = "Cargar archivo que generaron \r\notros grupos como resultado\r\nde la conciliacion";
-            // 
-            // label9
-            // 
-            this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(103, 246);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(203, 51);
-            this.label9.TabIndex = 1;
-            this.label9.Text = "Cargar archivo que generaron \r\notros grupos para lleva a cabo\r\nla conciliacion po" +
-    "r mi banco";
+            this.btn_conciliado.Location = new System.Drawing.Point(139, 326);
+            this.btn_conciliado.Name = "btn_conciliado";
+            this.btn_conciliado.Size = new System.Drawing.Size(128, 61);
+            this.btn_conciliado.TabIndex = 3;
+            this.btn_conciliado.Text = "Cargar archivo para conciliar";
+            this.btn_conciliado.UseVisualStyleBackColor = true;
+            this.btn_conciliado.Click += new System.EventHandler(this.btn_conciliado_Click);
             // 
             // btn_conciliar
             // 
@@ -335,15 +330,24 @@
             this.btn_conciliar.UseVisualStyleBackColor = true;
             this.btn_conciliar.Click += new System.EventHandler(this.btn_conciliar_Click);
             // 
-            // btn_conciliado
+            // label9
             // 
-            this.btn_conciliado.Location = new System.Drawing.Point(139, 326);
-            this.btn_conciliado.Name = "btn_conciliado";
-            this.btn_conciliado.Size = new System.Drawing.Size(128, 61);
-            this.btn_conciliado.TabIndex = 3;
-            this.btn_conciliado.Text = "Cargar archivo para conciliar";
-            this.btn_conciliado.UseVisualStyleBackColor = true;
-            this.btn_conciliado.Click += new System.EventHandler(this.btn_conciliado_Click);
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(103, 246);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(203, 51);
+            this.label9.TabIndex = 1;
+            this.label9.Text = "Cargar archivo que generaron \r\notros grupos para lleva a cabo\r\nla conciliacion po" +
+    "r mi banco";
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(103, 38);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(203, 51);
+            this.label8.TabIndex = 0;
+            this.label8.Text = "Cargar archivo que generaron \r\notros grupos como resultado\r\nde la conciliacion";
             // 
             // PAGO_OTRO_BANCO
             // 
