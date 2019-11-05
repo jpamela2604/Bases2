@@ -76,7 +76,7 @@
             this.txt_nocuenta.Name = "txt_nocuenta";
             this.txt_nocuenta.Size = new System.Drawing.Size(165, 22);
             this.txt_nocuenta.TabIndex = 3;
-            this.txt_nocuenta.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox_KeyPress);
+            this.txt_nocuenta.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.entero_KeyPress);
             // 
             // txt_nocheque
             // 
@@ -85,7 +85,7 @@
             this.txt_nocheque.Name = "txt_nocheque";
             this.txt_nocheque.Size = new System.Drawing.Size(165, 22);
             this.txt_nocheque.TabIndex = 4;
-            this.txt_nocheque.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox_KeyPress);
+            this.txt_nocheque.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.entero_KeyPress);
             // 
             // txt_monto
             // 
@@ -95,7 +95,7 @@
             this.txt_monto.Size = new System.Drawing.Size(165, 22);
             this.txt_monto.TabIndex = 5;
             this.txt_monto.TextChanged += new System.EventHandler(this.txt_monto_TextChanged);
-            this.txt_monto.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox_KeyPress);
+            this.txt_monto.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.decimal_KeyPress);
             // 
             // btn_verif
             // 

@@ -108,7 +108,7 @@
             this.box_saldo.Name = "box_saldo";
             this.box_saldo.Size = new System.Drawing.Size(175, 22);
             this.box_saldo.TabIndex = 8;
-            this.box_saldo.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox_KeyPress);
+            this.box_saldo.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.decimal_KeyPress);
             // 
             // btn_crear
             // 
@@ -258,7 +258,7 @@
             this.box_find_cuenta.Name = "box_find_cuenta";
             this.box_find_cuenta.Size = new System.Drawing.Size(153, 22);
             this.box_find_cuenta.TabIndex = 12;
-            this.box_find_cuenta.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox_KeyPress);
+            this.box_find_cuenta.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.entero_KeyPress);
             // 
             // data_cuenta
             // 
@@ -388,7 +388,7 @@
             this.box_codigo_fcuentas.Name = "box_codigo_fcuentas";
             this.box_codigo_fcuentas.Size = new System.Drawing.Size(132, 22);
             this.box_codigo_fcuentas.TabIndex = 2;
-            this.box_codigo_fcuentas.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox_KeyPress);
+            this.box_codigo_fcuentas.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.entero_KeyPress);
             // 
             // btn_fcuentas
             // 

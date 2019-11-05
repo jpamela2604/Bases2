@@ -25,6 +25,24 @@ namespace WindowsFormsApp1
             InitializeComponent();
         }
 
+        private void decimal_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            // Verify that the pressed key isn't CTRL or any non-numeric digit
+            if ( !char.IsPunctuation(e.KeyChar) && !char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void entero_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            // Verify that the pressed key isn't CTRL or any non-numeric digit
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+            {
+                e.Handled = true;
+            }
+        }
+
         private void PAGO_OTRO_BANCO_Load(object sender, EventArgs e)
         {
             ora = new OracleConnection(
@@ -86,6 +104,11 @@ namespace WindowsFormsApp1
 
         private void button1_Click(object sender, EventArgs e)
         {
+            if (txtnocuenta.Text == "") {System.Windows.Forms.MessageBox.Show("debe ingresar un numero de cuenta"); return;}
+            if (txtmonto.Text == "") { System.Windows.Forms.MessageBox.Show("debe ingresar un monto"); return; }
+            if (txtnocheque.Text == "") {System.Windows.Forms.MessageBox.Show("debe ingresar un numero de cheque"); return; }
+            if (!double.TryParse(txtmonto.Text, out double test)){ System.Windows.Forms.MessageBox.Show("el monto no corresponde a un numero valido"); return; }
+
             ora.Open();
             comando = new OracleCommand();
             comando.Connection = ora;
