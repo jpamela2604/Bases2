@@ -96,5 +96,11 @@ namespace WindowsFormsApp1
             PAGO_OTRO_BANCO S = new PAGO_OTRO_BANCO();
             S.Show();
         }
+
+        private void button10_Click(object sender, EventArgs e)
+        {
+            Consultas consultas = new Consultas();
+            consultas.Show();
+        }
     }
 }
