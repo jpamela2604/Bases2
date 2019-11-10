@@ -14,7 +14,7 @@ namespace WindowsFormsApp1
     public partial class ABC_Agencia : Form
     {
         //Cadena de conexion
-        OracleConnection ora = new OracleConnection("DATA SOURCE = ORCL; PASSWORD=bases2; USER ID=system;");
+        
 
         public ABC_Agencia()
         {
@@ -23,8 +23,8 @@ namespace WindowsFormsApp1
 
         private void button1_Click_1(object sender, EventArgs e)
         {
-            ora.Open();
-            OracleCommand comando = new OracleCommand("agencia_select", ora);
+            Conexion.abrirConexion();
+            OracleCommand comando = new OracleCommand("agencia_select", Conexion.ora);
             comando.CommandType = System.Data.CommandType.StoredProcedure;
             comando.Parameters.Add("registros", OracleType.Cursor).Direction = ParameterDirection.Output;
 
@@ -33,15 +33,15 @@ namespace WindowsFormsApp1
             DataTable tabla = new DataTable();
             adaptador.Fill(tabla);
             dataGridView1.DataSource = tabla;
-            ora.Close();
+            Conexion.cerrarConexion();
         }
 
         private void button2_Click_1(object sender, EventArgs e)
         {
             try
             {
-                ora.Open();
-                OracleCommand comando = new OracleCommand("agencia_insert", ora);
+                Conexion.abrirConexion();
+                OracleCommand comando = new OracleCommand("agencia_insert", Conexion.ora);
                 comando.CommandType = System.Data.CommandType.StoredProcedure;
                 comando.Parameters.Add("direccion", OracleType.VarChar).Value = textBox2.Text;
                 comando.Parameters.Add("descripcion", OracleType.VarChar).Value = richTextBox1.Text;
@@ -52,15 +52,15 @@ namespace WindowsFormsApp1
                 MessageBox.Show("Algo fallo");
             }
 
-            ora.Close();
+            Conexion.cerrarConexion();
         }
 
         private void button3_Click_1(object sender, EventArgs e)
         {
             try
             {
-                ora.Open();
-                OracleCommand comando = new OracleCommand("agencia_update", ora);
+                Conexion.abrirConexion();
+                OracleCommand comando = new OracleCommand("agencia_update", Conexion.ora);
                 comando.CommandType = System.Data.CommandType.StoredProcedure;
                 comando.Parameters.Add("pid_agencia", OracleType.VarChar).Value = textBox5.Text;
                 comando.Parameters.Add("pdireccion", OracleType.VarChar).Value = textBox3.Text;
@@ -72,15 +72,15 @@ namespace WindowsFormsApp1
                 MessageBox.Show("Algo fallo");
             }
 
-            ora.Close();
+            Conexion.cerrarConexion();
         }
 
         private void button4_Click_1(object sender, EventArgs e)
         {
             try
             {
-                ora.Open();
-                OracleCommand comando = new OracleCommand("agencia_delete", ora);
+                Conexion.abrirConexion();
+                OracleCommand comando = new OracleCommand("agencia_delete", Conexion.ora);
                 comando.CommandType = System.Data.CommandType.StoredProcedure;
                 comando.Parameters.Add("pid_agencia", OracleType.VarChar).Value = textBox6.Text;
                 comando.ExecuteNonQuery();
@@ -90,7 +90,7 @@ namespace WindowsFormsApp1
                 MessageBox.Show("Algo fallo");
             }
 
-            ora.Close();
+            Conexion.cerrarConexion();
         }
 
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)

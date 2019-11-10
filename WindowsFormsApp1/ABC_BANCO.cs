@@ -13,8 +13,6 @@ namespace WindowsFormsApp1
 {
     public partial class ABC_BANCO : Form
     {
-        OracleConnection ora = new OracleConnection("DATA SOURCE = ORCL; PASSWORD=bases2; USER ID=system;");
-
         public ABC_BANCO()
         {
             InitializeComponent();
@@ -41,8 +39,8 @@ namespace WindowsFormsApp1
         private void button1_Click_1(object sender, EventArgs e)
         {
 
-            ora.Open();
-            OracleCommand comando = new OracleCommand("banco_select", ora);
+            Conexion.abrirConexion();
+            OracleCommand comando = new OracleCommand("banco_select", Conexion.ora);
             comando.CommandType = System.Data.CommandType.StoredProcedure;
             comando.Parameters.Add("registros", OracleType.Cursor).Direction = ParameterDirection.Output;
 
@@ -51,7 +49,7 @@ namespace WindowsFormsApp1
             DataTable tabla = new DataTable();
             adaptador.Fill(tabla);
             dataGridView1.DataSource = tabla;
-            ora.Close();
+            Conexion.cerrarConexion();
         }
 
         private void button5_Click(object sender, EventArgs e)
@@ -65,8 +63,8 @@ namespace WindowsFormsApp1
         {
             try
             {
-                ora.Open();
-                OracleCommand comando = new OracleCommand("banco_insert", ora);
+                Conexion.abrirConexion();
+                OracleCommand comando = new OracleCommand("banco_insert", Conexion.ora);
                 comando.CommandType = System.Data.CommandType.StoredProcedure;
                 comando.Parameters.Add("nombre", OracleType.VarChar).Value = textBox1.Text;
                 comando.ExecuteNonQuery();
@@ -76,15 +74,15 @@ namespace WindowsFormsApp1
                 MessageBox.Show("Algo fallo");
             }
 
-            ora.Close();
+            Conexion.cerrarConexion();
         }
 
         private void button3_Click_1(object sender, EventArgs e)
         {
             try
             {
-                ora.Open();
-                OracleCommand comando = new OracleCommand("banco_update", ora);
+                Conexion.abrirConexion();
+                OracleCommand comando = new OracleCommand("banco_update", Conexion.ora);
                 comando.CommandType = System.Data.CommandType.StoredProcedure;
                 comando.Parameters.Add("pid_banco", OracleType.VarChar).Value = textBox5.Text;
                 comando.Parameters.Add("pnombre", OracleType.VarChar).Value = textBox4.Text;
@@ -95,15 +93,15 @@ namespace WindowsFormsApp1
                 MessageBox.Show("Algo fallo");
             }
 
-            ora.Close();
+            Conexion.cerrarConexion();
         }
 
         private void button4_Click_1(object sender, EventArgs e)
         {
             try
             {
-                ora.Open();
-                OracleCommand comando = new OracleCommand("banco_delete", ora);
+                Conexion.abrirConexion();
+                OracleCommand comando = new OracleCommand("banco_delete", Conexion.ora);
                 comando.CommandType = System.Data.CommandType.StoredProcedure;
                 comando.Parameters.Add("pid_banco", OracleType.VarChar).Value = textBox6.Text;
                 comando.ExecuteNonQuery();
@@ -113,7 +111,7 @@ namespace WindowsFormsApp1
                 MessageBox.Show("Algo fallo");
             }
 
-            ora.Close();
+            Conexion.cerrarConexion();
         }
     }
 }

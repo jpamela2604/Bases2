@@ -102,5 +102,11 @@ namespace WindowsFormsApp1
             Consultas consultas = new Consultas();
             consultas.Show();
         }
+
+        private void btn_menu_dba_Click(object sender, EventArgs e)
+        {
+            Form1 f = new Form1();
+            f.Show();
+        }
     }
 }
