@@ -25,7 +25,7 @@ namespace WindowsFormsApp1
             InitializeComponent();
         }
 
-        bool ComprobarCuenta()
+        bool ComprobarCuenta(String ctaa)
         {
             using (OracleConnection connection = new OracleConnection(conexion))
             {
@@ -38,7 +38,7 @@ namespace WindowsFormsApp1
                 {
 
                     comando.CommandType = System.Data.CommandType.StoredProcedure;
-                    comando.Parameters.Add("cuent", OracleType.Number).Value = Convert.ToInt32(NumeroCuenta.Text);
+                    comando.Parameters.Add("cuent", OracleType.Number).Value = Convert.ToInt32(ctaa);
                     comando.Parameters.Add("resultado", OracleType.Number);
                     comando.Parameters["resultado"].Direction = ParameterDirection.ReturnValue;
                     comando.ExecuteNonQuery();
@@ -107,11 +107,65 @@ namespace WindowsFormsApp1
         private void button1_Click(object sender, EventArgs e)
         {
             //crear nota
-        }
+            if (!(validarNoCuenta(NumeroCuenta) && validarMonto(Monto) && ComprobarCuenta(NumeroCuenta.Text)))
+            {
+                return;
+            }
+            using (OracleConnection connection = new OracleConnection(conexion))
+            {
+                connection.Open();
+                OracleCommand comando = new OracleCommand("notadebito", connection);
+                OracleTransaction transaction;
+                transaction = connection.BeginTransaction(escritura);
+                comando.Transaction = transaction;
+                OracleConnection ora = new OracleConnection(conexion);
+                try
+                {
+                    comando.CommandType = System.Data.CommandType.StoredProcedure;
+                    comando.Parameters.Add("fech", OracleType.Timestamp).Value = DateTime.Now;
+                    comando.Parameters.Add("valor", OracleType.Number).Value = Convert.ToDecimal(Monto.Text);
+                    comando.Parameters.Add("empleado", OracleType.Number).Value = Properties.Settings.Default.empleado;
+                    comando.Parameters.Add("agencia", OracleType.Number).Value = Properties.Settings.Default.agencia;
+                    comando.Parameters.Add("cuen", OracleType.Number).Value = Convert.ToInt32(NumeroCuenta.Text);
+                    comando.Parameters.Add("equipo", OracleType.Number).Value = Properties.Settings.Default.agencia;
+                    comando.ExecuteNonQuery();
+                    transaction.Commit();
+                    MessageBox.Show("Se creo nota de debito correctamente");
+                    NumeroCuenta.Text = "";
+                    Monto.Text = "";
 
+                }
+                catch (Exception)
+                {
+                    transaction.Rollback();
+                    MessageBox.Show("Algo fallo");
+                }
+
+            }
+
+        }
+   
         private void consultar_Click(object sender, EventArgs e)
         {
             //consultar nota
+            if (!(validarNoCuenta(textBox2) && ComprobarCuenta(textBox2.Text)))
+            {
+                return;
+            }
+
+
+        }
+
+        private void NotaDebito_Load(object sender, EventArgs e)
+        {
+            tabControl1.TabPages.Remove(tabPage2);
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            Login principal = new Login();
+            principal.Show();
         }
     }
 }

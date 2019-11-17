@@ -38,9 +38,9 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.consultar = new System.Windows.Forms.Button();
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
-            this.consultar = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
@@ -64,6 +64,7 @@
             this.button3.TabIndex = 14;
             this.button3.Text = "Cerrar Sesión";
             this.button3.UseVisualStyleBackColor = true;
+            this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
             // tabControl1
             // 
@@ -147,6 +148,16 @@
             this.tabPage2.Text = "Consultar Nota";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
+            // consultar
+            // 
+            this.consultar.Location = new System.Drawing.Point(380, 15);
+            this.consultar.Name = "consultar";
+            this.consultar.Size = new System.Drawing.Size(122, 40);
+            this.consultar.TabIndex = 20;
+            this.consultar.Text = "Consultar";
+            this.consultar.UseVisualStyleBackColor = true;
+            this.consultar.Click += new System.EventHandler(this.consultar_Click);
+            // 
             // textBox2
             // 
             this.textBox2.Location = new System.Drawing.Point(128, 26);
@@ -164,16 +175,6 @@
             this.label4.TabIndex = 18;
             this.label4.Text = "Número de Cuenta: ";
             // 
-            // consultar
-            // 
-            this.consultar.Location = new System.Drawing.Point(380, 15);
-            this.consultar.Name = "consultar";
-            this.consultar.Size = new System.Drawing.Size(122, 40);
-            this.consultar.TabIndex = 20;
-            this.consultar.Text = "Consultar";
-            this.consultar.UseVisualStyleBackColor = true;
-            this.consultar.Click += new System.EventHandler(this.consultar_Click);
-            // 
             // NotaDebito
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -184,6 +185,7 @@
             this.Controls.Add(this.label1);
             this.Name = "NotaDebito";
             this.Text = "NotaDebito";
+            this.Load += new System.EventHandler(this.NotaDebito_Load);
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             this.tabPage1.PerformLayout();

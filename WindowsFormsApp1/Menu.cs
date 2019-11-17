@@ -96,5 +96,29 @@ namespace WindowsFormsApp1
             PAGO_OTRO_BANCO S = new PAGO_OTRO_BANCO();
             S.Show();
         }
+
+        private void button10_Click(object sender, EventArgs e)
+        {
+            NotaCredito S = new NotaCredito();
+            S.Show();
+        }
+
+        private void button11_Click(object sender, EventArgs e)
+        {
+            NotaDebito S = new NotaDebito();
+            S.Show();
+        }
+
+        private void button12_Click(object sender, EventArgs e)
+        {
+            ConsultaSaldos S = new ConsultaSaldos();
+            S.Show();
+        }
+
+        private void button13_Click(object sender, EventArgs e)
+        {
+            Declarar_Anomalia_Cheque S = new Declarar_Anomalia_Cheque();
+            S.Show();
+        }
     }
 }
