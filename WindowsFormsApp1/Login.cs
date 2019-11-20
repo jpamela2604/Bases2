@@ -69,7 +69,7 @@ namespace WindowsFormsApp1
                         Properties.Settings.Default.id_empledo = Usuario.Text;
                         MessageBox.Show("Bienvenido");
                         this.Hide();
-                        Form menu = new Menu();
+                        Form menu = new MenuPrincipal();
                         Usuario.Text = "";
                         Contrasena.Text = "";
                         menu.ShowDialog();

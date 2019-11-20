@@ -164,6 +164,12 @@
     <Compile Include="MenuMantenimientoDBA.Designer.cs">
       <DependentUpon>MenuMantenimientoDBA.cs</DependentUpon>
     </Compile>
+    <Compile Include="MenuPrincipal.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MenuPrincipal.designer.cs">
+      <DependentUpon>MenuPrincipal.cs</DependentUpon>
+    </Compile>
     <Compile Include="NotaCredito.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -257,6 +263,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="MenuMantenimientoDBA.resx">
       <DependentUpon>MenuMantenimientoDBA.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MenuPrincipal.resx">
+      <DependentUpon>MenuPrincipal.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="NotaCredito.resx">
       <DependentUpon>NotaCredito.cs</DependentUpon>
