@@ -489,5 +489,10 @@ namespace WindowsFormsApp1
                 ora.Close();
             }
         }
+
+        private void label10_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

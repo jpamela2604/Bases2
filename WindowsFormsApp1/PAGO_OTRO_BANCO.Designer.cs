@@ -56,11 +56,18 @@
             this.btn_conciliar = new System.Windows.Forms.Button();
             this.label9 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
+            this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.label10 = new System.Windows.Forms.Label();
+            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.button1 = new System.Windows.Forms.Button();
+            this.button2 = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
             this.gen_comp.SuspendLayout();
             this.upload_conciliados.SuspendLayout();
+            this.tabPage3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
@@ -139,6 +146,7 @@
             this.tabControl1.Controls.Add(this.tabPage2);
             this.tabControl1.Controls.Add(this.gen_comp);
             this.tabControl1.Controls.Add(this.upload_conciliados);
+            this.tabControl1.Controls.Add(this.tabPage3);
             this.tabControl1.Location = new System.Drawing.Point(43, 48);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
@@ -349,6 +357,57 @@
             this.label8.TabIndex = 0;
             this.label8.Text = "Cargar archivo que generaron \r\notros grupos como resultado\r\nde la conciliacion";
             // 
+            // tabPage3
+            // 
+            this.tabPage3.Controls.Add(this.button2);
+            this.tabPage3.Controls.Add(this.button1);
+            this.tabPage3.Controls.Add(this.dataGridView1);
+            this.tabPage3.Controls.Add(this.label10);
+            this.tabPage3.Location = new System.Drawing.Point(4, 25);
+            this.tabPage3.Name = "tabPage3";
+            this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage3.Size = new System.Drawing.Size(399, 415);
+            this.tabPage3.TabIndex = 4;
+            this.tabPage3.Text = "Liberacion Reserva";
+            this.tabPage3.UseVisualStyleBackColor = true;
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(51, 29);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(82, 17);
+            this.label10.TabIndex = 0;
+            this.label10.Text = "En Reserva";
+            this.label10.Click += new System.EventHandler(this.label10_Click);
+            // 
+            // dataGridView1
+            // 
+            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView1.Location = new System.Drawing.Point(33, 62);
+            this.dataGridView1.Name = "dataGridView1";
+            this.dataGridView1.RowTemplate.Height = 24;
+            this.dataGridView1.Size = new System.Drawing.Size(337, 209);
+            this.dataGridView1.TabIndex = 1;
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(264, 23);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(88, 23);
+            this.button1.TabIndex = 2;
+            this.button1.Text = "Consultar";
+            this.button1.UseVisualStyleBackColor = true;
+            // 
+            // button2
+            // 
+            this.button2.Location = new System.Drawing.Point(131, 291);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(161, 72);
+            this.button2.TabIndex = 3;
+            this.button2.Text = "Liberar";
+            this.button2.UseVisualStyleBackColor = true;
+            // 
             // PAGO_OTRO_BANCO
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -367,6 +426,9 @@
             this.gen_comp.PerformLayout();
             this.upload_conciliados.ResumeLayout(false);
             this.upload_conciliados.PerformLayout();
+            this.tabPage3.ResumeLayout(false);
+            this.tabPage3.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -401,5 +463,10 @@
         private System.Windows.Forms.Button btn_conciliar;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.TabPage tabPage3;
+        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.Label label10;
     }
 }
