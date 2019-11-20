@@ -202,7 +202,7 @@ namespace WindowsFormsApp1
                 comando = new OracleCommand();
                 comando.Connection = ora;
                 comando.CommandText = "SELECT codigo_cheque,fecha,monto,banco,cuenta FROM cheque_externo WHERE estado_cheque = 7 and banco = :banco";
-                comando.Parameters.Add("banco", OracleType.Number).Value = ((KeyValuePair<string, string>)combo_bank.SelectedItem).Key;
+                comando.Parameters.Add("banco", OracleType.Number).Value = ((KeyValuePair<string, string>)combo_makebank.SelectedItem).Key;
                 OracleDataReader dr = comando.ExecuteReader();                
                 String createText = "";
                 while (dr.Read())
@@ -212,7 +212,7 @@ namespace WindowsFormsApp1
                     createText += "\n";
                 }
                 //out_banco_correlativo.txt
-                string path = Directory.GetCurrentDirectory() + "\\OUT_"+ ((KeyValuePair<string, string>)combo_bank.SelectedItem).Key+"_00.txt";
+                string path = Directory.GetCurrentDirectory() + "\\OUT_"+ ((KeyValuePair<string, string>)combo_makebank.SelectedItem).Key+"_00.txt";
                 File.WriteAllText(path, createText);
                 System.Windows.Forms.MessageBox.Show("El archivo \n"+path+"\n se ha creado correctamente");
 
@@ -476,7 +476,7 @@ namespace WindowsFormsApp1
             try
             {
                 comando.Parameters.Clear();
-                comando.CommandText = "UPDATE cheque_externo SET estado_cheque = 4WHERE codigo_cheque = :cheque";
+                comando.CommandText = "UPDATE cheque_externo SET estado_cheque = 4 WHERE codigo_cheque = :cheque";
                 comando.Parameters.Add("cheque", OracleType.Number).Value = txt_nocheque.Text;
                 comando.ExecuteNonQuery();
                 System.Windows.Forms.MessageBox.Show("Operacion realizada con exito!");
@@ -493,6 +493,66 @@ namespace WindowsFormsApp1
         private void label10_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void combo_makebank_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            //obtener el indice del banco
+            var numero_banco = ((KeyValuePair<string, string>)combo_makebank.SelectedItem).Key;
+            ora.Open();
+            comando = new OracleCommand();
+            comando.Connection = ora;
+            try
+            {
+                comando.Parameters.Clear();
+                comando.CommandText = "select * from cheque_externo, transaccion " +
+                    " where " +
+                    " cheque_externo.estado_cheque = 7 and " +
+                    " transaccion.tipo_transaccion = 2 and " +
+                    " transaccion.cheque_externo = cheque_externo.codigo_cheque and " +
+                    " cheque_externo.banco = :banco";
+                comando.Parameters.Add("banco", OracleType.Number).Value = numero_banco;
+                var reader = comando.ExecuteReader();
+                DataTable t = new DataTable();
+                t.Load(reader);
+                dataGridView2.DataSource = t;
+            }
+            catch (Exception ex)
+            {
+                System.Windows.Forms.MessageBox.Show(ex.Message);
+            }
+            finally
+            {
+                ora.Close();
+            }
+        }
+
+        private void button1_Click_1(object sender, EventArgs e)
+        {
+            ora.Open();
+            comando = new OracleCommand();
+            comando.Connection = ora;
+            try
+            {
+                comando.Parameters.Clear();
+                comando.CommandText = "select * from cheque_externo, transaccion " +
+                    " where " +
+                    " cheque_externo.estado_cheque = 6 and " +
+                    " transaccion.tipo_transaccion = 2 and " +
+                    " transaccion.cheque_externo = cheque_externo.codigo_cheque";
+                var reader = comando.ExecuteReader();
+                DataTable t = new DataTable();
+                t.Load(reader);
+                dataGridView1.DataSource = t;
+            }
+            catch (Exception ex)
+            {
+                System.Windows.Forms.MessageBox.Show(ex.Message);
+            }
+            finally
+            {
+                ora.Close();
+            }
         }
     }
 }
