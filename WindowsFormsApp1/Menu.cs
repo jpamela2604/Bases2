@@ -99,6 +99,11 @@ namespace WindowsFormsApp1
 
         private void button10_Click(object sender, EventArgs e)
         {
+
+        }
+
+        private void btn_consultas_Click(object sender, EventArgs e)
+        {
             Consultas consultas = new Consultas();
             consultas.Show();
         }

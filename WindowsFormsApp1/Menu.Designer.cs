@@ -42,7 +42,7 @@
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.pgobnk = new System.Windows.Forms.Button();
             this.tabPage3 = new System.Windows.Forms.TabPage();
-            this.button10 = new System.Windows.Forms.Button();
+            this.btn_consultas = new System.Windows.Forms.Button();
             this.tabPage4 = new System.Windows.Forms.TabPage();
             this.tabPage5 = new System.Windows.Forms.TabPage();
             this.btn_menu_dba = new System.Windows.Forms.Button();
@@ -203,7 +203,7 @@
             // tabPage3
             // 
             this.tabPage3.AutoScroll = true;
-            this.tabPage3.Controls.Add(this.button10);
+            this.tabPage3.Controls.Add(this.btn_consultas);
             this.tabPage3.Controls.Add(this.button6);
             this.tabPage3.Controls.Add(this.button5);
             this.tabPage3.Location = new System.Drawing.Point(4, 22);
@@ -215,15 +215,15 @@
             this.tabPage3.Text = "AUDITOR";
             this.tabPage3.UseVisualStyleBackColor = true;
             // 
-            // button10
+            // btn_consultas
             // 
-            this.button10.Location = new System.Drawing.Point(255, 28);
-            this.button10.Name = "button10";
-            this.button10.Size = new System.Drawing.Size(196, 98);
-            this.button10.TabIndex = 6;
-            this.button10.Text = "OPCIONES DE GERENCIA";
-            this.button10.UseVisualStyleBackColor = true;
-            this.button10.Click += new System.EventHandler(this.button10_Click);
+            this.btn_consultas.Location = new System.Drawing.Point(255, 28);
+            this.btn_consultas.Name = "btn_consultas";
+            this.btn_consultas.Size = new System.Drawing.Size(196, 98);
+            this.btn_consultas.TabIndex = 6;
+            this.btn_consultas.Text = "OPCIONES DE GERENCIA";
+            this.btn_consultas.UseVisualStyleBackColor = true;
+            this.btn_consultas.Click += new System.EventHandler(this.button10_Click);
             // 
             // tabPage4
             // 
@@ -295,7 +295,7 @@
         private System.Windows.Forms.TabPage tabPage4;
         private System.Windows.Forms.TabPage tabPage5;
         private System.Windows.Forms.Button pgobnk;
-        private System.Windows.Forms.Button button10;
+        private System.Windows.Forms.Button btn_consultas;
         private System.Windows.Forms.Button btn_menu_dba;
     }
 }
