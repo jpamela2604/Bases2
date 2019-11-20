@@ -73,12 +73,51 @@ namespace WindowsFormsApp1
             }
         }
 
+        int getCorrelativo()
+        {
+            using (OracleConnection connection = new OracleConnection(conexion))
+            {
+                connection.Open();
+                OracleCommand comando = new OracleCommand("getcorrelativo", connection);
+                OracleTransaction transaction;
+                transaction = connection.BeginTransaction(lectura);
+                comando.Transaction = transaction;
+                try
+                {
+
+                    comando.CommandType = System.Data.CommandType.StoredProcedure;
+                    //comando.Parameters.Add("cuent", OracleType.Number).Value = Convert.ToInt32(NumeroCuenta.Text);
+                    comando.Parameters.Add("resultado", OracleType.Number);
+                    comando.Parameters["resultado"].Direction = ParameterDirection.ReturnValue;
+                    comando.ExecuteNonQuery();
+                    transaction.Commit();
+                    /*ASIGNAR A VARIABLE DE CONFIGURACION*/
+                    int coor = System.Convert.ToInt32(comando.Parameters["resultado"].Value);
+                   // MessageBox.Show("" + coor);
+                    return coor; 
+                }
+                catch (Exception EX)
+                {
+                    MessageBox.Show("Algo salio mal");
+                    transaction.Rollback();
+                    return -100;
+                }
+            }
+        }
+
         private void button1_Click(object sender, EventArgs e)
         {
             if (!(CheckTextBox(NumeroCuenta)&& positivo()&& ComprobarCuenta()))
             {
                 return;
             }
+
+            int correlativo = getCorrelativo();
+            if(correlativo<0)
+            {
+                return;
+            }
+
             using (OracleConnection connection = new OracleConnection(conexion))
             {
                 connection.Open();
@@ -92,6 +131,7 @@ namespace WindowsFormsApp1
                     comando.CommandType = System.Data.CommandType.StoredProcedure;
                     comando.Parameters.Add("numero_cuenta", OracleType.VarChar).Value = Convert.ToInt32(NumeroCuenta.Text);
                     comando.Parameters.Add("cantidad", OracleType.VarChar).Value = (int)numericUpDown1.Value;
+                    comando.Parameters.Add("correlativo", OracleType.VarChar).Value = correlativo;
                     comando.ExecuteNonQuery();
                     transaction.Commit();
                     MessageBox.Show("Se envió la solicitud");
