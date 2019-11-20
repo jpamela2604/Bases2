@@ -122,11 +122,11 @@
     <Compile Include="Declarar_Anomalia_Cheque.Designer.cs">
       <DependentUpon>Declarar_Anomalia_Cheque.cs</DependentUpon>
     </Compile>
-    <Compile Include="DepositoMonetario.cs">
+    <Compile Include="Deposito.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="DepositoMonetario.Designer.cs">
-      <DependentUpon>DepositoMonetario.cs</DependentUpon>
+    <Compile Include="Deposito.Designer.cs">
+      <DependentUpon>Deposito.cs</DependentUpon>
     </Compile>
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
@@ -163,6 +163,18 @@
     </Compile>
     <Compile Include="MenuMantenimientoDBA.Designer.cs">
       <DependentUpon>MenuMantenimientoDBA.cs</DependentUpon>
+    </Compile>
+    <Compile Include="NotaCredito.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="NotaCredito.Designer.cs">
+      <DependentUpon>NotaCredito.cs</DependentUpon>
+    </Compile>
+    <Compile Include="NotaDebito.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="NotaDebito.Designer.cs">
+      <DependentUpon>NotaDebito.cs</DependentUpon>
     </Compile>
     <Compile Include="PAGO_CHEQUE.cs">
       <SubType>Form</SubType>
@@ -225,8 +237,8 @@
     <EmbeddedResource Include="Declarar_Anomalia_Cheque.resx">
       <DependentUpon>Declarar_Anomalia_Cheque.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="DepositoMonetario.resx">
-      <DependentUpon>DepositoMonetario.cs</DependentUpon>
+    <EmbeddedResource Include="Deposito.resx">
+      <DependentUpon>Deposito.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
@@ -245,6 +257,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="MenuMantenimientoDBA.resx">
       <DependentUpon>MenuMantenimientoDBA.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NotaCredito.resx">
+      <DependentUpon>NotaCredito.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NotaDebito.resx">
+      <DependentUpon>NotaDebito.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="PAGO_CHEQUE.resx">
       <DependentUpon>PAGO_CHEQUE.cs</DependentUpon>
