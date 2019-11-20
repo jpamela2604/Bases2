@@ -57,10 +57,11 @@
             this.label9 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.tabPage3 = new System.Windows.Forms.TabPage();
-            this.label10 = new System.Windows.Forms.Label();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
+            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.label10 = new System.Windows.Forms.Label();
+            this.dataGridView2 = new System.Windows.Forms.DataGridView();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
@@ -68,6 +69,7 @@
             this.upload_conciliados.SuspendLayout();
             this.tabPage3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
@@ -150,7 +152,7 @@
             this.tabControl1.Location = new System.Drawing.Point(43, 48);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(407, 444);
+            this.tabControl1.Size = new System.Drawing.Size(942, 642);
             this.tabControl1.TabIndex = 9;
             // 
             // tabPage1
@@ -264,13 +266,14 @@
             // 
             // gen_comp
             // 
+            this.gen_comp.Controls.Add(this.dataGridView2);
             this.gen_comp.Controls.Add(this.combo_makebank);
             this.gen_comp.Controls.Add(this.label7);
             this.gen_comp.Controls.Add(this.bnt_generar);
             this.gen_comp.Location = new System.Drawing.Point(4, 25);
             this.gen_comp.Name = "gen_comp";
             this.gen_comp.Padding = new System.Windows.Forms.Padding(3);
-            this.gen_comp.Size = new System.Drawing.Size(399, 415);
+            this.gen_comp.Size = new System.Drawing.Size(934, 613);
             this.gen_comp.TabIndex = 2;
             this.gen_comp.Text = "Genera Archivo";
             this.gen_comp.UseVisualStyleBackColor = true;
@@ -278,15 +281,16 @@
             // combo_makebank
             // 
             this.combo_makebank.FormattingEnabled = true;
-            this.combo_makebank.Location = new System.Drawing.Point(90, 154);
+            this.combo_makebank.Location = new System.Drawing.Point(382, 137);
             this.combo_makebank.Name = "combo_makebank";
             this.combo_makebank.Size = new System.Drawing.Size(213, 24);
             this.combo_makebank.TabIndex = 2;
+            this.combo_makebank.SelectedIndexChanged += new System.EventHandler(this.combo_makebank_SelectedIndexChanged);
             // 
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(35, 41);
+            this.label7.Location = new System.Drawing.Point(328, 27);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(340, 68);
             this.label7.TabIndex = 1;
@@ -296,7 +300,7 @@
             // 
             // bnt_generar
             // 
-            this.bnt_generar.Location = new System.Drawing.Point(128, 255);
+            this.bnt_generar.Location = new System.Drawing.Point(429, 492);
             this.bnt_generar.Name = "bnt_generar";
             this.bnt_generar.Size = new System.Drawing.Size(147, 91);
             this.bnt_generar.TabIndex = 0;
@@ -313,7 +317,7 @@
             this.upload_conciliados.Location = new System.Drawing.Point(4, 25);
             this.upload_conciliados.Name = "upload_conciliados";
             this.upload_conciliados.Padding = new System.Windows.Forms.Padding(3);
-            this.upload_conciliados.Size = new System.Drawing.Size(399, 415);
+            this.upload_conciliados.Size = new System.Drawing.Size(934, 613);
             this.upload_conciliados.TabIndex = 3;
             this.upload_conciliados.Text = "Cargar Conciliados";
             this.upload_conciliados.UseVisualStyleBackColor = true;
@@ -366,53 +370,63 @@
             this.tabPage3.Location = new System.Drawing.Point(4, 25);
             this.tabPage3.Name = "tabPage3";
             this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage3.Size = new System.Drawing.Size(399, 415);
+            this.tabPage3.Size = new System.Drawing.Size(934, 613);
             this.tabPage3.TabIndex = 4;
             this.tabPage3.Text = "Liberacion Reserva";
             this.tabPage3.UseVisualStyleBackColor = true;
             // 
-            // label10
-            // 
-            this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(51, 29);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(82, 17);
-            this.label10.TabIndex = 0;
-            this.label10.Text = "En Reserva";
-            this.label10.Click += new System.EventHandler(this.label10_Click);
-            // 
-            // dataGridView1
-            // 
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(33, 62);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.RowTemplate.Height = 24;
-            this.dataGridView1.Size = new System.Drawing.Size(337, 209);
-            this.dataGridView1.TabIndex = 1;
-            // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(264, 23);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(88, 23);
-            this.button1.TabIndex = 2;
-            this.button1.Text = "Consultar";
-            this.button1.UseVisualStyleBackColor = true;
-            // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(131, 291);
+            this.button2.Location = new System.Drawing.Point(389, 499);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(161, 72);
             this.button2.TabIndex = 3;
             this.button2.Text = "Liberar";
             this.button2.UseVisualStyleBackColor = true;
             // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(400, 81);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(134, 44);
+            this.button1.TabIndex = 2;
+            this.button1.Text = "Consultar";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click_1);
+            // 
+            // dataGridView1
+            // 
+            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView1.Location = new System.Drawing.Point(33, 160);
+            this.dataGridView1.Name = "dataGridView1";
+            this.dataGridView1.RowTemplate.Height = 24;
+            this.dataGridView1.Size = new System.Drawing.Size(874, 291);
+            this.dataGridView1.TabIndex = 1;
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(52, 40);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(82, 17);
+            this.label10.TabIndex = 0;
+            this.label10.Text = "En Reserva";
+            this.label10.Click += new System.EventHandler(this.label10_Click);
+            // 
+            // dataGridView2
+            // 
+            this.dataGridView2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView2.Location = new System.Drawing.Point(66, 211);
+            this.dataGridView2.Name = "dataGridView2";
+            this.dataGridView2.RowTemplate.Height = 24;
+            this.dataGridView2.Size = new System.Drawing.Size(807, 215);
+            this.dataGridView2.TabIndex = 3;
+            // 
             // PAGO_OTRO_BANCO
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(501, 532);
+            this.ClientSize = new System.Drawing.Size(1066, 739);
             this.Controls.Add(this.tabControl1);
             this.Name = "PAGO_OTRO_BANCO";
             this.Text = "PAGO_OTRO_BANCO";
@@ -429,6 +443,7 @@
             this.tabPage3.ResumeLayout(false);
             this.tabPage3.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -468,5 +483,6 @@
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.DataGridView dataGridView2;
     }
 }
