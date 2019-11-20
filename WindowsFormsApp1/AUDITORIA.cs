@@ -116,5 +116,30 @@ namespace WindowsFormsApp1
                 stream.Close();
             }
         }
+
+        private void btn_transacciones_Click(object sender, EventArgs e)
+        {
+            Conexion.abrirConexion();
+
+            try
+            {
+                OracleCommand comando = new OracleCommand("auditor_transaccion", Conexion.ora);
+                comando.CommandType = System.Data.CommandType.StoredProcedure;
+                comando.Parameters.Add("registros", OracleType.Cursor).Direction = ParameterDirection.Output;
+                OracleDataAdapter adaptador = new OracleDataAdapter();
+                adaptador.SelectCommand = comando;
+                DataTable tabla = new DataTable();
+                adaptador.Fill(tabla);
+                dataGridView1.DataSource = tabla;
+                Conexion.cerrarConexion();
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Algo fallo");
+            }
+
+
+            Conexion.cerrarConexion();
+        }
     }
 }
