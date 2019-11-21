@@ -237,6 +237,7 @@ namespace WindowsFormsApp1
                 //POR CADA REGISTRO HACER LO SIGUIENTE
                 var lines = File.ReadLines(selectedFileName);
                 String RESPUESTA = "";
+                ora.Open();
                 foreach (var line in lines)
                 {
                     //BANCO|REFERENCIA|CUENTA|NO_CHEQUE|MONTO  
@@ -244,7 +245,7 @@ namespace WindowsFormsApp1
                     String estatus = "OK";
                     //String log = "";
                     //HACER COBRO DEL CHEQUE
-                    ora.Open();
+                    
                     comando = new OracleCommand();
                     comando.Connection = ora;
                     OracleTransaction trans = ora.BeginTransaction();
@@ -286,10 +287,11 @@ namespace WindowsFormsApp1
                             throw new Exception("El cheque no pertenece a ninguna chequera o a esa cuenta");
                         }
 
+                        /*
                         if (!IsCuentaBloqueada(linea[2]))
                         {
                             break;
-                        }
+                        }*/
 
 
                         //LA CUENTA TIENE FONDOS
@@ -340,7 +342,9 @@ namespace WindowsFormsApp1
                     catch (Exception ex)
                     {
                         trans.Rollback();
-
+                        trans = ora.BeginTransaction();
+                        comando.Transaction = trans;
+                        System.Windows.Forms.MessageBox.Show(ex.Message);
                         if (ex.Message == "NO TIENE FONDOS") {
                             //RECHAZAR CHEQUE
                             comando.Parameters.Clear();
@@ -359,7 +363,7 @@ namespace WindowsFormsApp1
                         comando.CommandText = "INSERT INTO TRANSACCION (NO_RECHAZO, RAZON_RECHAZO,FECHA,SALDO_INICIAL, SALDO_FINAL, VALOR,EMPLEADO, AGENCIA, TIPO_TRANSACCION, EQUIPO,CHEQUE_LOCAL) " +
                             "VALUES(:norechazo,:razonrechazo,:fecha,'0','0',:valor,:empleado,:agencia,'0',:equipo,:cheque)";
                         comando.Parameters.Add("norechazo", OracleType.Number).Value = 1;
-                        comando.Parameters.Add("razonrechazo", OracleType.Number).Value = ex.Message;
+                        comando.Parameters.Add("razonrechazo", OracleType.VarChar,200).Value = ex.Message;
                         comando.Parameters.Add("fecha", OracleType.DateTime).Value = fecha;
                         comando.Parameters.Add("valor", OracleType.Number).Value = Convert.ToDouble(linea[4]);
                         comando.Parameters.Add("cheque", OracleType.Number).Value = Convert.ToInt32(linea[3]);
@@ -379,6 +383,7 @@ namespace WindowsFormsApp1
                 }
                 //GUARDAR EL ARCHIVO 
                 //IN_banco_correlativo.txt
+                ora.Close();
                 string path = Directory.GetCurrentDirectory() + "\\IN_2_00.txt";
                 File.WriteAllText(path, RESPUESTA);
                 System.Windows.Forms.MessageBox.Show("El archivo \n" + path + "\n se ha creado correctamente");
@@ -600,10 +605,11 @@ namespace WindowsFormsApp1
                     }
                     else
                     {
+                        /*
                         if (!IsCuentaBloqueada(cuenta))
                         {
                             break;
-                        }
+                        }*/
                         //restar monto a reserva
                         comando.Parameters.Clear();
                         comando.CommandText = "UPDATE cuenta SET en_reserva = en_reserva - :valor WHERE numero_cuenta = :cuenta";
@@ -921,7 +927,7 @@ namespace WindowsFormsApp1
 
         bool IsCuentaBloqueada(String cuenta)
         {
-            ora.Open();
+            //ora.Open();
             comando = new OracleCommand();
             comando.Connection = ora;
             OracleTransaction transaction = ora.BeginTransaction();
