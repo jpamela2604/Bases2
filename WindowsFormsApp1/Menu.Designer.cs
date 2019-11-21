@@ -29,24 +29,24 @@
         private void InitializeComponent()
         {
             this.tabPage6 = new System.Windows.Forms.TabPage();
-            this.button10 = new System.Windows.Forms.Button();
-            this.button11 = new System.Windows.Forms.Button();
-            this.button12 = new System.Windows.Forms.Button();
             this.button13 = new System.Windows.Forms.Button();
+            this.button12 = new System.Windows.Forms.Button();
+            this.button11 = new System.Windows.Forms.Button();
+            this.button10 = new System.Windows.Forms.Button();
             this.tabPage5 = new System.Windows.Forms.TabPage();
             this.tabPage3 = new System.Windows.Forms.TabPage();
-            this.button5 = new System.Windows.Forms.Button();
             this.button6 = new System.Windows.Forms.Button();
+            this.button5 = new System.Windows.Forms.Button();
             this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.button7 = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
-            this.button4 = new System.Windows.Forms.Button();
-            this.button9 = new System.Windows.Forms.Button();
             this.pgobnk = new System.Windows.Forms.Button();
+            this.button9 = new System.Windows.Forms.Button();
+            this.button4 = new System.Windows.Forms.Button();
+            this.button3 = new System.Windows.Forms.Button();
+            this.button7 = new System.Windows.Forms.Button();
             this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.button2 = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
             this.button8 = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
+            this.button2 = new System.Windows.Forms.Button();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage6.SuspendLayout();
             this.tabPage3.SuspendLayout();
@@ -70,27 +70,16 @@
             this.tabPage6.Text = "VISA";
             this.tabPage6.UseVisualStyleBackColor = true;
             // 
-            // button10
+            // button13
             // 
-            this.button10.Location = new System.Drawing.Point(101, 42);
-            this.button10.Margin = new System.Windows.Forms.Padding(4);
-            this.button10.Name = "button10";
-            this.button10.Size = new System.Drawing.Size(191, 58);
-            this.button10.TabIndex = 0;
-            this.button10.Text = "NOTA DE CREDITO";
-            this.button10.UseVisualStyleBackColor = true;
-            this.button10.Click += new System.EventHandler(this.button10_Click);
-            // 
-            // button11
-            // 
-            this.button11.Location = new System.Drawing.Point(101, 133);
-            this.button11.Margin = new System.Windows.Forms.Padding(4);
-            this.button11.Name = "button11";
-            this.button11.Size = new System.Drawing.Size(191, 58);
-            this.button11.TabIndex = 1;
-            this.button11.Text = "NOTA DE DEBITO";
-            this.button11.UseVisualStyleBackColor = true;
-            this.button11.Click += new System.EventHandler(this.button11_Click);
+            this.button13.Location = new System.Drawing.Point(101, 309);
+            this.button13.Margin = new System.Windows.Forms.Padding(4);
+            this.button13.Name = "button13";
+            this.button13.Size = new System.Drawing.Size(191, 58);
+            this.button13.TabIndex = 3;
+            this.button13.Text = "BLOQUEO/DESBLOQUEO CHEQUE";
+            this.button13.UseVisualStyleBackColor = true;
+            this.button13.Click += new System.EventHandler(this.button13_Click);
             // 
             // button12
             // 
@@ -103,16 +92,27 @@
             this.button12.UseVisualStyleBackColor = true;
             this.button12.Click += new System.EventHandler(this.button12_Click);
             // 
-            // button13
+            // button11
             // 
-            this.button13.Location = new System.Drawing.Point(101, 309);
-            this.button13.Margin = new System.Windows.Forms.Padding(4);
-            this.button13.Name = "button13";
-            this.button13.Size = new System.Drawing.Size(191, 58);
-            this.button13.TabIndex = 3;
-            this.button13.Text = "BLOQUEO/DESBLOQUEO CHEQUE";
-            this.button13.UseVisualStyleBackColor = true;
-            this.button13.Click += new System.EventHandler(this.button13_Click);
+            this.button11.Location = new System.Drawing.Point(101, 133);
+            this.button11.Margin = new System.Windows.Forms.Padding(4);
+            this.button11.Name = "button11";
+            this.button11.Size = new System.Drawing.Size(191, 58);
+            this.button11.TabIndex = 1;
+            this.button11.Text = "NOTA DE DEBITO";
+            this.button11.UseVisualStyleBackColor = true;
+            this.button11.Click += new System.EventHandler(this.button11_Click);
+            // 
+            // button10
+            // 
+            this.button10.Location = new System.Drawing.Point(101, 42);
+            this.button10.Margin = new System.Windows.Forms.Padding(4);
+            this.button10.Name = "button10";
+            this.button10.Size = new System.Drawing.Size(191, 58);
+            this.button10.TabIndex = 0;
+            this.button10.Text = "NOTA DE CREDITO";
+            this.button10.UseVisualStyleBackColor = true;
+            this.button10.Click += new System.EventHandler(this.button10_Click);
             // 
             // tabPage5
             // 
@@ -139,17 +139,6 @@
             this.tabPage3.Text = "AUDITOR";
             this.tabPage3.UseVisualStyleBackColor = true;
             // 
-            // button5
-            // 
-            this.button5.Location = new System.Drawing.Point(71, 191);
-            this.button5.Margin = new System.Windows.Forms.Padding(4);
-            this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(261, 121);
-            this.button5.TabIndex = 4;
-            this.button5.Text = "RESTO";
-            this.button5.UseVisualStyleBackColor = true;
-            this.button5.Click += new System.EventHandler(this.button5_Click);
-            // 
             // button6
             // 
             this.button6.Location = new System.Drawing.Point(71, 34);
@@ -160,6 +149,17 @@
             this.button6.Text = "AUDITORIA";
             this.button6.UseVisualStyleBackColor = true;
             this.button6.Click += new System.EventHandler(this.button6_Click);
+            // 
+            // button5
+            // 
+            this.button5.Location = new System.Drawing.Point(71, 191);
+            this.button5.Margin = new System.Windows.Forms.Padding(4);
+            this.button5.Name = "button5";
+            this.button5.Size = new System.Drawing.Size(261, 121);
+            this.button5.TabIndex = 4;
+            this.button5.Text = "RESTO";
+            this.button5.UseVisualStyleBackColor = true;
+            this.button5.Click += new System.EventHandler(this.button5_Click);
             // 
             // tabPage2
             // 
@@ -178,38 +178,16 @@
             this.tabPage2.Text = "RECEPTOR/PAGADOR";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
-            // button7
+            // pgobnk
             // 
-            this.button7.Location = new System.Drawing.Point(47, 162);
-            this.button7.Margin = new System.Windows.Forms.Padding(4);
-            this.button7.Name = "button7";
-            this.button7.Size = new System.Drawing.Size(261, 121);
-            this.button7.TabIndex = 6;
-            this.button7.Text = "CONSULTAS";
-            this.button7.UseVisualStyleBackColor = true;
-            this.button7.Click += new System.EventHandler(this.button7_Click);
-            // 
-            // button3
-            // 
-            this.button3.Location = new System.Drawing.Point(47, 322);
-            this.button3.Margin = new System.Windows.Forms.Padding(4);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(261, 121);
-            this.button3.TabIndex = 2;
-            this.button3.Text = "PAGO CHEQUE LOCAL";
-            this.button3.UseVisualStyleBackColor = true;
-            this.button3.Click += new System.EventHandler(this.button3_Click);
-            // 
-            // button4
-            // 
-            this.button4.Location = new System.Drawing.Point(47, 14);
-            this.button4.Margin = new System.Windows.Forms.Padding(4);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(261, 121);
-            this.button4.TabIndex = 3;
-            this.button4.Text = "TRANSFERENCIA";
-            this.button4.UseVisualStyleBackColor = true;
-            this.button4.Click += new System.EventHandler(this.button4_Click);
+            this.pgobnk.Location = new System.Drawing.Point(355, 322);
+            this.pgobnk.Margin = new System.Windows.Forms.Padding(4);
+            this.pgobnk.Name = "pgobnk";
+            this.pgobnk.Size = new System.Drawing.Size(261, 121);
+            this.pgobnk.TabIndex = 9;
+            this.pgobnk.Text = "PAGO CHEQUE\r\nOTRO BANCO";
+            this.pgobnk.UseVisualStyleBackColor = true;
+            this.pgobnk.Click += new System.EventHandler(this.pgobnk_Click);
             // 
             // button9
             // 
@@ -222,16 +200,38 @@
             this.button9.UseVisualStyleBackColor = true;
             this.button9.Click += new System.EventHandler(this.button9_Click);
             // 
-            // pgobnk
+            // button4
             // 
-            this.pgobnk.Location = new System.Drawing.Point(355, 322);
-            this.pgobnk.Margin = new System.Windows.Forms.Padding(4);
-            this.pgobnk.Name = "pgobnk";
-            this.pgobnk.Size = new System.Drawing.Size(261, 121);
-            this.pgobnk.TabIndex = 9;
-            this.pgobnk.Text = "PAGO CHEQUE\r\nOTRO BANCO";
-            this.pgobnk.UseVisualStyleBackColor = true;
-            this.pgobnk.Click += new System.EventHandler(this.pgobnk_Click);
+            this.button4.Location = new System.Drawing.Point(47, 14);
+            this.button4.Margin = new System.Windows.Forms.Padding(4);
+            this.button4.Name = "button4";
+            this.button4.Size = new System.Drawing.Size(261, 121);
+            this.button4.TabIndex = 3;
+            this.button4.Text = "TRANSFERENCIA";
+            this.button4.UseVisualStyleBackColor = true;
+            this.button4.Click += new System.EventHandler(this.button4_Click);
+            // 
+            // button3
+            // 
+            this.button3.Location = new System.Drawing.Point(47, 322);
+            this.button3.Margin = new System.Windows.Forms.Padding(4);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(261, 121);
+            this.button3.TabIndex = 2;
+            this.button3.Text = "PAGO CHEQUE LOCAL";
+            this.button3.UseVisualStyleBackColor = true;
+            this.button3.Click += new System.EventHandler(this.button3_Click);
+            // 
+            // button7
+            // 
+            this.button7.Location = new System.Drawing.Point(47, 162);
+            this.button7.Margin = new System.Windows.Forms.Padding(4);
+            this.button7.Name = "button7";
+            this.button7.Size = new System.Drawing.Size(261, 121);
+            this.button7.TabIndex = 6;
+            this.button7.Text = "CONSULTAS";
+            this.button7.UseVisualStyleBackColor = true;
+            this.button7.Click += new System.EventHandler(this.button7_Click);
             // 
             // tabPage1
             // 
@@ -243,32 +243,10 @@
             this.tabPage1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.tabPage1.Size = new System.Drawing.Size(644, 536);
+            this.tabPage1.Size = new System.Drawing.Size(933, 536);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "CUENTAS NUEVAS";
             this.tabPage1.UseVisualStyleBackColor = true;
-            // 
-            // button2
-            // 
-            this.button2.Location = new System.Drawing.Point(29, 183);
-            this.button2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(261, 121);
-            this.button2.TabIndex = 1;
-            this.button2.Text = "CUENTAS";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
-            // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(29, 39);
-            this.button1.Margin = new System.Windows.Forms.Padding(4);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(261, 121);
-            this.button1.TabIndex = 0;
-            this.button1.Text = "CLIENTES";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // button8
             // 
@@ -281,6 +259,28 @@
             this.button8.UseVisualStyleBackColor = true;
             this.button8.Click += new System.EventHandler(this.button8_Click);
             // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(29, 39);
+            this.button1.Margin = new System.Windows.Forms.Padding(4);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(261, 121);
+            this.button1.TabIndex = 0;
+            this.button1.Text = "CLIENTES";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // button2
+            // 
+            this.button2.Location = new System.Drawing.Point(29, 183);
+            this.button2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(261, 121);
+            this.button2.TabIndex = 1;
+            this.button2.Text = "CUENTAS";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
+            // 
             // tabControl1
             // 
             this.tabControl1.Controls.Add(this.tabPage1);
@@ -292,7 +292,7 @@
             this.tabControl1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(652, 565);
+            this.tabControl1.Size = new System.Drawing.Size(941, 565);
             this.tabControl1.TabIndex = 11;
             // 
             // Menu
