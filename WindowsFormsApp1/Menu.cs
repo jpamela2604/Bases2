@@ -120,5 +120,47 @@ namespace WindowsFormsApp1
             Declarar_Anomalia_Cheque S = new Declarar_Anomalia_Cheque();
             S.Show();
         }
+
+        private void button14_Click(object sender, EventArgs e)
+        {
+            SolicitudChequera S = new SolicitudChequera();
+            S.Show();
+        }
+
+        private void button15_Click(object sender, EventArgs e)
+        {
+            ABC_BANCO S = new ABC_BANCO();
+            S.Show();
+        }
+
+        private void button16_Click(object sender, EventArgs e)
+        {
+            ABC_Empleado S = new ABC_Empleado();
+            S.Show();
+        }
+
+        private void button17_Click(object sender, EventArgs e)
+        {
+            ABC_Agencia S = new ABC_Agencia();
+            S.Show();
+        }
+
+        private void button18_Click(object sender, EventArgs e)
+        {
+            ABC_Rol S = new ABC_Rol();
+            S.Show();
+        }
+
+        private void button19_Click(object sender, EventArgs e)
+        {
+            ABC_Equipo S = new ABC_Equipo();
+            S.Show();
+        }
+
+        private void button20_Click(object sender, EventArgs e)
+        {
+            Declarar_Anomalia_Cheque S = new Declarar_Anomalia_Cheque();
+            S.Show();
+        }
     }
 }
