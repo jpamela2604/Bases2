@@ -117,7 +117,7 @@ namespace WindowsFormsApp1
                         Properties.Settings.Default.agencia = Convert.ToInt32(((KeyValuePair<string, string>)comboBox1.SelectedItem).Key);
                         MessageBox.Show("Bienvenido");
                         this.Hide();
-                        Form menu = new MenuPrincipal();
+                        Form menu = new Menu();
                         Usuario.Text = "";
                         Contrasena.Text = "";
                         menu.ShowDialog();
