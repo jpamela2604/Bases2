@@ -183,7 +183,7 @@ namespace WindowsFormsApp1
 
         private void monetario_Click(object sender, EventArgs e)
         {
-            if(!(validarNoCuenta(NumeroCuenta)&&validarMonto(Monto)&&ComprobarCuenta(NumeroCuenta.Text)))
+            if(!(validarNoCuenta(NumeroCuenta)&&validarMonto(Monto)&&ComprobarCuenta(NumeroCuenta.Text) && IsCuentaBloqueada(NumeroCuenta.Text)))
             {
                 return;
             }
@@ -233,7 +233,14 @@ namespace WindowsFormsApp1
             {
                 return;
             }
-
+            if (!IsCuentaBloqueada(textBox1.Text))
+            {
+                return;
+            }
+            if (!IsCuentaBloqueada(txt_nocuenta.Text))
+            {
+                return;
+            }
             OracleConnection ora= new OracleConnection(
                "DATA SOURCE = " + Properties.Settings.Default.nombre_db + ";" +
                "PASSWORD=" + Properties.Settings.Default.contrasenia_db + ";" +
@@ -396,7 +403,42 @@ namespace WindowsFormsApp1
                 ora.Close();
             }
         }
+        bool IsCuentaBloqueada(String cuenta)
+        {
+            using (OracleConnection connection = new OracleConnection(conexion))
+            {
+                connection.Open();
+                OracleCommand comando = new OracleCommand("estadocuenta", connection);
+                OracleTransaction transaction;
+                transaction = connection.BeginTransaction(lectura);
+                comando.Transaction = transaction;
+                try
+               {
 
+                    comando.CommandType = System.Data.CommandType.StoredProcedure;
+                    comando.Parameters.Add("cuenta", OracleType.Number).Value = Convert.ToInt32(cuenta);
+                // comando.Parameters["resultado"].Direction = ParameterDirection.ReturnValue;
+                    comando.Parameters.Add("resultado", OracleType.VarChar,100).Direction = ParameterDirection.ReturnValue;
+                    comando.ExecuteNonQuery();
+                    transaction.Commit();
+                    string tipocuenta = Convert.ToString(comando.Parameters["resultado"].Value).ToUpper().Trim();
+                
+                    if(tipocuenta.Equals("ACTIVA"))
+                    {
+                        return true;
+                    }
+                    MessageBox.Show("No se puede efectuar transaccion la cuenta "+cuenta+" esta "+tipocuenta);
+                    return false;
+                }
+                catch (Exception EX)
+                {
+                    MessageBox.Show("algo fallo");
+                    transaction.Rollback();
+                    return false;
+                }
+            }
+
+        }
         private void externo_Click(object sender, EventArgs e)
         {
             if (!(validarNoCuenta(textBox2)
@@ -406,6 +448,11 @@ namespace WindowsFormsApp1
             {
                 return;
             }
+            if(!IsCuentaBloqueada(textBox2.Text))
+            {
+                return;
+            }
+
             OracleConnection ora = new OracleConnection(
               "DATA SOURCE = " + Properties.Settings.Default.nombre_db + ";" +
               "PASSWORD=" + Properties.Settings.Default.contrasenia_db + ";" +
