@@ -665,5 +665,250 @@ namespace WindowsFormsApp1
             System.Windows.Forms.MessageBox.Show("Operacion completada!");
             ora.Close();
         }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            ora.Open();
+            comando = new OracleCommand();
+            comando.Connection = ora;
+            foreach (DataGridViewRow row in dataGridView4.Rows)
+            {
+                if ((row.Index + 1) == dataGridView3.Rows.Count) { break; }
+                OracleTransaction trans = ora.BeginTransaction();
+                comando.Transaction = trans;
+                String[] linea = new String[6];
+                linea[0]  = row.Cells["banco"].Value.ToString();
+                linea[1] = row.Cells["referencia"].Value.ToString();
+                linea[2] = row.Cells["cuenta"].Value.ToString();
+                linea[3] = row.Cells["nocheque"].Value.ToString();
+                linea[4] = row.Cells["monto"].Value.ToString();
+                linea[5] = row.Cells["resultado"].Value.ToString();
+                try
+                {
+                    DateTime fecha = DateTime.Now;
+                    //BANCO|REFERENCIA|CUENTA|NO_CHEQUE|MONTO|RESPONSE
+                    if (linea[5].ToLower() == "ok")
+                    {
+                        //GRABAR TRANSACCION
+                        comando.Parameters.Clear();
+                        comando.CommandText = "INSERT INTO TRANSACCION (FECHA,SALDO_INICIAL, SALDO_FINAL, VALOR,EMPLEADO, AGENCIA, TIPO_TRANSACCION, EQUIPO,CHEQUE_EXTERNO) " +
+                            "VALUES(:fecha,'0','0',:valor,:empleado,:agencia,'3',:equipo,:cheque)";
+                        comando.Parameters.Add("fecha", OracleType.DateTime).Value = fecha;
+                        comando.Parameters.Add("valor", OracleType.Number).Value = linea[4];
+                        comando.Parameters.Add("cheque", OracleType.Number).Value = linea[3];
+                        comando.Parameters.Add("empleado", OracleType.Number).Value = Properties.Settings.Default.empleado;
+                        comando.Parameters.Add("agencia", OracleType.Number).Value = 1;
+                        comando.Parameters.Add("equipo", OracleType.Number).Value = 0;
+                        comando.ExecuteNonQuery();
+
+                        //  REGISTRAR CAMBIO EN CHEQUE_EXTRANGERO
+                        comando.Parameters.Clear();
+                        comando.CommandText = "UPDATE cheque_externo SET estado_cheque = 8 WHERE codigo_cheque = :cheque";
+                        comando.Parameters.Add("cheque", OracleType.Number).Value = linea[3];
+                        comando.ExecuteNonQuery();
+                        trans.Commit();
+                    }
+                    else
+                    {
+                        //GRABAR TRANSACCION
+                        comando.Parameters.Clear();
+                        comando.CommandText = "INSERT INTO TRANSACCION (NO_RECHAZO, RAZON_RECHAZO, FECHA,SALDO_INICIAL, SALDO_FINAL, VALOR,EMPLEADO, AGENCIA, TIPO_TRANSACCION, EQUIPO,CHEQUE_EXTERNO) " +
+                            "VALUES(:rechazo, :razon,:fecha,'0','0',:valor,:empleado,:agencia,'3',:equipo,:cheque)";
+                        comando.Parameters.Add("rechazo", OracleType.Number).Value = 1;
+                        comando.Parameters.Add("razon", OracleType.VarChar).Value = "NO TIENE FONDOS";
+                        comando.Parameters.Add("fecha", OracleType.DateTime).Value = fecha;
+                        comando.Parameters.Add("valor", OracleType.Number).Value = linea[4];
+                        comando.Parameters.Add("cheque", OracleType.Number).Value = linea[3];
+                        comando.Parameters.Add("empleado", OracleType.Number).Value = Properties.Settings.Default.empleado;
+                        comando.Parameters.Add("agencia", OracleType.Number).Value = 1;
+                        comando.Parameters.Add("equipo", OracleType.Number).Value = 0;
+                        comando.ExecuteNonQuery();
+
+                        //  REGISTRAR CAMBIO EN CHEQUE_EXTRANGERO
+                        comando.Parameters.Clear();
+                        comando.CommandText = "UPDATE cheque_externo SET estado_cheque = 9 WHERE codigo_cheque = :cheque";
+                        comando.Parameters.Add("cheque", OracleType.Number).Value = linea[3];
+                        comando.ExecuteNonQuery();
+                        trans.Commit();
+                    }
+                }
+                catch (Exception ex)
+                {
+                    trans.Rollback();
+                    System.Windows.Forms.MessageBox.Show(ex.Message);
+                }
+            }
+
+            ora.Close();
+            System.Windows.Forms.MessageBox.Show("Se ha terminado de cargar todos los cheques");     
+
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            ora.Open();
+            comando = new OracleCommand();
+            comando.Connection = ora;
+            String RESPUESTA = "";
+            foreach (DataGridViewRow row in dataGridView4.Rows)
+            {
+                if ((row.Index + 1) == dataGridView3.Rows.Count) { break; }
+                OracleTransaction trans = ora.BeginTransaction();
+                comando.Transaction = trans;
+                String[] linea = new String[6];
+                linea[0] = row.Cells["banco"].Value.ToString();
+                linea[1] = row.Cells["referencia"].Value.ToString();
+                linea[2] = row.Cells["cuenta"].Value.ToString();
+                linea[3] = row.Cells["nocheque"].Value.ToString();
+                linea[4] = row.Cells["monto"].Value.ToString();
+
+                //BANCO|REFERENCIA|CUENTA|NO_CHEQUE|MONTO  
+                String estatus = "OK";
+                //String log = "";
+                //HACER COBRO DEL CHEQUE
+                DateTime fecha = DateTime.Now;
+                var chequera = 0;
+                try
+                {
+                    //VERIFICACION INICIAL DEL CHEQUE
+                    comando.CommandText = "SELECT descripcion, nombre FROM estado_cheque WHERE codigo = (SELECT estado_cheque FROM cheque_local WHERE codigo_cheque = :cheque)";
+                    comando.Parameters.Add("cheque", OracleType.Number).Value = linea[3];
+                    OracleDataReader dr = comando.ExecuteReader();
+                    //dr.Read();
+                    if (dr.Read())
+                    {
+                        throw new Exception("Error el cheque aparece: " + dr["descripcion"] + " " + dr["nombre"]);
+                    }
+
+                    //EXISTE EL CHEQUE
+                    comando.Parameters.Clear();
+                    bool verif_cheq = false;
+                    Int32 cod_cheque = Convert.ToInt32(linea[3]);
+                    comando.CommandText = "SELECT * FROM chequera WHERE cuenta = :cuenta";
+                    comando.Parameters.Add("cuenta", OracleType.Number).Value = linea[2];
+                    dr = comando.ExecuteReader();
+                    while (!verif_cheq && dr.Read())
+                    {
+                        //CHEQUE PERTENEZCA A CHEQUERA
+                        if (cod_cheque >= Convert.ToInt32(dr["numero_inicio"]) && cod_cheque <= Convert.ToInt32(dr["numero_final"]))
+                        {
+                            verif_cheq = true;
+                            chequera = Convert.ToInt32(dr["codigo_chequera"]);
+                        }
+                        //dr.NextResult();
+                    }
+
+                    if (!verif_cheq)
+                    {
+                        throw new Exception("El cheque no pertenece a ninguna chequera o a esa cuenta");
+                    }
+
+
+                    //LA CUENTA TIENE FONDOS
+                    comando.Parameters.Clear();
+                    comando.CommandText = "SELECT saldo_disponible FROM cuenta WHERE numero_cuenta = :cuenta";
+                    comando.Parameters.Add("cuenta", OracleType.Number).Value = linea[2];
+                    dr = comando.ExecuteReader();
+                    dr.Read();
+                    Int32 saldo = Convert.ToInt32(dr["saldo_disponible"]);
+                    double monto = Convert.ToDouble(linea[4]);
+                    if (saldo < monto)
+                    {
+                        throw new Exception("NO TIENE FONDOS");
+                    }
+
+                    //SE DEBITA DE LA CUENTA
+                    comando.Parameters.Clear();
+                    comando.CommandText = "UPDATE cuenta SET saldo_disponible = saldo_disponible - :monto WHERE numero_cuenta = :cuenta";
+                    comando.Parameters.Add("cuenta", OracleType.Number).Value = linea[2];
+                    comando.Parameters.Add("monto", OracleType.Number).Value = Convert.ToDouble(linea[4]);
+                    comando.ExecuteNonQuery();
+
+                    //CHEQUE COBRADO
+                    comando.Parameters.Clear();
+                    comando.CommandText = "INSERT INTO CHEQUE_LOCAL (codigo_cheque,fecha,monto,chequera,estado_cheque)" +
+                            "VALUES(:codigo_cheque,:fecha,:monto,:chequera,:estado_cheque)";
+                    comando.Parameters.Add("codigo_cheque", OracleType.Number).Value = linea[3];
+                    comando.Parameters.Add("fecha", OracleType.DateTime).Value = fecha;
+                    comando.Parameters.Add("monto", OracleType.Number).Value = linea[4];
+                    comando.Parameters.Add("chequera", OracleType.Number).Value = chequera;
+                    comando.Parameters.Add("estado_cheque", OracleType.Number).Value = 4;
+                    comando.ExecuteNonQuery();
+
+                    //REGISTRAR LA TRANSACCION
+                    comando.Parameters.Clear();
+                    comando.CommandText = "INSERT INTO TRANSACCION (FECHA,SALDO_INICIAL, SALDO_FINAL, VALOR,EMPLEADO, AGENCIA, TIPO_TRANSACCION, EQUIPO,CHEQUE_LOCAL) " +
+                        "VALUES(:fecha,'0','0',:valor,:empleado,:agencia,'0',:equipo,:cheque)";
+                    comando.Parameters.Add("fecha", OracleType.DateTime).Value = fecha;
+                    comando.Parameters.Add("valor", OracleType.Number).Value = Convert.ToDouble(linea[4]);
+                    comando.Parameters.Add("cheque", OracleType.Number).Value = Convert.ToInt32(linea[3]);
+                    comando.Parameters.Add("empleado", OracleType.Number).Value = Properties.Settings.Default.empleado;
+                    comando.Parameters.Add("agencia", OracleType.Number).Value = 1;
+                    comando.Parameters.Add("equipo", OracleType.Number).Value = 0;
+                    comando.ExecuteNonQuery();
+
+                    trans.Commit();
+                }
+                catch (Exception ex)
+                {
+                    trans.Rollback();
+
+                    if (ex.Message == "NO TIENE FONDOS")
+                    {
+                        //RECHAZAR CHEQUE
+                        comando.Parameters.Clear();
+                        comando.CommandText = "INSERT INTO CHEQUE_LOCAL (codigo_cheque,fecha,monto,chequera,estado_cheque)" +
+                            "VALUES(:codigo_cheque,:fecha,:monto,:chequera,:estado_cheque)";
+                        comando.Parameters.Add("codigo_cheque", OracleType.Number).Value = linea[3];
+                        comando.Parameters.Add("fecha", OracleType.DateTime).Value = fecha;
+                        comando.Parameters.Add("monto", OracleType.Number).Value = linea[4];
+                        comando.Parameters.Add("chequera", OracleType.Number).Value = chequera;
+                        comando.Parameters.Add("estado_cheque", OracleType.Number).Value = 5;
+                        comando.ExecuteNonQuery();
+                    }
+
+                    //REGISTRAR LA TRANSACCION
+                    comando.Parameters.Clear();
+                    comando.CommandText = "INSERT INTO TRANSACCION (NO_RECHAZO, RAZON_RECHAZO,FECHA,SALDO_INICIAL, SALDO_FINAL, VALOR,EMPLEADO, AGENCIA, TIPO_TRANSACCION, EQUIPO,CHEQUE_LOCAL) " +
+                        "VALUES(:norechazo,:razonrechazo,:fecha,'0','0',:valor,:empleado,:agencia,'0',:equipo,:cheque)";
+                    comando.Parameters.Add("norechazo", OracleType.Number).Value = 1;
+                    comando.Parameters.Add("razonrechazo", OracleType.Number).Value = ex.Message;
+                    comando.Parameters.Add("fecha", OracleType.DateTime).Value = fecha;
+                    comando.Parameters.Add("valor", OracleType.Number).Value = Convert.ToDouble(linea[4]);
+                    comando.Parameters.Add("cheque", OracleType.Number).Value = Convert.ToInt32(linea[3]);
+                    comando.Parameters.Add("empleado", OracleType.Number).Value = Properties.Settings.Default.empleado;
+                    comando.Parameters.Add("agencia", OracleType.Number).Value = 1;
+                    comando.Parameters.Add("equipo", OracleType.Number).Value = 0;
+                    comando.ExecuteNonQuery();
+                    trans.Commit();
+                    estatus = "1";
+                }
+                finally
+                {
+                    //GRABAR EN LA VARIABLE DE RETORNO
+                    RESPUESTA += ConvertStringArrayToString(linea) + "|" + estatus;
+                    RESPUESTA += "\n";
+                }
+            }
+            //GUARDAR EL ARCHIVO 
+            //IN_banco_correlativo.txt
+            string path = Directory.GetCurrentDirectory() + "\\IN_2_00.txt";
+            File.WriteAllText(path, RESPUESTA);
+            System.Windows.Forms.MessageBox.Show("El archivo \n" + path + "\n se ha creado correctamente");
+
+        }
+
+        static string ConvertStringArrayToString(string[] array)
+        {
+            // Concatenate all the elements into a StringBuilder.
+            StringBuilder builder = new StringBuilder();
+            foreach (string value in array)
+            {
+                builder.Append(value);
+                builder.Append('|');
+            }
+            return builder.ToString();
+        }
+    
     }
 }
