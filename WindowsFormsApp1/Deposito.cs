@@ -199,14 +199,14 @@ namespace WindowsFormsApp1
                 comando.Transaction = transaction;
                 OracleConnection ora = new OracleConnection(conexion);
                 try
-                {
+               {
                     comando.CommandType = System.Data.CommandType.StoredProcedure;
                     comando.Parameters.Add("fech", OracleType.Timestamp).Value =DateTime.Now;
                     comando.Parameters.Add("valor", OracleType.Number).Value = Convert.ToDecimal(Monto.Text);
                     comando.Parameters.Add("empleado", OracleType.Number).Value = Properties.Settings.Default.empleado;
                     comando.Parameters.Add("agencia", OracleType.Number).Value = Properties.Settings.Default.agencia;
                     comando.Parameters.Add("cuen", OracleType.Number).Value = Convert.ToInt32(NumeroCuenta.Text);
-                    comando.Parameters.Add("equipo", OracleType.Number).Value = Properties.Settings.Default.agencia;
+                    comando.Parameters.Add("equipo", OracleType.Number).Value = Properties.Settings.Default.equipo;
                     comando.ExecuteNonQuery();
                     transaction.Commit();
                     MessageBox.Show("Se hizo el deposito correctamente");
