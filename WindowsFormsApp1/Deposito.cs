@@ -436,15 +436,17 @@ namespace WindowsFormsApp1
                 //CARGAR LOS DATOS A LA TRANSACCION
                 comando.Parameters.Clear();
                 comando.CommandText = "INSERT INTO TRANSACCION " +
-                    "      (FECHA,SALDO_INICIAL, SALDO_FINAL, VALOR,EMPLEADO, AGENCIA, TIPO_TRANSACCION, EQUIPO,CHEQUE_EXTERNO) " +
-                    "VALUES(:fecha,'0','0',:valor,:empleado,:agencia,'2',:equipo,:cheque)";
+                    "      (FECHA,SALDO_INICIAL, SALDO_FINAL, VALOR,EMPLEADO, AGENCIA, TIPO_TRANSACCION, EQUIPO,CHEQUE_EXTERNO,CUENTA) " +
+                    "VALUES(:fecha,'0','0',:valor,:empleado,:agencia,'2',:equipo,:cheque,:cuenta)";
                 comando.Parameters.Add("fecha", OracleType.DateTime).Value = fecha;
                 comando.Parameters.Add("valor", OracleType.Number).Value = Convert.ToDouble(txtmonto.Text);
                 comando.Parameters.Add("cheque", OracleType.Number).Value = Convert.ToInt32(txtnocheque.Text);
                 comando.Parameters.Add("empleado", OracleType.Number).Value = Properties.Settings.Default.empleado;
                 comando.Parameters.Add("agencia", OracleType.Number).Value = 1;
                 comando.Parameters.Add("equipo", OracleType.Number).Value = 0;
+                comando.Parameters.Add("cuenta", OracleType.Number).Value = Convert.ToInt32(textBox2.Text);
                 comando.ExecuteNonQuery();
+
                 // se registra el deposito
                 comando.Parameters.Clear();
                 String upd = "update cuenta set en_reserva =(select en_reserva from cuenta where NUMERO_CUENTA=" + textBox2.Text + ")+" + txtmonto.Text + "  where NUMERO_CUENTA=" + textBox2.Text + "";
@@ -452,9 +454,11 @@ namespace WindowsFormsApp1
                 //MessageBox.Show(upd);
                 comando.ExecuteNonQuery();
                 comando.Parameters.Clear();
+                /*
                 comando.CommandText = "insert into transaccion (fecha,saldo_inicial,saldo_final,valor,empleado,agencia,cuenta,tipo_transaccion,equipo,cheque_externo) values (:fecha,0,0," 
                     + Convert.ToDecimal(txtmonto.Text) + "," + Properties.Settings.Default.empleado + "," + Properties.Settings.Default.agencia + "," + textBox2.Text + "," + 1 + "," + Properties.Settings.Default.agencia + "," + txtnocheque.Text + ")";
                 comando.Parameters.Add("fecha", OracleType.DateTime).Value = fecha;
+                */
                 trans.Commit();
                 System.Windows.Forms.MessageBox.Show("Operacion Realizada con Exito");
             }

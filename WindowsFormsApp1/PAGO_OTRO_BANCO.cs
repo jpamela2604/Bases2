@@ -389,8 +389,6 @@ namespace WindowsFormsApp1
                 ora.Open();
                 comando = new OracleCommand();
                 comando.Connection = ora;
-                OracleTransaction trans = ora.BeginTransaction();
-                comando.Transaction = trans;
                 string selectedFileName = openFileDialog1.FileName;
                 try
                 {
@@ -398,6 +396,8 @@ namespace WindowsFormsApp1
                     var lines = File.ReadLines(selectedFileName);
                     foreach (var line in lines)
                     {
+                        OracleTransaction trans = ora.BeginTransaction();
+                        comando.Transaction = trans;
                         try
                         {
                             DateTime fecha = DateTime.Now;
@@ -419,7 +419,7 @@ namespace WindowsFormsApp1
 
                                 //  REGISTRAR CAMBIO EN CHEQUE_EXTRANGERO
                                 comando.Parameters.Clear();
-                                comando.CommandText = "UPDATE cheque_externo SET estado_cheque = 6 WHERE codigo_cheque = :cheque";
+                                comando.CommandText = "UPDATE cheque_externo SET estado_cheque = 8 WHERE codigo_cheque = :cheque";
                                 comando.Parameters.Add("cheque", OracleType.Number).Value = linea[3];
                                 comando.ExecuteNonQuery();
                                 trans.Commit();
@@ -442,7 +442,7 @@ namespace WindowsFormsApp1
 
                                 //  REGISTRAR CAMBIO EN CHEQUE_EXTRANGERO
                                 comando.Parameters.Clear();
-                                comando.CommandText = "UPDATE cheque_externo SET estado_cheque = 5 WHERE codigo_cheque = :cheque";
+                                comando.CommandText = "UPDATE cheque_externo SET estado_cheque = 9 WHERE codigo_cheque = :cheque";
                                 comando.Parameters.Add("cheque", OracleType.Number).Value = linea[3];
                                 comando.ExecuteNonQuery();
                                 trans.Commit();
@@ -509,7 +509,8 @@ namespace WindowsFormsApp1
                     " where " +
                     " cheque_externo.estado_cheque = 7 and " +
                     " transaccion.tipo_transaccion = 2 and " +
-                    " transaccion.cheque_externo = cheque_externo.codigo_cheque and " +
+                    " transaccion.cheque_externo = cheque_externo.codigo_cheque and" +
+                    " cheque_externo.cuenta is not null and" +
                     " cheque_externo.banco = :banco";
                 comando.Parameters.Add("banco", OracleType.Number).Value = numero_banco;
                 var reader = comando.ExecuteReader();
@@ -537,13 +538,26 @@ namespace WindowsFormsApp1
                 comando.Parameters.Clear();
                 comando.CommandText = "select * from cheque_externo, transaccion " +
                     " where " +
-                    " cheque_externo.estado_cheque = 6 and " +
+                    " cheque_externo.estado_cheque = 8 and " +
                     " transaccion.tipo_transaccion = 2 and " +
-                    " transaccion.cheque_externo = cheque_externo.codigo_cheque";
+                    " transaccion.cheque_externo = cheque_externo.codigo_cheque ";
+                    //" cheque_externo.cuenta is not null";
                 var reader = comando.ExecuteReader();
                 DataTable t = new DataTable();
                 t.Load(reader);
                 dataGridView1.DataSource = t;
+
+                comando.Parameters.Clear();
+                comando.CommandText = "select * from cheque_externo, transaccion " +
+                    " where " +
+                    " cheque_externo.estado_cheque = 9 and " +
+                    " transaccion.tipo_transaccion = 2 and " +
+                    " transaccion.cheque_externo = cheque_externo.codigo_cheque ";
+                    //" cheque_externo.cuenta is not null";
+                reader = comando.ExecuteReader();
+                DataTable t1 = new DataTable();
+                t1.Load(reader);
+                dataGridView3.DataSource = t1;
             }
             catch (Exception ex)
             {
@@ -553,6 +567,103 @@ namespace WindowsFormsApp1
             {
                 ora.Close();
             }
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            ora.Open();
+            comando = new OracleCommand();
+            comando.Connection = ora;
+            //por cada elemento de la tabla aceptado
+            foreach (DataGridViewRow row in dataGridView1.Rows)
+            {
+                if ((row.Index + 1) == dataGridView1.Rows.Count) { break; }
+                OracleTransaction trans = ora.BeginTransaction();
+                comando.Transaction = trans;
+                var cuenta = row.Cells["cuenta1"].Value.ToString();
+                var monto = row.Cells["monto"].Value;
+                var cheque = row.Cells["cheque_externo"].Value;
+                try
+                {                    
+                    if (cuenta == "")
+                    {
+                        //si no tiene cuenta solo se cambia el estado del cheque
+                        comando.Parameters.Clear();
+                        comando.CommandText = "UPDATE cheque_externo SET estado_cheque = 6 WHERE codigo_cheque = :cheque";
+                        comando.Parameters.Add("cheque", OracleType.Number).Value = cheque;
+                        comando.ExecuteNonQuery();
+                    }
+                    else
+                    {
+                        //restar monto a reserva
+                        comando.Parameters.Clear();
+                        comando.CommandText = "UPDATE cuenta SET en_reserva = en_reserva - :valor WHERE numero_cuenta = :cuenta";
+                        comando.Parameters.Add("valor", OracleType.Number).Value = monto;
+                        comando.Parameters.Add("cuenta", OracleType.Number).Value = cuenta;
+                        comando.ExecuteNonQuery();
+                        //agregra monto a saldo disponible
+                        comando.Parameters.Clear();
+                        comando.CommandText = "UPDATE cuenta SET saldo_disponible = saldo_disponible + :valor WHERE numero_cuenta = :cuenta";
+                        comando.Parameters.Add("valor", OracleType.Number).Value = monto;
+                        comando.Parameters.Add("cuenta", OracleType.Number).Value = cuenta;
+                        comando.ExecuteNonQuery();
+                        //se cambia el estado del cheque
+                        comando.Parameters.Clear();
+                        comando.CommandText = "UPDATE cheque_externo SET estado_cheque = 4 WHERE codigo_cheque = :cheque";
+                        comando.Parameters.Add("cheque", OracleType.Number).Value = cheque;
+                        comando.ExecuteNonQuery();
+                    }
+                    trans.Commit();
+                }catch(Exception ex)
+                {
+                    trans.Rollback();
+                    System.Windows.Forms.MessageBox.Show(ex.Message);
+                }
+            }
+            //por cada elemento de la tabla rechazado
+            foreach (DataGridViewRow row in dataGridView3.Rows)
+            {
+                if ((row.Index + 1) == dataGridView3.Rows.Count) { break; }
+                OracleTransaction trans = ora.BeginTransaction();
+                comando.Transaction = trans;
+                var cuenta = row.Cells["cuenta1"].Value;
+                var monto = row.Cells["monto"].Value;
+                var cheque = row.Cells["cheque_externo"].Value;
+                try
+                {
+                    if (cuenta == "")
+                    {
+                        //si no tiene cuenta solo se cambia el estado del cheque
+                        comando.Parameters.Clear();
+                        comando.CommandText = "UPDATE cheque_externo SET estado_cheque = 5 WHERE codigo_cheque = :cheque";
+                        comando.Parameters.Add("cheque", OracleType.Number).Value = cheque;
+                        comando.ExecuteNonQuery();
+                    }
+                    else
+                    {
+                        //restar monto a reserva
+                        comando.Parameters.Clear();
+                        comando.CommandText = "UPDATE cuenta SET en_reserva = en_reserva - :valor WHERE numero_cuenta = :cuenta";
+                        comando.Parameters.Add("valor", OracleType.Number).Value = monto;
+                        comando.Parameters.Add("cuenta", OracleType.Number).Value = cuenta;
+                        comando.ExecuteNonQuery();
+                        //se cambia el estado del cheque
+                        comando.Parameters.Clear();
+                        comando.CommandText = "UPDATE cheque_externo SET estado_cheque = 5 WHERE codigo_cheque = :cheque";
+                        comando.Parameters.Add("cheque", OracleType.Number).Value = cheque;
+                        comando.ExecuteNonQuery();
+                    }
+                    trans.Commit();
+                }
+                catch (Exception ex)
+                {
+                    trans.Rollback();
+                    System.Windows.Forms.MessageBox.Show(ex.Message);
+                }
+            }
+
+            System.Windows.Forms.MessageBox.Show("Operacion completada!");
+            ora.Close();
         }
     }
 }
