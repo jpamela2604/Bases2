@@ -385,7 +385,7 @@ namespace WindowsFormsApp1
                 //MessageBox.Show(upd);
                 comando.ExecuteNonQuery();
                 comando.Parameters.Clear();
-            comando.CommandText = "insert into transaccion (fecha,saldo_inicial,saldo_final,valor,empleado,agencia,cuenta,tipo_transaccion,equipo,cheque_local) values (:fecha,0,0," + Convert.ToDecimal(txt_monto.Text) + "," + Properties.Settings.Default.empleado + "," + Properties.Settings.Default.agencia + "," + textBox1.Text + "," + 1 + "," + Properties.Settings.Default.agencia +","+txt_nocheque.Text+ ")";
+            comando.CommandText = "insert into transaccion (fecha,saldo_inicial,saldo_final,valor,empleado,agencia,cuenta,tipo_transaccion,equipo,cheque_local) values (:fecha,0,0," + Convert.ToDecimal(txt_monto.Text) + "," + Properties.Settings.Default.empleado + "," + Properties.Settings.Default.agencia + "," + textBox1.Text + "," + 1 + "," + Properties.Settings.Default.equipo +","+txt_nocheque.Text+ ")";
             comando.Parameters.Add("fecha", OracleType.DateTime).Value = fecha;
            
             comando.ExecuteNonQuery();
