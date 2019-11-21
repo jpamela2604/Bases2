@@ -30,6 +30,8 @@
         {
             this.label1 = new System.Windows.Forms.Label();
             this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.label15 = new System.Windows.Forms.Label();
+            this.txtnocuenta = new System.Windows.Forms.TextBox();
             this.combo_bank = new System.Windows.Forms.ComboBox();
             this.label14 = new System.Windows.Forms.Label();
             this.textBox2 = new System.Windows.Forms.TextBox();
@@ -62,8 +64,6 @@
             this.label2 = new System.Windows.Forms.Label();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.button3 = new System.Windows.Forms.Button();
-            this.label15 = new System.Windows.Forms.Label();
-            this.txtnocuenta = new System.Windows.Forms.TextBox();
             this.tabPage3.SuspendLayout();
             this.tabPage2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pic_firma)).BeginInit();
@@ -102,6 +102,24 @@
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "Cheque Externo";
             this.tabPage3.UseVisualStyleBackColor = true;
+            // 
+            // label15
+            // 
+            this.label15.AutoSize = true;
+            this.label15.Location = new System.Drawing.Point(27, 139);
+            this.label15.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(61, 13);
+            this.label15.TabIndex = 37;
+            this.label15.Text = "No. Cuenta";
+            // 
+            // txtnocuenta
+            // 
+            this.txtnocuenta.Location = new System.Drawing.Point(197, 139);
+            this.txtnocuenta.Margin = new System.Windows.Forms.Padding(2);
+            this.txtnocuenta.Name = "txtnocuenta";
+            this.txtnocuenta.Size = new System.Drawing.Size(130, 20);
+            this.txtnocuenta.TabIndex = 38;
             // 
             // combo_bank
             // 
@@ -150,7 +168,7 @@
             // 
             // externo
             // 
-            this.externo.Location = new System.Drawing.Point(391, 204);
+            this.externo.Location = new System.Drawing.Point(395, 207);
             this.externo.Margin = new System.Windows.Forms.Padding(2);
             this.externo.Name = "externo";
             this.externo.Size = new System.Drawing.Size(103, 46);
@@ -430,24 +448,6 @@
             this.button3.Text = "Cerrar Sesión";
             this.button3.UseVisualStyleBackColor = true;
             this.button3.Click += new System.EventHandler(this.button3_Click);
-            // 
-            // label15
-            // 
-            this.label15.AutoSize = true;
-            this.label15.Location = new System.Drawing.Point(27, 139);
-            this.label15.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(61, 13);
-            this.label15.TabIndex = 37;
-            this.label15.Text = "No. Cuenta";
-            // 
-            // txtnocuenta
-            // 
-            this.txtnocuenta.Location = new System.Drawing.Point(197, 139);
-            this.txtnocuenta.Margin = new System.Windows.Forms.Padding(2);
-            this.txtnocuenta.Name = "txtnocuenta";
-            this.txtnocuenta.Size = new System.Drawing.Size(130, 20);
-            this.txtnocuenta.TabIndex = 38;
             // 
             // Deposito
             // 

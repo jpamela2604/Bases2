@@ -452,7 +452,7 @@ namespace WindowsFormsApp1
                 //MessageBox.Show(upd);
                 comando.ExecuteNonQuery();
                 comando.Parameters.Clear();
-                comando.CommandText = "insert into transaccion (fecha,saldo_inicial,saldo_final,valor,empleado,agencia,cuenta,tipo_transaccion,equipo,cheque_local) values (:fecha,0,0," 
+                comando.CommandText = "insert into transaccion (fecha,saldo_inicial,saldo_final,valor,empleado,agencia,cuenta,tipo_transaccion,equipo,cheque_externo) values (:fecha,0,0," 
                     + Convert.ToDecimal(txtmonto.Text) + "," + Properties.Settings.Default.empleado + "," + Properties.Settings.Default.agencia + "," + textBox2.Text + "," + 1 + "," + Properties.Settings.Default.agencia + "," + txtnocheque.Text + ")";
                 comando.Parameters.Add("fecha", OracleType.DateTime).Value = fecha;
                 trans.Commit();
