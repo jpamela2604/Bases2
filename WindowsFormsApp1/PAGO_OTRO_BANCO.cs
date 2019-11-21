@@ -286,6 +286,11 @@ namespace WindowsFormsApp1
                             throw new Exception("El cheque no pertenece a ninguna chequera o a esa cuenta");
                         }
 
+                        if (!IsCuentaBloqueada(linea[2]))
+                        {
+                            break;
+                        }
+
 
                         //LA CUENTA TIENE FONDOS
                         comando.Parameters.Clear();
@@ -595,6 +600,10 @@ namespace WindowsFormsApp1
                     }
                     else
                     {
+                        if (!IsCuentaBloqueada(cuenta))
+                        {
+                            break;
+                        }
                         //restar monto a reserva
                         comando.Parameters.Clear();
                         comando.CommandText = "UPDATE cuenta SET en_reserva = en_reserva - :valor WHERE numero_cuenta = :cuenta";
@@ -909,6 +918,37 @@ namespace WindowsFormsApp1
             }
             return builder.ToString();
         }
-    
+
+        bool IsCuentaBloqueada(String cuenta)
+        {
+            ora.Open();
+            comando = new OracleCommand();
+            comando.Connection = ora;
+            OracleTransaction transaction = ora.BeginTransaction();
+            comando.Transaction = transaction;
+            try
+            {
+                comando.CommandType = System.Data.CommandType.StoredProcedure;
+                comando.Parameters.Add("cuenta", OracleType.Number).Value = Convert.ToInt32(cuenta);
+                comando.Parameters.Add("resultado", OracleType.VarChar, 100).Direction = ParameterDirection.ReturnValue;
+                comando.ExecuteNonQuery();
+                transaction.Commit();
+                string tipocuenta = Convert.ToString(comando.Parameters["resultado"].Value).ToUpper().Trim();
+
+                if (tipocuenta.Equals("ACTIVA"))
+                {
+                    return true;
+                }
+                MessageBox.Show("No se puede efectuar transaccion la cuenta " + cuenta + " esta " + tipocuenta);
+                return false;
+            }
+            catch (Exception EX)
+            {
+                MessageBox.Show("algo fallo");
+                transaction.Rollback();
+                return false;
+            }    
+        }
+
     }
 }

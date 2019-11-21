@@ -403,6 +403,7 @@ namespace WindowsFormsApp1
                 ora.Close();
             }
         }
+
         bool IsCuentaBloqueada(String cuenta)
         {
             using (OracleConnection connection = new OracleConnection(conexion))
