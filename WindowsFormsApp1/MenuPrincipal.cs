@@ -195,5 +195,10 @@ namespace WindowsFormsApp1
         {
 
         }
+
+        private void button20_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

@@ -414,7 +414,9 @@ namespace WindowsFormsApp1
                 transaction = connection.BeginTransaction(lectura);
                 comando.Transaction = transaction;
                 try
-               {
+               { 
+
+
 
                     comando.CommandType = System.Data.CommandType.StoredProcedure;
                     comando.Parameters.Add("cuenta", OracleType.Number).Value = Convert.ToInt32(cuenta);
