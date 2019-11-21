@@ -127,7 +127,7 @@ namespace WindowsFormsApp1
                     comando.Parameters.Add("empleado", OracleType.Number).Value = Properties.Settings.Default.empleado;
                     comando.Parameters.Add("agencia", OracleType.Number).Value = Properties.Settings.Default.agencia;
                     comando.Parameters.Add("cuen", OracleType.Number).Value = Convert.ToInt32(NumeroCuenta.Text);
-                    comando.Parameters.Add("equipo", OracleType.Number).Value = Properties.Settings.Default.agencia;
+                    comando.Parameters.Add("equipo", OracleType.Number).Value = Properties.Settings.Default.equipo;
                     comando.ExecuteNonQuery();
                     transaction.Commit();
                     MessageBox.Show("Se creo nota de debito correctamente");
