@@ -344,7 +344,7 @@ namespace WindowsFormsApp1
                     comando.Parameters.Add("cuenta", OracleType.Number).Value = Convert.ToInt32(txt_nocuenta.Text);
                     comando.Parameters.Add("cheque", OracleType.Number).Value = Convert.ToInt32(txt_nocheque.Text);
                     comando.Parameters.Add("empleado", OracleType.Number).Value = Properties.Settings.Default.empleado;
-                    comando.Parameters.Add("agencia", OracleType.Number).Value = 1;
+                    comando.Parameters.Add("agencia", OracleType.Number).Value = Properties.Settings.Default.agencia;
                     comando.Parameters.Add("equipo", OracleType.Number).Value = 0;
                     comando.ExecuteNonQuery();
                     return;
@@ -375,7 +375,7 @@ namespace WindowsFormsApp1
                 comando.Parameters.Add("cuenta", OracleType.Number).Value = Convert.ToInt32(txt_nocuenta.Text);
                 comando.Parameters.Add("cheque", OracleType.Number).Value = Convert.ToInt32(txt_nocheque.Text);
                 comando.Parameters.Add("empleado", OracleType.Number).Value = Properties.Settings.Default.empleado;
-                comando.Parameters.Add("agencia", OracleType.Number).Value = 1;
+                comando.Parameters.Add("agencia", OracleType.Number).Value = Properties.Settings.Default.agencia;
                 comando.Parameters.Add("equipo", OracleType.Number).Value = 0;
                 comando.ExecuteNonQuery();
                 // se registra el deposito
@@ -492,7 +492,7 @@ namespace WindowsFormsApp1
                 comando.Parameters.Add("valor", OracleType.Number).Value = Convert.ToDouble(txtmonto.Text);
                 comando.Parameters.Add("cheque", OracleType.Number).Value = Convert.ToInt32(txtnocheque.Text);
                 comando.Parameters.Add("empleado", OracleType.Number).Value = Properties.Settings.Default.empleado;
-                comando.Parameters.Add("agencia", OracleType.Number).Value = 1;
+                comando.Parameters.Add("agencia", OracleType.Number).Value = Properties.Settings.Default.agencia;
                 comando.Parameters.Add("equipo", OracleType.Number).Value = 0;
                 comando.Parameters.Add("cuenta", OracleType.Number).Value = Convert.ToInt32(textBox2.Text);
                 comando.ExecuteNonQuery();

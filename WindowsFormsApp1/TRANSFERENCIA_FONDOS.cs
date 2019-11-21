@@ -138,7 +138,7 @@ namespace WindowsFormsApp1
                 comando.Parameters.Add("valor", OracleType.Number).Value = Convert.ToDouble(txt_monto.Text);
                 comando.Parameters.Add("cuenta", OracleType.Number).Value = Convert.ToInt32(txt_cuenta_a.Text);
                 comando.Parameters.Add("empleado", OracleType.Number).Value = Properties.Settings.Default.empleado;
-                comando.Parameters.Add("agencia", OracleType.Number).Value = 1;
+                comando.Parameters.Add("agencia", OracleType.Number).Value = Properties.Settings.Default.agencia;
                 comando.Parameters.Add("equipo", OracleType.Number).Value = 0;
                 comando.ExecuteNonQuery();
 
@@ -149,7 +149,7 @@ namespace WindowsFormsApp1
                 comando.Parameters.Add("valor", OracleType.Number).Value = Convert.ToDouble(txt_monto.Text);
                 comando.Parameters.Add("cuenta", OracleType.Number).Value = Convert.ToInt32(txt_cuenta_b.Text);
                 comando.Parameters.Add("empleado", OracleType.Number).Value = Properties.Settings.Default.empleado;
-                comando.Parameters.Add("agencia", OracleType.Number).Value = 1;
+                comando.Parameters.Add("agencia", OracleType.Number).Value = Properties.Settings.Default.agencia;
                 comando.Parameters.Add("equipo", OracleType.Number).Value = 0;
                 comando.ExecuteNonQuery();
 

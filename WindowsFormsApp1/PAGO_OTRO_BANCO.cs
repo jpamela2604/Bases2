@@ -138,7 +138,7 @@ namespace WindowsFormsApp1
                 comando.Parameters.Add("valor", OracleType.Number).Value = Convert.ToDouble(txtmonto.Text);
                 comando.Parameters.Add("cheque", OracleType.Number).Value = Convert.ToInt32(txtnocheque.Text);
                 comando.Parameters.Add("empleado", OracleType.Number).Value = Properties.Settings.Default.empleado;
-                comando.Parameters.Add("agencia", OracleType.Number).Value = 1;
+                comando.Parameters.Add("agencia", OracleType.Number).Value = Properties.Settings.Default.agencia;
                 comando.Parameters.Add("equipo", OracleType.Number).Value = 0;
                 comando.ExecuteNonQuery();
                 trans.Commit();
@@ -331,7 +331,7 @@ namespace WindowsFormsApp1
                         comando.Parameters.Add("valor", OracleType.Number).Value = Convert.ToDouble(linea[4]);
                         comando.Parameters.Add("cheque", OracleType.Number).Value = Convert.ToInt32(linea[3]);
                         comando.Parameters.Add("empleado", OracleType.Number).Value = Properties.Settings.Default.empleado;
-                        comando.Parameters.Add("agencia", OracleType.Number).Value = 1;
+                        comando.Parameters.Add("agencia", OracleType.Number).Value = Properties.Settings.Default.agencia;
                         comando.Parameters.Add("equipo", OracleType.Number).Value = 0;
                         comando.ExecuteNonQuery();
 
@@ -364,7 +364,7 @@ namespace WindowsFormsApp1
                         comando.Parameters.Add("valor", OracleType.Number).Value = Convert.ToDouble(linea[4]);
                         comando.Parameters.Add("cheque", OracleType.Number).Value = Convert.ToInt32(linea[3]);
                         comando.Parameters.Add("empleado", OracleType.Number).Value = Properties.Settings.Default.empleado;
-                        comando.Parameters.Add("agencia", OracleType.Number).Value = 1;
+                        comando.Parameters.Add("agencia", OracleType.Number).Value = Properties.Settings.Default.agencia;
                         comando.Parameters.Add("equipo", OracleType.Number).Value = 0;
                         comando.ExecuteNonQuery();
                         trans.Commit();
@@ -418,7 +418,7 @@ namespace WindowsFormsApp1
                                 comando.Parameters.Add("valor", OracleType.Number).Value = linea[4];
                                 comando.Parameters.Add("cheque", OracleType.Number).Value = linea[3];
                                 comando.Parameters.Add("empleado", OracleType.Number).Value = Properties.Settings.Default.empleado;
-                                comando.Parameters.Add("agencia", OracleType.Number).Value = 1;
+                                comando.Parameters.Add("agencia", OracleType.Number).Value = Properties.Settings.Default.agencia;
                                 comando.Parameters.Add("equipo", OracleType.Number).Value = 0;
                                 comando.ExecuteNonQuery();
 
@@ -441,7 +441,7 @@ namespace WindowsFormsApp1
                                 comando.Parameters.Add("valor", OracleType.Number).Value = linea[4];
                                 comando.Parameters.Add("cheque", OracleType.Number).Value = linea[3];
                                 comando.Parameters.Add("empleado", OracleType.Number).Value = Properties.Settings.Default.empleado;
-                                comando.Parameters.Add("agencia", OracleType.Number).Value = 1;
+                                comando.Parameters.Add("agencia", OracleType.Number).Value = Properties.Settings.Default.agencia;
                                 comando.Parameters.Add("equipo", OracleType.Number).Value = 0;
                                 comando.ExecuteNonQuery();
 
@@ -706,7 +706,7 @@ namespace WindowsFormsApp1
                         comando.Parameters.Add("valor", OracleType.Number).Value = linea[4];
                         comando.Parameters.Add("cheque", OracleType.Number).Value = linea[3];
                         comando.Parameters.Add("empleado", OracleType.Number).Value = Properties.Settings.Default.empleado;
-                        comando.Parameters.Add("agencia", OracleType.Number).Value = 1;
+                        comando.Parameters.Add("agencia", OracleType.Number).Value = Properties.Settings.Default.agencia;
                         comando.Parameters.Add("equipo", OracleType.Number).Value = 0;
                         comando.ExecuteNonQuery();
 
@@ -729,7 +729,7 @@ namespace WindowsFormsApp1
                         comando.Parameters.Add("valor", OracleType.Number).Value = linea[4];
                         comando.Parameters.Add("cheque", OracleType.Number).Value = linea[3];
                         comando.Parameters.Add("empleado", OracleType.Number).Value = Properties.Settings.Default.empleado;
-                        comando.Parameters.Add("agencia", OracleType.Number).Value = 1;
+                        comando.Parameters.Add("agencia", OracleType.Number).Value = Properties.Settings.Default.agencia;
                         comando.Parameters.Add("equipo", OracleType.Number).Value = 0;
                         comando.ExecuteNonQuery();
 
@@ -852,7 +852,7 @@ namespace WindowsFormsApp1
                     comando.Parameters.Add("valor", OracleType.Number).Value = Convert.ToDouble(linea[4]);
                     comando.Parameters.Add("cheque", OracleType.Number).Value = Convert.ToInt32(linea[3]);
                     comando.Parameters.Add("empleado", OracleType.Number).Value = Properties.Settings.Default.empleado;
-                    comando.Parameters.Add("agencia", OracleType.Number).Value = 1;
+                    comando.Parameters.Add("agencia", OracleType.Number).Value = Properties.Settings.Default.agencia;
                     comando.Parameters.Add("equipo", OracleType.Number).Value = 0;
                     comando.ExecuteNonQuery();
 
@@ -886,7 +886,7 @@ namespace WindowsFormsApp1
                     comando.Parameters.Add("valor", OracleType.Number).Value = Convert.ToDouble(linea[4]);
                     comando.Parameters.Add("cheque", OracleType.Number).Value = Convert.ToInt32(linea[3]);
                     comando.Parameters.Add("empleado", OracleType.Number).Value = Properties.Settings.Default.empleado;
-                    comando.Parameters.Add("agencia", OracleType.Number).Value = 1;
+                    comando.Parameters.Add("agencia", OracleType.Number).Value = Properties.Settings.Default.agencia;
                     comando.Parameters.Add("equipo", OracleType.Number).Value = 0;
                     comando.ExecuteNonQuery();
                     trans.Commit();
@@ -950,5 +950,9 @@ namespace WindowsFormsApp1
             }    
         }
 
+        private void gen_comp_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

@@ -31,18 +31,18 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle13 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle14 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle15 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
@@ -68,10 +68,27 @@
             this.label7 = new System.Windows.Forms.Label();
             this.bnt_generar = new System.Windows.Forms.Button();
             this.upload_conciliados = new System.Windows.Forms.TabPage();
+            this.dataGridView5 = new System.Windows.Forms.DataGridView();
+            this.D2BANCO = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.D2REFERENCIA = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.D2CUENTA = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.D2NOCHEQUE = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.D2MONTO = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridView4 = new System.Windows.Forms.DataGridView();
+            this.D1BANCO = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.D1REFERENCIA = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.D1CUENTA = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.D1NOCHEQUE = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.D1MONTO = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.D1RESULTADO = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.btn_conciliado = new System.Windows.Forms.Button();
-            this.btn_conciliar = new System.Windows.Forms.Button();
-            this.label9 = new System.Windows.Forms.Label();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.label8 = new System.Windows.Forms.Label();
+            this.button3 = new System.Windows.Forms.Button();
+            this.btn_conciliar = new System.Windows.Forms.Button();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.button4 = new System.Windows.Forms.Button();
+            this.label9 = new System.Windows.Forms.Label();
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.dataGridView3 = new System.Windows.Forms.DataGridView();
             this.label12 = new System.Windows.Forms.Label();
@@ -80,36 +97,19 @@
             this.button1 = new System.Windows.Forms.Button();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.label10 = new System.Windows.Forms.Label();
-            this.dataGridView4 = new System.Windows.Forms.DataGridView();
-            this.dataGridView5 = new System.Windows.Forms.DataGridView();
-            this.button3 = new System.Windows.Forms.Button();
-            this.button4 = new System.Windows.Forms.Button();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.D1BANCO = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.D1REFERENCIA = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.D1CUENTA = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.D1NOCHEQUE = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.D1MONTO = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.D1RESULTADO = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.D2BANCO = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.D2REFERENCIA = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.D2CUENTA = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.D2NOCHEQUE = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.D2MONTO = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
             this.gen_comp.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
             this.upload_conciliados.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView5)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView4)).BeginInit();
+            this.groupBox1.SuspendLayout();
+            this.groupBox2.SuspendLayout();
             this.tabPage3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView4)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView5)).BeginInit();
-            this.groupBox1.SuspendLayout();
-            this.groupBox2.SuspendLayout();
             this.SuspendLayout();
             // 
             // label1
@@ -209,7 +209,7 @@
             this.tabPage1.Location = new System.Drawing.Point(4, 25);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(934, 613);
+            this.tabPage1.Size = new System.Drawing.Size(1153, 613);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Cobro de cheque";
             this.tabPage1.UseVisualStyleBackColor = true;
@@ -234,7 +234,7 @@
             this.tabPage2.Location = new System.Drawing.Point(4, 25);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(934, 613);
+            this.tabPage2.Size = new System.Drawing.Size(1153, 613);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Consulta cheque";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -313,10 +313,11 @@
             this.gen_comp.Location = new System.Drawing.Point(4, 25);
             this.gen_comp.Name = "gen_comp";
             this.gen_comp.Padding = new System.Windows.Forms.Padding(3);
-            this.gen_comp.Size = new System.Drawing.Size(934, 613);
+            this.gen_comp.Size = new System.Drawing.Size(1153, 613);
             this.gen_comp.TabIndex = 2;
             this.gen_comp.Text = "Genera Archivo";
             this.gen_comp.UseVisualStyleBackColor = true;
+            this.gen_comp.Click += new System.EventHandler(this.gen_comp_Click);
             // 
             // dataGridView2
             // 
@@ -397,6 +398,151 @@
             this.upload_conciliados.Text = "Cargar Conciliados";
             this.upload_conciliados.UseVisualStyleBackColor = true;
             // 
+            // dataGridView5
+            // 
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridView5.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle4;
+            this.dataGridView5.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
+            this.dataGridView5.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.D2BANCO,
+            this.D2REFERENCIA,
+            this.D2CUENTA,
+            this.D2NOCHEQUE,
+            this.D2MONTO});
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle5.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dataGridView5.DefaultCellStyle = dataGridViewCellStyle5;
+            this.dataGridView5.Location = new System.Drawing.Point(363, 320);
+            this.dataGridView5.Name = "dataGridView5";
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle6.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridView5.RowHeadersDefaultCellStyle = dataGridViewCellStyle6;
+            this.dataGridView5.RowTemplate.Height = 24;
+            this.dataGridView5.Size = new System.Drawing.Size(729, 229);
+            this.dataGridView5.TabIndex = 5;
+            // 
+            // D2BANCO
+            // 
+            this.D2BANCO.Frozen = true;
+            this.D2BANCO.HeaderText = "banco";
+            this.D2BANCO.Name = "D2BANCO";
+            // 
+            // D2REFERENCIA
+            // 
+            this.D2REFERENCIA.Frozen = true;
+            this.D2REFERENCIA.HeaderText = "referencia";
+            this.D2REFERENCIA.Name = "D2REFERENCIA";
+            // 
+            // D2CUENTA
+            // 
+            this.D2CUENTA.Frozen = true;
+            this.D2CUENTA.HeaderText = "cuenta";
+            this.D2CUENTA.Name = "D2CUENTA";
+            // 
+            // D2NOCHEQUE
+            // 
+            this.D2NOCHEQUE.Frozen = true;
+            this.D2NOCHEQUE.HeaderText = "nocheque";
+            this.D2NOCHEQUE.Name = "D2NOCHEQUE";
+            // 
+            // D2MONTO
+            // 
+            this.D2MONTO.Frozen = true;
+            this.D2MONTO.HeaderText = "monto";
+            this.D2MONTO.Name = "D2MONTO";
+            // 
+            // dataGridView4
+            // 
+            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle7.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle7.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle7.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle7.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle7.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridView4.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle7;
+            this.dataGridView4.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
+            this.dataGridView4.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.D1BANCO,
+            this.D1REFERENCIA,
+            this.D1CUENTA,
+            this.D1NOCHEQUE,
+            this.D1MONTO,
+            this.D1RESULTADO});
+            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle8.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle8.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle8.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle8.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle8.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dataGridView4.DefaultCellStyle = dataGridViewCellStyle8;
+            this.dataGridView4.Location = new System.Drawing.Point(363, 26);
+            this.dataGridView4.Name = "dataGridView4";
+            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle9.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle9.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle9.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle9.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle9.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle9.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridView4.RowHeadersDefaultCellStyle = dataGridViewCellStyle9;
+            this.dataGridView4.RowTemplate.Height = 24;
+            this.dataGridView4.Size = new System.Drawing.Size(786, 215);
+            this.dataGridView4.TabIndex = 4;
+            // 
+            // D1BANCO
+            // 
+            this.D1BANCO.Frozen = true;
+            this.D1BANCO.HeaderText = "banco";
+            this.D1BANCO.Name = "D1BANCO";
+            // 
+            // D1REFERENCIA
+            // 
+            this.D1REFERENCIA.Frozen = true;
+            this.D1REFERENCIA.HeaderText = "referencia";
+            this.D1REFERENCIA.Name = "D1REFERENCIA";
+            // 
+            // D1CUENTA
+            // 
+            this.D1CUENTA.Frozen = true;
+            this.D1CUENTA.HeaderText = "cuenta";
+            this.D1CUENTA.Name = "D1CUENTA";
+            // 
+            // D1NOCHEQUE
+            // 
+            this.D1NOCHEQUE.Frozen = true;
+            this.D1NOCHEQUE.HeaderText = "nocheque";
+            this.D1NOCHEQUE.Name = "D1NOCHEQUE";
+            // 
+            // D1MONTO
+            // 
+            this.D1MONTO.Frozen = true;
+            this.D1MONTO.HeaderText = "monto";
+            this.D1MONTO.Name = "D1MONTO";
+            // 
+            // D1RESULTADO
+            // 
+            this.D1RESULTADO.Frozen = true;
+            this.D1RESULTADO.HeaderText = "resultado";
+            this.D1RESULTADO.Name = "D1RESULTADO";
+            // 
             // btn_conciliado
             // 
             this.btn_conciliado.Location = new System.Drawing.Point(122, 445);
@@ -406,6 +552,37 @@
             this.btn_conciliado.Text = "Cargar archivo para conciliar";
             this.btn_conciliado.UseVisualStyleBackColor = true;
             this.btn_conciliado.Click += new System.EventHandler(this.btn_conciliado_Click);
+            // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.label8);
+            this.groupBox1.Controls.Add(this.button3);
+            this.groupBox1.Controls.Add(this.btn_conciliar);
+            this.groupBox1.Location = new System.Drawing.Point(19, 6);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(1131, 291);
+            this.groupBox1.TabIndex = 8;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Ya conciliados";
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(28, 48);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(203, 51);
+            this.label8.TabIndex = 0;
+            this.label8.Text = "Cargar archivo que generaron \r\notros grupos como resultado\r\nde la conciliacion";
+            // 
+            // button3
+            // 
+            this.button3.Location = new System.Drawing.Point(721, 241);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(90, 44);
+            this.button3.TabIndex = 6;
+            this.button3.Text = "Carga Manual";
+            this.button3.UseVisualStyleBackColor = true;
+            this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
             // btn_conciliar
             // 
@@ -417,6 +594,27 @@
             this.btn_conciliar.UseVisualStyleBackColor = true;
             this.btn_conciliar.Click += new System.EventHandler(this.btn_conciliar_Click);
             // 
+            // groupBox2
+            // 
+            this.groupBox2.Controls.Add(this.button4);
+            this.groupBox2.Controls.Add(this.label9);
+            this.groupBox2.Location = new System.Drawing.Point(19, 304);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(1079, 303);
+            this.groupBox2.TabIndex = 9;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "Por conciliar";
+            // 
+            // button4
+            // 
+            this.button4.Location = new System.Drawing.Point(721, 251);
+            this.button4.Name = "button4";
+            this.button4.Size = new System.Drawing.Size(90, 46);
+            this.button4.TabIndex = 7;
+            this.button4.Text = "Carga Manual";
+            this.button4.UseVisualStyleBackColor = true;
+            this.button4.Click += new System.EventHandler(this.button4_Click);
+            // 
             // label9
             // 
             this.label9.AutoSize = true;
@@ -426,15 +624,6 @@
             this.label9.TabIndex = 1;
             this.label9.Text = "Cargar archivo que generaron \r\notros grupos para lleva a cabo\r\nla conciliacion po" +
     "r mi banco";
-            // 
-            // label8
-            // 
-            this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(28, 48);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(203, 51);
-            this.label8.TabIndex = 0;
-            this.label8.Text = "Cargar archivo que generaron \r\notros grupos como resultado\r\nde la conciliacion";
             // 
             // tabPage3
             // 
@@ -448,7 +637,7 @@
             this.tabPage3.Location = new System.Drawing.Point(4, 25);
             this.tabPage3.Name = "tabPage3";
             this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage3.Size = new System.Drawing.Size(934, 613);
+            this.tabPage3.Size = new System.Drawing.Size(1153, 613);
             this.tabPage3.TabIndex = 4;
             this.tabPage3.Text = "Liberacion Reserva";
             this.tabPage3.UseVisualStyleBackColor = true;
@@ -569,194 +758,6 @@
             this.label10.Text = "En Reserva";
             this.label10.Click += new System.EventHandler(this.label10_Click);
             // 
-            // dataGridView4
-            // 
-            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle7.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle7.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle7.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle7.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle7.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridView4.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle7;
-            this.dataGridView4.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
-            this.dataGridView4.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.D1BANCO,
-            this.D1REFERENCIA,
-            this.D1CUENTA,
-            this.D1NOCHEQUE,
-            this.D1MONTO,
-            this.D1RESULTADO});
-            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle8.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle8.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle8.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle8.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle8.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dataGridView4.DefaultCellStyle = dataGridViewCellStyle8;
-            this.dataGridView4.Location = new System.Drawing.Point(363, 26);
-            this.dataGridView4.Name = "dataGridView4";
-            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle9.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle9.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle9.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle9.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle9.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle9.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridView4.RowHeadersDefaultCellStyle = dataGridViewCellStyle9;
-            this.dataGridView4.RowTemplate.Height = 24;
-            this.dataGridView4.Size = new System.Drawing.Size(786, 215);
-            this.dataGridView4.TabIndex = 4;
-            // 
-            // dataGridView5
-            // 
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridView5.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle4;
-            this.dataGridView5.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
-            this.dataGridView5.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.D2BANCO,
-            this.D2REFERENCIA,
-            this.D2CUENTA,
-            this.D2NOCHEQUE,
-            this.D2MONTO});
-            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle5.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dataGridView5.DefaultCellStyle = dataGridViewCellStyle5;
-            this.dataGridView5.Location = new System.Drawing.Point(363, 320);
-            this.dataGridView5.Name = "dataGridView5";
-            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle6.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridView5.RowHeadersDefaultCellStyle = dataGridViewCellStyle6;
-            this.dataGridView5.RowTemplate.Height = 24;
-            this.dataGridView5.Size = new System.Drawing.Size(729, 229);
-            this.dataGridView5.TabIndex = 5;
-            // 
-            // button3
-            // 
-            this.button3.Location = new System.Drawing.Point(721, 241);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(90, 44);
-            this.button3.TabIndex = 6;
-            this.button3.Text = "Carga Manual";
-            this.button3.UseVisualStyleBackColor = true;
-            this.button3.Click += new System.EventHandler(this.button3_Click);
-            // 
-            // button4
-            // 
-            this.button4.Location = new System.Drawing.Point(721, 251);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(90, 46);
-            this.button4.TabIndex = 7;
-            this.button4.Text = "Carga Manual";
-            this.button4.UseVisualStyleBackColor = true;
-            this.button4.Click += new System.EventHandler(this.button4_Click);
-            // 
-            // groupBox1
-            // 
-            this.groupBox1.Controls.Add(this.label8);
-            this.groupBox1.Controls.Add(this.button3);
-            this.groupBox1.Controls.Add(this.btn_conciliar);
-            this.groupBox1.Location = new System.Drawing.Point(19, 6);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(1131, 291);
-            this.groupBox1.TabIndex = 8;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Ya conciliados";
-            // 
-            // groupBox2
-            // 
-            this.groupBox2.Controls.Add(this.button4);
-            this.groupBox2.Controls.Add(this.label9);
-            this.groupBox2.Location = new System.Drawing.Point(19, 304);
-            this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(1079, 303);
-            this.groupBox2.TabIndex = 9;
-            this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "Por conciliar";
-            // 
-            // D1BANCO
-            // 
-            this.D1BANCO.Frozen = true;
-            this.D1BANCO.HeaderText = "banco";
-            this.D1BANCO.Name = "D1BANCO";
-            // 
-            // D1REFERENCIA
-            // 
-            this.D1REFERENCIA.Frozen = true;
-            this.D1REFERENCIA.HeaderText = "referencia";
-            this.D1REFERENCIA.Name = "D1REFERENCIA";
-            // 
-            // D1CUENTA
-            // 
-            this.D1CUENTA.Frozen = true;
-            this.D1CUENTA.HeaderText = "cuenta";
-            this.D1CUENTA.Name = "D1CUENTA";
-            // 
-            // D1NOCHEQUE
-            // 
-            this.D1NOCHEQUE.Frozen = true;
-            this.D1NOCHEQUE.HeaderText = "nocheque";
-            this.D1NOCHEQUE.Name = "D1NOCHEQUE";
-            // 
-            // D1MONTO
-            // 
-            this.D1MONTO.Frozen = true;
-            this.D1MONTO.HeaderText = "monto";
-            this.D1MONTO.Name = "D1MONTO";
-            // 
-            // D1RESULTADO
-            // 
-            this.D1RESULTADO.Frozen = true;
-            this.D1RESULTADO.HeaderText = "resultado";
-            this.D1RESULTADO.Name = "D1RESULTADO";
-            // 
-            // D2BANCO
-            // 
-            this.D2BANCO.Frozen = true;
-            this.D2BANCO.HeaderText = "banco";
-            this.D2BANCO.Name = "D2BANCO";
-            // 
-            // D2REFERENCIA
-            // 
-            this.D2REFERENCIA.Frozen = true;
-            this.D2REFERENCIA.HeaderText = "referencia";
-            this.D2REFERENCIA.Name = "D2REFERENCIA";
-            // 
-            // D2CUENTA
-            // 
-            this.D2CUENTA.Frozen = true;
-            this.D2CUENTA.HeaderText = "cuenta";
-            this.D2CUENTA.Name = "D2CUENTA";
-            // 
-            // D2NOCHEQUE
-            // 
-            this.D2NOCHEQUE.Frozen = true;
-            this.D2NOCHEQUE.HeaderText = "nocheque";
-            this.D2NOCHEQUE.Name = "D2NOCHEQUE";
-            // 
-            // D2MONTO
-            // 
-            this.D2MONTO.Frozen = true;
-            this.D2MONTO.HeaderText = "monto";
-            this.D2MONTO.Name = "D2MONTO";
-            // 
             // PAGO_OTRO_BANCO
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -775,16 +776,16 @@
             this.gen_comp.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).EndInit();
             this.upload_conciliados.ResumeLayout(false);
-            this.tabPage3.ResumeLayout(false);
-            this.tabPage3.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView3)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView4)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView5)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView4)).EndInit();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
+            this.tabPage3.ResumeLayout(false);
+            this.tabPage3.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView3)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
 
         }

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -30,8 +31,54 @@ namespace WindowsFormsApp1
 
         private void Login_Load(object sender, EventArgs e)
         {
+            ArrayList t_cuenta = Get_Agencia();
+            Dictionary<string, string> test = new Dictionary<string, string>();
+            foreach (String[] tipo in t_cuenta)
+            {
+                test.Add(tipo[0], tipo[1]);
+            }
 
+            comboBox1.DataSource = new BindingSource(test, null);
+            comboBox1.DisplayMember = "Value";
+            comboBox1.ValueMember = "Key";
+            comboBox1.SelectedIndex = 1;
         }
+
+        private ArrayList Get_Agencia()
+        {
+            ArrayList bank_list = new ArrayList();
+            using (OracleConnection ora = new OracleConnection(cad))
+            {
+                OracleCommand comando = new OracleCommand("login", ora);
+                try
+                {
+                    ora.Open();
+                    comando = new OracleCommand("SELECT id_agencia, direccion, descripcion FROM agencia", ora);
+                    OracleDataAdapter adaptador = new OracleDataAdapter();
+                    adaptador.SelectCommand = comando;
+                    DataTable tabla_tipos = new DataTable();
+                    adaptador.Fill(tabla_tipos);
+
+                    foreach (DataRow row in tabla_tipos.Rows)
+                    {
+                        String[] s1 = new String[3];
+                        s1[0] = row["id_agencia"].ToString();
+                        s1[1] = row["direccion"].ToString()+ row["descripcion"].ToString();
+                        bank_list.Add(s1);
+                    }
+                }
+                catch (Exception e)
+                {
+                    System.Windows.Forms.MessageBox.Show("Error al buscar las agencias: " + e.Message);
+                }
+                finally
+                {
+                    ora.Close();
+                }
+            }
+            return bank_list;
+        }
+
         bool CheckTextBox(TextBox tb)
         {
             if (string.IsNullOrEmpty(tb.Text))
@@ -67,6 +114,7 @@ namespace WindowsFormsApp1
                         Properties.Settings.Default.empleado = Convert.ToInt32(Usuario.Text);
                         Properties.Settings.Default.rol = codigoRol;
                         Properties.Settings.Default.id_empledo = Usuario.Text;
+                        Properties.Settings.Default.agencia = Convert.ToInt32(((KeyValuePair<string, string>)comboBox1.SelectedItem).Key);
                         MessageBox.Show("Bienvenido");
                         this.Hide();
                         Form menu = new MenuPrincipal();
