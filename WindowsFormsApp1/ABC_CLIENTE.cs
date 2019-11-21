@@ -96,14 +96,16 @@ namespace WindowsFormsApp1
 
         public String convert_blob_to_image(byte[] blob, String nombre)
         {
-            String path = Path.GetTempPath();
-            String direccion = @path + nombre + ".jpg";
-            if (File.Exists(direccion))
-            {
-                File.Delete(direccion);
-            }
-            File.WriteAllBytes(direccion, blob);
-            return direccion;
+                Random random = new System.Random();
+                int value = random.Next(0, 100); //returns integer of 0-100
+                String path = Path.GetTempPath();
+                String direccion = @path + nombre + value + ".jpg";
+                if (File.Exists(direccion))
+                {
+                    File.Delete(direccion);
+                }
+                File.WriteAllBytes(direccion, blob);
+                return direccion;
         }
 
         public String[] Get_Client(long codigo_cliente,long dpi)
@@ -142,11 +144,18 @@ namespace WindowsFormsApp1
                     s1[4] = lector.GetInt32(4).ToString(); //telefono
                     s1[5] = lector.GetString(5); //correo
                     s1[6] = lector.GetInt32(6).ToString(); //tipo_cliente
-                    byte[] foto = (byte[])(lector["foto"]); //foto
-                    s1[7] = convert_blob_to_image(foto, "foto"); //foto
-                    byte[] firma = (byte[])(lector["firma"]); //firma
-                    s1[8] = convert_blob_to_image(firma, "firma"); //firma
-                    s1[9] = lector.GetString(9); //dpi   
+                    s1[9] = lector.GetString(9); //dpi
+                    try
+                    {
+                        byte[] foto = (byte[])(lector["foto"]); //foto
+                        s1[7] = convert_blob_to_image(foto, "foto"); //foto
+                        byte[] firma = (byte[])(lector["firma"]); //firma
+                        s1[8] = convert_blob_to_image(firma, "firma"); //firma
+                    }catch(Exception ex)
+                    {
+                        System.Windows.Forms.MessageBox.Show(ex.Message);
+                    }
+                       
                 }
 
             }
@@ -179,7 +188,7 @@ namespace WindowsFormsApp1
 
                 comando.ExecuteNonQuery();
 
-                comando = new OracleCommand("SELECT codigo_cliente from CLIENTE where dpi = " + dpi, ora);
+                comando = new OracleCommand("SELECT codigo_cliente from CLIENTE where nombre = '"+nombre+"' and direccion = '"+direccion+"' and dpi = " + dpi+" and nit = "+nit + " and telefono = " + telefono, ora);
                 adaptador = new OracleDataAdapter();
                 adaptador.SelectCommand = comando;
                 DataTable tabla_tipos = new DataTable();
@@ -430,8 +439,11 @@ namespace WindowsFormsApp1
             box_bfoto.Text = resultado[7];
             box_bfirma.Text = resultado[8];
             box_bdpi.Text = resultado[9];//dpi
-            pic_bfoto.Image = Image.FromFile(resultado[7]);
-            pic_bfirma.Image = Image.FromFile(resultado[8]);
+            if (resultado[7] != null && resultado[8] != null)
+            {
+                pic_bfoto.Image = Image.FromFile(resultado[7]);
+                pic_bfirma.Image = Image.FromFile(resultado[8]);
+            }
         }
 
         private void button7_Click(object sender, EventArgs e)
@@ -488,6 +500,7 @@ namespace WindowsFormsApp1
             OpenFileDialog openFileDialog1 = new OpenFileDialog();
             openFileDialog1.Title = "Subir Foto";
             openFileDialog1.DefaultExt = "jpg";
+            openFileDialog1.ShowHelp = true;
             //openFileDialog1.ShowDialog();
 
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
@@ -503,6 +516,7 @@ namespace WindowsFormsApp1
             OpenFileDialog openFileDialog1 = new OpenFileDialog();
             openFileDialog1.Title = "Subir Firma";
             openFileDialog1.DefaultExt = "jpg";
+            openFileDialog1.ShowHelp = true;
             //openFileDialog1.ShowDialog();
 
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
